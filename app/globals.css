@@ -192,6 +192,8 @@ body {
     }
 }
 
+html { scrollbar-gutter: stable both-edges; }
+
 
 /* For the entire scrollbar */
 ::-webkit-scrollbar {
