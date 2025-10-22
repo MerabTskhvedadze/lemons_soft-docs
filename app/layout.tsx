@@ -38,9 +38,9 @@ export default function RootLayout(
                                 <span className={'font-bold text-[16px]'}>Lemons CRM Docs</span>
                             </div>
 
-                            <SidebarTrigger/>
 
                             <div className={'flex items-center gap-3'}>
+                                <SidebarTrigger className={'min-[1124px]:hidden'}/>
                                 <span>docs</span>
                                 <span>production</span>
                                 <span>examples</span>
