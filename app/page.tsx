@@ -1,65 +1,174 @@
-import Image from "next/image";
+import Link from 'next/link'
+import {Separator} from "@/components/ui/separator";
+import {
+    Table,
+    TableHeader,
+    TableRow,
+    TableHead,
+    TableBody,
+    TableCell,
+} from "@/components/ui/table";
+
+import {
+    FaDesktop,
+    FaBars,
+    FaAddressBook,
+    FaShoppingBag,
+    FaHandshake,
+    FaUsers,
+    FaPhone,
+    FaMobile,
+    FaComments,
+    FaBookmark,
+    FaCreditCard,
+    FaHourglassStart,
+    FaMap,
+    FaUniversity,
+    FaBuilding,
+    FaFile,
+    FaArchive,
+    FaLanguage,
+    FaBook,
+    FaCubes,
+} from "react-icons/fa"
 
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    const menuItems = [
+        {label: "დეშბორდი", href: "/dashboard", desc: 'ზოგადი აქტივობის მიმოხილვა', icon: <FaDesktop/>},
+        {label: "მენიუ", href: "/dashboard", desc: 'ნავიგაციის მენიუს მართვა', icon: <FaBars/>},
+        {label: "ლიდები", href: "/dashboard", desc: 'ლიდების მენეჯმენტი', icon: <FaAddressBook/>},
+        {label: "კომერციულები", href: "/dashboard", desc: 'ზარები, შეტყობინებები, ელ.ფოსტა', icon: <FaShoppingBag/>},
+        {
+            label: "შეხვედრები",
+            href: "/dashboard",
+            desc: 'შეხვედრების მენეჯმენტი და ჩემი შეხვედრები',
+            icon: <FaHandshake/>
+        },
+        {
+            label: "მობინადრეები",
+            href: "/dashboard",
+            desc: 'ყველა მობინადრის არქივი, მათი საკონტაქტო, დავალიანებები და თავმჯდომარეები',
+            icon: <FaUsers/>
+        },
+        {
+            label: "მომლოდინეები",
+            href: "/dashboard",
+            desc: 'მომლოდინე ლიდები, რომლებიც ელოდებიან ზარს ჩვენგან',
+            icon: <FaPhone/>
+        },
+        {
+            label: "SMS",
+            href: "/dashboard",
+            desc: 'SMS - ის გაგზავნა, შაბლონები და SMS - ბოტის მართვა',
+            icon: <FaMobile/>
+        },
+        {label: "შეტყობინებები", href: "/dashboard", desc: 'შეტყობინებების მართვა ყველა პროექტზე', icon: <FaComments/>},
+        {
+            label: "SALE ხელფასები",
+            href: "/dashboard",
+            desc: 'გაყიდვების გუნდის ხელფასების მართვის პანელი',
+            icon: <FaBookmark/>
+        },
+        {
+            label: "CALL ხელფასები",
+            href: "/dashboard",
+            desc: 'ქოლცენტრის გუნდის ხელფასების მართვის პანელი',
+            icon: <FaCreditCard/>
+        },
+        {
+            label: "მენეჯმენტი",
+            href: "/dashboard",
+            desc: 'გრაფიკის მართვის პანელი (შვებულებები, გრაფიკი და სხვა...)',
+            icon: <FaHourglassStart/>
+        },
+        {label: "სტატისტიკა", href: "/dashboard", desc: 'შემოსული და გაცემული ნომრების სტატისტიკა', icon: <FaMap/>},
+        {
+            label: "გუნდი",
+            href: "/dashboard",
+            desc: 'გუნდის მენეჯმენტი, შეზღუდვები როლების  მიხედვით',
+            icon: <FaUniversity/>
+        },
+        {
+            label: "სამშენებლო",
+            href: "/dashboard",
+            desc: 'პროექტების საინფორმაციო პანელი, პროექტის სტატუსი, კატეგორია და სხვა...',
+            icon: <FaBuilding/>
+        },
+        {label: "გვერდები", href: "/dashboard", desc: 'გვერდების შექმნის მოდული', icon: <FaFile/>},
+        {label: "Access Logs", href: "/dashboard", desc: 'ნებართვების ისტორია', icon: <FaArchive/>},
+        {label: "ენები", href: "/dashboard", desc: 'ენის შეცვლა და დამატება', icon: <FaLanguage/>},
+        {label: "ლექსიკონი", href: "/dashboard", desc: 'სიტყვების დამატება ენების მიხედვით', icon: <FaBook/>},
+        {label: "REST API", href: "/dashboard", desc: 'ინტეგრაცია სხვა სისტემებთან', icon: <FaCubes/>},
+    ]
+
+    return (
+        <>
+            {/*overview*/}
+            <section className={'flex flex-col gap-3'}>
+                <div>
+                    <h1 className={'title_font text-lg'}>ზოგადი მიმოხილვა</h1>
+                    <p className={'pl-5'}>
+                        Lemons CRM - არის გუნდის და კლიენტის მენეჯმენტის სისტემა, რომელიც აერთიანებს ყველა ძირითად
+                        სამუშაო პროცესს ერთ ინტერფეისში.
+                        <br/>
+                        Lemons CRM - ში ასახულია კომპანიის ყველა სამუშაო პროცესი ლაივ რეჟიმში: ლიდების მართვა, ზარების
+                        და შეტყობინებების მონიტორინგი, გაყიდვების სტატუსების კონტროლი და
+                        სტატისტიკის ანალიზი.
+                    </p>
+                </div>
+
+                <div className={'flex flex-col gap-3'}>
+                    <h1 className={'title_font text-sm'}>მთავარი შესაძლებლობები</h1>
+                    <ul className={'list-disc pl-9 flex flex-col gap-3'}>
+                        <li>გუნდის მენეჯმენტი</li>
+                        <li>კლიენტების მონაცემების უსაფრთხო მართვა</li>
+                        <li>ზარების, SMS-ის და აქტივობების ისტორიის ნახვა</li>
+                        <li>გაყიდვების პროცესის თვალყურის დევნება ლაივ რეჟიმში</li>
+                        <li>სტატისტიკური ანალიტიკა</li>
+                        <li>REST API ინტეგრაცია სხვა სისტემებთან</li>
+                    </ul>
+                </div>
+            </section>
+
+            <Separator className="my-5"/>
+
+            {/*navigation*/}
+            <section className={'flex flex-col gap-3'}>
+                <div>
+                    <h1 className={'title_font text-lg'}>ნავიგაცია და გვერდის სტრუქტურა</h1>
+                    <p className={'pl-5'}>
+                        საიტზე მარცხენა მხარეს მდებარეობს ნავიგაციის მენიუ, რომელიც უზრუნველყოფს წვდომას ყველა
+                        მოდულთან.
+                        <br/>
+                        მოდულებზე წვდომა განსაზღვრულია თანამშრომლის პოზიციის მიხედვით
+                    </p>
+                </div>
+
+                <div className={'pl-3 max-w-[900px]'}>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead className={'title_font'}>მენიუს ელემენტები</TableHead>
+                                <TableHead className={'title_font'}>დანიშნულება</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {menuItems.map((item) => (
+                                <TableRow key={item.label}>
+                                    <TableCell>
+                                        <Link href={item.href}
+                                              className={'flex items-center gap-2 hover:underline title_font'}>
+                                            {item.icon}
+                                            <span className={'pt-[1px]'}>{item.label}</span>
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell>{item.desc}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </div>
+            </section>
+        </>
+    );
 }
