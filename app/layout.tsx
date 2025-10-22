@@ -7,7 +7,6 @@ import Link from "next/link";
 import {AppSidebar} from "@/components/app-aside";
 
 import {FaBookOpen} from "react-icons/fa6";
-import { HiArrowTopRightOnSquare } from "react-icons/hi2";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 
 
