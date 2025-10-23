@@ -4,8 +4,6 @@ import React from 'react'
 import Link from 'next/link'
 import {Separator} from "@/components/ui/separator";
 
-import {Collapsible, CollapsibleTrigger, CollapsibleContent} from '@/components/ui/collapsible'
-
 import {
     Table,
     TableHeader,
@@ -242,6 +240,7 @@ export default function Home() {
 
             <Separator className="my-5"/>
 
+            {/*header*/}
             <section className={'flex flex-col gap-3'}>
                 <div>
                     <h1 className={'title_font text-lg'}>ზედა ნავიგაცია</h1>
