@@ -54,6 +54,10 @@
     font-family: "FiraGOUPP-Regular";
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: "FiraGO-Book" !important;
     font-size: 1rem; /* This now becomes dynamic */
@@ -69,7 +73,6 @@ body {
     /* Prevent horizontal scroll */
     overflow-x: hidden;
 }
-
 
 @custom-variant dark (&:is(.dark *));
 
@@ -192,7 +195,9 @@ body {
     }
 }
 
-html { scrollbar-gutter: stable both-edges; }
+html {
+    scrollbar-gutter: stable both-edges;
+}
 
 
 /* For the entire scrollbar */
@@ -203,8 +208,8 @@ html { scrollbar-gutter: stable both-edges; }
 
 /* For the scrollbar track (the background area) */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1 ;
-    border-radius: 1px ;
+    background: #f1f1f1;
+    border-radius: 1px;
 }
 
 /* For the scrollbar thumb (the draggable part) */
