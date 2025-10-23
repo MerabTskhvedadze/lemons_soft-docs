@@ -60,7 +60,7 @@ export default function RootLayout(
                 </div>
             </header>
 
-            <main className=" gap-10 pt-20 px-5 w-full flex">
+            <main className=" gap-10 pt-24 px-5 w-full flex">
                 <aside
                     className="overflow-y-auto overflow-x-hidden max-h-200 w-65 shrink-0 hidden min-[1124px]:block min-[1124px]:sticky top-24  self-start">
                     <AppSidebar/>
