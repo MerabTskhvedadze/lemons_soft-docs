@@ -3,6 +3,8 @@
 import React from 'react'
 import Link from 'next/link'
 import {Separator} from "@/components/ui/separator";
+import {FadeInSection} from "@/animations/FadeInSection";
+
 
 import {
     Table,
@@ -241,87 +243,90 @@ export default function Home() {
             <Separator className="my-5"/>
 
             {/*header*/}
-            <section className={'flex flex-col gap-3'}>
-                <div>
-                    <h1 className={'title_font text-lg'}>ზედა ნავიგაცია</h1>
-                    <p className={'pl-5'}>
-                        ზედა ნავიგაციაში წარმოდგენილია შორთქათები და
-                        დამხმარე ფუნქციები:
+            <FadeInSection>
+                <section className={'flex flex-col gap-3'}>
+                    <div>
+                        <h1 className={'title_font text-lg'}>ზედა ნავიგაცია (ჰედერი)</h1>
+                        <p className={'pl-5'}>
+                            ზედა ნავიგაციაში წარმოდგენილია შორთქათები და
+                            დამხმარე ფუნქციები:
 
-                        <span className={'mt-2 text-xs block italic text-gray-600'}>
-                            *შორთქათი: სწრაფი ღილაკი კონკრეტული ფუნქციის გასააქტიურებლად*
-                        </span>
-                    </p>
+                            <span className={'mt-2 text-xs block italic text-gray-600'}>
+                                *შორთქათი: სწრაფი ღილაკი კონკრეტული ფუნქციის გასააქტიურებლად*
+                            </span>
+                        </p>
+                    </div>
 
-                </div>
-
-                <div className={'pl-3 max-w-full'}>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className={'title_font text-gray-500'}>ელემენტი</TableHead>
-                                <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {topNavItems.map((i) => (
-                                <TableRow key={i.label}>
-                                    <TableCell className={'title_font'}>
-                                        <Link href={i.href} className={`${!(i.button) ? 'underline' : ''}`}>
-                                            {i?.button ?
-                                                i.button
-                                                :
-                                                i.label
-                                            }
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell>{i.desc}</TableCell>
+                    <div className={'pl-3 max-w-full'}>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className={'title_font text-gray-500'}>ელემენტი</TableHead>
+                                    <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
-            </section>
+                            </TableHeader>
+                            <TableBody>
+                                {topNavItems.map((i) => (
+                                    <TableRow key={i.label}>
+                                        <TableCell className={'title_font'}>
+                                            <Link href={i.href} className={`${!(i.button) ? 'underline' : ''}`}>
+                                                {i?.button ?
+                                                    i.button
+                                                    :
+                                                    i.label
+                                                }
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell>{i.desc}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                </section>
+            </FadeInSection>
 
             <Separator className="my-5"/>
 
             {/*sidebar*/}
-            <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dashboard'}>
-                <div>
-                    <h1 className={'title_font text-lg'}>გვერდითი პანელი და გვერდების სტრუქტურა</h1>
-                    <p className={'pl-5'}>
-                        საიტზე მარცხენა მხარეს მდებარეობს ნავიგაციის მენიუ, რომელიც უზრუნველყოფს წვდომას ყველა
-                        მოდულთან.
-                        <br/>
-                        მოდულებზე წვდომა განსაზღვრულია თანამშრომლის პოზიციის მიხედვით
-                    </p>
-                </div>
+            <FadeInSection>
+                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dashboard'}>
+                    <div>
+                        <h1 className={'title_font text-lg'}>გვერდითი პანელი და გვერდების სტრუქტურა</h1>
+                        <p className={'pl-5'}>
+                            საიტზე მარცხენა მხარეს მდებარეობს ნავიგაციის მენიუ, რომელიც უზრუნველყოფს წვდომას ყველა
+                            მოდულთან.
+                            <br/>
+                            მოდულებზე წვდომა განსაზღვრულია თანამშრომლის პოზიციის მიხედვით
+                        </p>
+                    </div>
 
-                <div className={'pl-3 max-w-[900px]'}>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className={'title_font text-gray-500'}>ელემენტები</TableHead>
-                                <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {menuItems.map((item) => (
-                                <TableRow key={item.label}>
-                                    <TableCell>
-                                        <Link href={item.href}
-                                              className={'flex items-center gap-2 hover:underline title_font'}>
-                                            {item.icon}
-                                            <span className={'pt-[1px]'}>{item.label}</span>
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell>{item.desc}</TableCell>
+                    <div className={'pl-3 max-w-[900px]'}>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className={'title_font text-gray-500'}>ელემენტები</TableHead>
+                                    <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
-            </section>
+                            </TableHeader>
+                            <TableBody>
+                                {menuItems.map((item) => (
+                                    <TableRow key={item.label}>
+                                        <TableCell>
+                                            <Link href={item.href}
+                                                  className={'flex items-center gap-2 hover:underline title_font'}>
+                                                {item.icon}
+                                                <span className={'pt-[1px]'}>{item.label}</span>
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell>{item.desc}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                </section>
+            </FadeInSection>
         </>
     );
 }
