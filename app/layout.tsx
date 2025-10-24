@@ -24,29 +24,29 @@ export const metadata: Metadata = {
     description: "lemons crm documentation",
 };
 
-
 export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html lang="en">
-        <body
-            className={`flex flex-col max-w-screen-2xl mx-auto ${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ScrollProgressBar/>
-        <SidebarProvider>
-            <Header/>
+            <body
+                className={`flex flex-col max-w-screen-2xl mx-auto ${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+                <ScrollProgressBar/>
+                <SidebarProvider>
+                    <Header/>
 
-            <main className="gap-10 pt-24 px-5 w-full flex">
-                <aside
-                    className="overflow-y-auto overflow-x-hidden max-h-150 w-65 shrink-0 hidden min-[1124px]:block min-[1124px]:sticky top-24 self-start">
-                    <AppSidebar/>
-                </aside>
-                {children}
-            </main>
-        </SidebarProvider>
+                    <main className="gap-10 pt-24 px-5 w-full flex">
+                        <aside
+                            className="overflow-y-auto overflow-x-hidden max-h-150 w-65 shrink-0 hidden min-[1124px]:block min-[1124px]:sticky top-24 self-start">
+                            <AppSidebar/>
+                        </aside>
+                        {children}
+                    </main>
+                </SidebarProvider>
 
-        <footer className="p-12 h-[100px]">
-            <div className="mx-auto w-fit">Motion is supported by the best in the industry.</div>
-        </footer>
-        </body>
+                <footer className="p-12 h-[100px]">
+                    <div className="mx-auto w-fit">Motion is supported by the best in the industry.</div>
+                </footer>
+            </body>
         </html>
     );
 }
