@@ -26,6 +26,7 @@ import {MdListAlt, MdNotes, MdOutlineWatchLater, MdTimelapse} from "react-icons/
 import {IoMdPause} from "react-icons/io";
 import {RiVoiceprintFill, RiCupFill} from "react-icons/ri";
 import {Button} from "@/components/ui/button";
+import {ScrollTrailText} from "@/animations/ScrollTrailText";
 
 export default function Home() {
     const menuItems = [
@@ -195,8 +196,10 @@ export default function Home() {
             <FadeInSection>
                 <section className={'flex flex-col gap-3'}>
                     <div>
-                        <h1 className={'title_font text-lg'}>ზოგადი მიმოხილვა</h1>
-                        <p className={'pl-5'}>
+                        <h1 className={'title_font text-lg'}>
+                            <ScrollTrailText>ზოგადი მიმოხილვა</ScrollTrailText>
+                        </h1>
+                        <ScrollTrailText className={'pl-5'}>
                             Lemons CRM - არის გუნდის და კლიენტის მენეჯმენტის სისტემა, რომელიც აერთიანებს ყველა ძირითად
                             სამუშაო პროცესს ერთ ინტერფეისში.
                             <br/>
@@ -204,40 +207,52 @@ export default function Home() {
                             ზარების
                             და შეტყობინებების მონიტორინგი, გაყიდვების სტატუსების კონტროლი და
                             სტატისტიკის ანალიზი.
-                        </p>
+                        </ScrollTrailText>
                     </div>
 
                     <div className={'flex flex-col gap-3'}>
-                        <h1 className={'title_font text-sm'}>მთავარი შესაძლებლობები</h1>
+                        <h1 className={'title_font text-sm'}>
+                            <ScrollTrailText>მთავარი შესაძლებლობები</ScrollTrailText>
+                        </h1>
                         <ul className={'list-decimal pl-9 flex flex-col gap-3 title_font text-sm'}>
                             <li>
-                                <span>კომპანიის მენეჯმენტი</span>
+                                <ScrollTrailText>კომპანიის მენეჯმენტი</ScrollTrailText>
                                 <ul className={'mt-1 list-disc pl-3.5 flex flex-col gap-1 text_font text-sm'}>
-                                    <li>გაყიდვები</li>
-                                    <li>მარკეტინგი</li>
-                                    <li>ქოლცენტრი</li>
-                                    <li>HR - დეპარტამენტი</li>
-                                    <li>მობინადრეებთან ურთიერთობის მენეჯმენტი</li>
+                                    <li>
+                                        <ScrollTrailText>გაყიდვები</ScrollTrailText>
+                                    </li>
+                                    <li>
+                                        <ScrollTrailText>მარკეტინგი</ScrollTrailText>
+                                    </li>
+                                    <li>
+                                        <ScrollTrailText>ქოლცენტრი</ScrollTrailText>
+                                    </li>
+                                    <li>
+                                        <ScrollTrailText>HR - დეპარტამენტი</ScrollTrailText>
+                                    </li>
+                                    <li>
+                                        <ScrollTrailText>მობინადრეებთან ურთიერთობის მენეჯმენტი </ScrollTrailText>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
-                                <span>კლიენტების მონაცემების უსაფრთხო მართვა</span>
+                                <ScrollTrailText>კლიენტების მონაცემების უსაფრთხო მართვა</ScrollTrailText>
                                 <ul className={'mt-1 list-disc pl-3.5 flex flex-col gap-1 text_font text-sm'}>
-                                    <li>მობინადრეების პანელი</li>
-                                    <li>ხელშეკრულებები და გადახდები</li>
+                                    <li><ScrollTrailText>მობინადრეების პანელი</ScrollTrailText></li>
+                                    <li><ScrollTrailText>ხელშეკრულებები და გადახდები</ScrollTrailText></li>
                                 </ul>
                             </li>
-                            <li>ზარების და SMS-ების ისტორია</li>
-                            <li>გაყიდვების პროცესის თვალყურის დევნება ლაივ რეჟიმში</li>
+                            <li><ScrollTrailText>ზარების და SMS-ების ისტორია</ScrollTrailText></li>
+                            <li><ScrollTrailText>გაყიდვების პროცესის თვალყურის დევნება ლაივ რეჟიმში</ScrollTrailText>
+                            </li>
                             <li>
-                                <span>სტატისტიკური ანალიტიკა</span>
+                                <ScrollTrailText>სტატისტიკური ანალიტიკა</ScrollTrailText>
                                 <ul className={'mt-1 list-disc pl-3.5 flex flex-col gap-1 text_font text-sm'}>
-                                    <li>დღის ზარების რაოდენობა</li>
-                                    <li>დღის შეხვედრები</li>
-                                    <li>მომლოდინე ლიდები</li>
+                                    <li><ScrollTrailText>დღის ზარების რაოდენობა</ScrollTrailText></li>
+                                    <li><ScrollTrailText>დღის შეხვედრები</ScrollTrailText></li>
+                                    <li><ScrollTrailText>მომლოდინე ლიდები</ScrollTrailText></li>
                                 </ul>
                             </li>
-                            {/*<li>REST API ინტეგრაცია სხვა სისტემებთან</li>*/}
                         </ul>
                     </div>
                 </section>
@@ -249,23 +264,29 @@ export default function Home() {
             <FadeInSection>
                 <section className={'flex flex-col gap-3'}>
                     <div>
-                        <h1 className={'title_font text-lg'}>ზედა ნავიგაცია (ჰედერი)</h1>
-                        <p className={'pl-5'}>
+                        <h1 className={'title_font text-lg'}>
+                            <ScrollTrailText>ზედა ნავიგაცია (ჰედერი)</ScrollTrailText>
+                        </h1>
+                        <ScrollTrailText className={'pl-5'}>
                             ზედა ნავიგაციაში წარმოდგენილია შორთქათები და
                             დამხმარე ფუნქციები:
 
                             <span className={'mt-2 text-xs block italic text-gray-600'}>
                                 *შორთქათი: სწრაფი ღილაკი კონკრეტული ფუნქციის გასააქტიურებლად*
                             </span>
-                        </p>
+                        </ScrollTrailText>
                     </div>
 
                     <div className={'pl-3 max-w-full'}>
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className={'title_font text-gray-500'}>ელემენტი</TableHead>
-                                    <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
+                                    <TableHead className={'title_font text-gray-500'}>
+                                        <ScrollTrailText>ელემენტი</ScrollTrailText>
+                                    </TableHead>
+                                    <TableHead className={'title_font text-gray-500'}>
+                                        <ScrollTrailText>ფუნქცია</ScrollTrailText>
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -280,7 +301,9 @@ export default function Home() {
                                                 }
                                             </Link>
                                         </TableCell>
-                                        <TableCell>{i.desc}</TableCell>
+                                        <TableCell>
+                                            <ScrollTrailText>{i.desc}</ScrollTrailText>
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -295,34 +318,40 @@ export default function Home() {
             <FadeInSection>
                 <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dashboard'}>
                     <div>
-                        <h1 className={'title_font text-lg'}>გვერდითი პანელი და გვერდების სტრუქტურა</h1>
-                        <p className={'pl-5'}>
+                        <h1 className={'title_font text-lg'}>
+                            <ScrollTrailText> გვერდითი პანელი და გვერდების სტრუქტურა </ScrollTrailText>
+                        </h1>
+                        <ScrollTrailText className={'pl-5'}>
                             საიტზე მარცხენა მხარეს მდებარეობს ნავიგაციის მენიუ, რომელიც უზრუნველყოფს წვდომას ყველა
                             მოდულთან.
                             <br/>
                             მოდულებზე წვდომა განსაზღვრულია თანამშრომლის პოზიციის მიხედვით
-                        </p>
+                        </ScrollTrailText>
                     </div>
 
                     <div className={'pl-3 max-w-[900px]'}>
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className={'title_font text-gray-500'}>ელემენტები</TableHead>
-                                    <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
+                                    <TableHead
+                                        className={'title_font text-gray-500'}><ScrollTrailText>ელემენტები</ScrollTrailText></TableHead>
+                                    <TableHead
+                                        className={'title_font text-gray-500'}><ScrollTrailText>ფუნქცია</ScrollTrailText></TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {menuItems.map((item) => (
                                     <TableRow key={item.label}>
                                         <TableCell>
-                                            <Link href={item.href}
-                                                  className={'flex items-center gap-2 hover:underline title_font'}>
-                                                {item.icon}
-                                                <span className={'pt-[1px]'}>{item.label}</span>
-                                            </Link>
+                                            <ScrollTrailText>
+                                                <Link href={item.href}
+                                                      className={'flex items-center gap-2 hover:underline title_font'}>
+                                                    {item.icon}
+                                                    <span className={'pt-[1px]'}>{item.label}</span>
+                                                </Link>
+                                            </ScrollTrailText>
                                         </TableCell>
-                                        <TableCell>{item.desc}</TableCell>
+                                        <TableCell><ScrollTrailText>{item.desc}</ScrollTrailText></TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -344,12 +373,16 @@ export default function Home() {
                             </div>
                         </Button>
 
-                        <h1 className={'title_font'}>თანამშრომლების სამუშაო საათების გრაფიკი.</h1>
+                        <h1 className={'title_font'}>
+                            <ScrollTrailText>თანამშრომლების სამუშაო საათების გრაფიკი.</ScrollTrailText>
+                        </h1>
                     </div>
 
                     <div className={'pl-3 max-w-[900px]'}>
-                        მოცემული ღილაკზე დაკლიკებისას გაიხსნება ფანჯარა, რომელშიც მოცემულია ცხრილი თანამშრომლების
-                        სამუშაო საათებით დეპარტამენტების მიხედვით, ცხრილში მოცემულია მთელი თვის გეგმა
+                        <ScrollTrailText>
+                            მოცემული ღილაკზე დაკლიკებისას გაიხსნება ფანჯარა, რომელშიც მოცემულია ცხრილი თანამშრომლების
+                            სამუშაო საათებით დეპარტამენტების მიხედვით, ცხრილში მოცემულია მთელი თვის გეგმა
+                        </ScrollTrailText>
                     </div>
                 </section>
             </FadeInSection>
@@ -367,13 +400,15 @@ export default function Home() {
                             </div>
                         </Button>
                         <h1 className={'title_font'}>
-                            წებოვანი ქაღალდი (Sticky notes)
+                            <ScrollTrailText>წებოვანი ქაღალდი (Sticky notes)</ScrollTrailText>
                         </h1>
                     </div>
 
                     <div className={'pl-3 max-w-[900px]'}>
-                        ეს ფუნქციონალი მომხმარებელს აძლევს საშუალებას, საიტზე შექმნას პირადი ან სამუშაო შენიშვნები,
-                        რომლებსაც ნებისმიერ დროს დაინახავს საიტის ნებისმიერი გვერდიდან.
+                        <ScrollTrailText>
+                            ეს ფუნქციონალი მომხმარებელს აძლევს საშუალებას, საიტზე შექმნას პირადი ან სამუშაო შენიშვნები,
+                            რომლებსაც ნებისმიერ დროს დაინახავს საიტის ნებისმიერი გვერდიდან.
+                        </ScrollTrailText>
                     </div>
                 </section>
             </FadeInSection>
@@ -391,12 +426,12 @@ export default function Home() {
                             </div>
                         </Button>
                         <h1 className={'title_font'}>
-                            საათი
+                            <ScrollTrailText>საათი</ScrollTrailText>
                         </h1>
                     </div>
 
                     <div className={'pl-3 max-w-[900px]'}>
-                        დროის მაჩვენებელი ბეიჯი
+                        <ScrollTrailText>დროის მაჩვენებელი ბეიჯი</ScrollTrailText>
                     </div>
                 </section>
             </FadeInSection>
@@ -414,13 +449,16 @@ export default function Home() {
                             </div>
                         </Button>
                         <h1 className={'title_font'}>
-                            დოლარის კურსი
+                            <ScrollTrailText>დოლარის კურსი</ScrollTrailText>
                         </h1>
                     </div>
 
                     <div className={'pl-3 max-w-[900px]'}>
-                        მოცემული ღილაკი გვიჩვენებს დოლარის კურსს ლართან მიმართებაში, დაკლიკებისას რეფრეშდება და მოაქვს
-                        უახლესი კურსი
+                        <ScrollTrailText>
+                            მოცემული ღილაკი გვიჩვენებს დოლარის კურსს ლართან მიმართებაში, დაკლიკებისას რეფრეშდება და
+                            მოაქვს
+                            უახლესი კურსი
+                        </ScrollTrailText>
                     </div>
                 </section>
             </FadeInSection>
@@ -457,15 +495,17 @@ export default function Home() {
                             </div>
                         </div>
                         <h1 className={'title_font'}>
-                            სრული სესიის ხანგრძლივობა
+                            <ScrollTrailText>სრული სესიის ხანგრძლივობა</ScrollTrailText>
                         </h1>
                     </div>
 
                     <div className={'pl-3 max-w-[900px]'}>
-                        ეს კონტეინერი გვიჩვენებს სრულ სამუშაო სესიას, დროის ჩართვიდან დასრულებამდე, დაპაუზების
-                        შემთხვევაში ირთობა შესვენების ტაიმერი და ითვლის რამდენიხანი იყო თანამშრომელი შესვენებაზე.
-                        <br/>
-                        დასრულების შემდეგ ნამუშევარ დროს აკლდება შესვენების დრო და ასე ითვლება სამუშაო სესია
+                        <ScrollTrailText>
+                            ეს კონტეინერი გვიჩვენებს სრულ სამუშაო სესიას, დროის ჩართვიდან დასრულებამდე, დაპაუზების
+                            შემთხვევაში ირთობა შესვენების ტაიმერი და ითვლის რამდენიხანი იყო თანამშრომელი შესვენებაზე.
+                            <br/>
+                            დასრულების შემდეგ ნამუშევარ დროს აკლდება შესვენების დრო და ასე ითვლება სამუშაო სესია
+                        </ScrollTrailText>
                     </div>
                 </section>
             </FadeInSection>
