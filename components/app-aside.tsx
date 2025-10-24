@@ -34,7 +34,6 @@ import {
     FaCubes,
     FaHome,
 } from "react-icons/fa"
-import {Separator} from "@/components/ui/separator";
 
 export function AppSidebar() {
     const data = [

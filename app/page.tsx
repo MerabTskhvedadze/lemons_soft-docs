@@ -3,6 +3,8 @@
 import React from 'react'
 import Link from 'next/link'
 import {Separator} from "@/components/ui/separator";
+import {FadeInSection} from "@/animations/FadeInSection";
+
 
 import {
     Table,
@@ -103,7 +105,7 @@ export default function Home() {
         {
             label: 'SCRIPTS',
             desc: 'ღილაკი რომელიც ხსნის სკრიპტების საიტს(კითხვა პასუხის შაბლონი).',
-            href: "#dashboard",
+            href: "#",
             button: <Button size={'sm'} className={'bg-[#20c997]'}>
                 <div className={'flex items-center gap-2'}>
                     <MdListAlt/>
@@ -114,7 +116,7 @@ export default function Home() {
         {
             label: 'გრაფიკი',
             desc: 'თანამშრომლების სამუშაო საათების გრაფიკი.',
-            href: "#dashboard",
+            href: "#graph",
             button: <Button size={'sm'} className={'bg-[#0047b0]'}>
                 <div className={'flex items-center gap-2'}>
                     <RiVoiceprintFill/>
@@ -125,7 +127,7 @@ export default function Home() {
         {
             label: 'სანიშნი',
             desc: 'სწრაფი სანიშნი (sticky notes).',
-            href: "#dashboard",
+            href: "#notes",
             button: <Button size={'sm'}>
                 <div className={'flex items-center gap-2'}>
                     <MdNotes/>
@@ -136,7 +138,7 @@ export default function Home() {
         {
             label: 'საათი',
             desc: 'საათი.',
-            href: "#dashboard",
+            href: "#time",
             button: <Button size={'sm'} className={'bg-[#3b7ddd]'}>
                 <div className={'flex items-center gap-2'}>
                     <MdOutlineWatchLater/>
@@ -147,7 +149,7 @@ export default function Home() {
         {
             label: 'დოლარის კურსი',
             desc: 'დოლარის კურსის მაჩვენებელი შორთქათი.',
-            href: "#dashboard",
+            href: "#dollar",
             button: <Button size={'sm'} className={'bg-[#28a745]'}>
                 <div className={'flex items-center gap-2'}>
                     <FaDollarSign/>
@@ -161,12 +163,12 @@ export default function Home() {
             href: "#dashboard",
             button: <div className={'flex items-center gap-5 p-2 bg-[#486794]/60 rounded'}>
                 <div className={'flex items-center gap-3'}>
-                    <div className={'flex items-center gap-2'}>
-                        <MdTimelapse size={20} className={'text-white'}/>
+                    <div className={'flex items-center gap-2 text-white'}>
+                        <MdTimelapse size={20}/>
                         <span>0:00:00</span>
                     </div>
-                    <div className={'flex items-center gap-1'}>
-                        <RiCupFill size={20} className={'text-white'}/>
+                    <div className={'flex items-center gap-1 text-white'}>
+                        <RiCupFill size={20}/>
                         <span>0:00:00</span>
                     </div>
                 </div>
@@ -190,138 +192,283 @@ export default function Home() {
     return (
         <>
             {/*overview*/}
-            <section className={'flex flex-col gap-3'}>
-                <div>
-                    <h1 className={'title_font text-lg'}>ზოგადი მიმოხილვა</h1>
-                    <p className={'pl-5'}>
-                        Lemons CRM - არის გუნდის და კლიენტის მენეჯმენტის სისტემა, რომელიც აერთიანებს ყველა ძირითად
-                        სამუშაო პროცესს ერთ ინტერფეისში.
-                        <br/>
-                        Lemons CRM - ში ასახულია კომპანიის ყველა სამუშაო პროცესი ლაივ რეჟიმში: ლიდების მართვა, ზარების
-                        და შეტყობინებების მონიტორინგი, გაყიდვების სტატუსების კონტროლი და
-                        სტატისტიკის ანალიზი.
-                    </p>
-                </div>
+            <FadeInSection>
+                <section className={'flex flex-col gap-3'}>
+                    <div>
+                        <h1 className={'title_font text-lg'}>ზოგადი მიმოხილვა</h1>
+                        <p className={'pl-5'}>
+                            Lemons CRM - არის გუნდის და კლიენტის მენეჯმენტის სისტემა, რომელიც აერთიანებს ყველა ძირითად
+                            სამუშაო პროცესს ერთ ინტერფეისში.
+                            <br/>
+                            Lemons CRM - ში ასახულია კომპანიის ყველა სამუშაო პროცესი ლაივ რეჟიმში: ლიდების მართვა,
+                            ზარების
+                            და შეტყობინებების მონიტორინგი, გაყიდვების სტატუსების კონტროლი და
+                            სტატისტიკის ანალიზი.
+                        </p>
+                    </div>
 
-                <div className={'flex flex-col gap-3'}>
-                    <h1 className={'title_font text-sm'}>მთავარი შესაძლებლობები</h1>
-                    <ul className={'list-decimal pl-9 flex flex-col gap-3 title_font text-sm'}>
-                        <li>
-                            <span>კომპანიის მენეჯმენტი</span>
-                            <ul className={'mt-1 list-disc pl-3.5 flex flex-col gap-1 text_font text-sm'}>
-                                <li>გაყიდვები</li>
-                                <li>მარკეტინგი</li>
-                                <li>ქოლცენტრი</li>
-                                <li>HR - დეპარტამენტი</li>
-                                <li>მობინადრეებთან ურთიერთობის მენეჯმენტი</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span>კლიენტების მონაცემების უსაფრთხო მართვა</span>
-                            <ul className={'mt-1 list-disc pl-3.5 flex flex-col gap-1 text_font text-sm'}>
-                                <li>მობინადრეების პანელი</li>
-                                <li>ხელშეკრულებები და გადახდები</li>
-                            </ul>
-                        </li>
-                        <li>ზარების და SMS-ების ისტორია</li>
-                        <li>გაყიდვების პროცესის თვალყურის დევნება ლაივ რეჟიმში</li>
-                        <li>
-                            <span>სტატისტიკური ანალიტიკა</span>
-                            <ul className={'mt-1 list-disc pl-3.5 flex flex-col gap-1 text_font text-sm'}>
-                                <li>დღის ზარების რაოდენობა</li>
-                                <li>დღის შეხვედრები</li>
-                                <li>მომლოდინე ლიდები</li>
-                            </ul>
-                        </li>
-                        {/*<li>REST API ინტეგრაცია სხვა სისტემებთან</li>*/}
-                    </ul>
-                </div>
-            </section>
+                    <div className={'flex flex-col gap-3'}>
+                        <h1 className={'title_font text-sm'}>მთავარი შესაძლებლობები</h1>
+                        <ul className={'list-decimal pl-9 flex flex-col gap-3 title_font text-sm'}>
+                            <li>
+                                <span>კომპანიის მენეჯმენტი</span>
+                                <ul className={'mt-1 list-disc pl-3.5 flex flex-col gap-1 text_font text-sm'}>
+                                    <li>გაყიდვები</li>
+                                    <li>მარკეტინგი</li>
+                                    <li>ქოლცენტრი</li>
+                                    <li>HR - დეპარტამენტი</li>
+                                    <li>მობინადრეებთან ურთიერთობის მენეჯმენტი</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span>კლიენტების მონაცემების უსაფრთხო მართვა</span>
+                                <ul className={'mt-1 list-disc pl-3.5 flex flex-col gap-1 text_font text-sm'}>
+                                    <li>მობინადრეების პანელი</li>
+                                    <li>ხელშეკრულებები და გადახდები</li>
+                                </ul>
+                            </li>
+                            <li>ზარების და SMS-ების ისტორია</li>
+                            <li>გაყიდვების პროცესის თვალყურის დევნება ლაივ რეჟიმში</li>
+                            <li>
+                                <span>სტატისტიკური ანალიტიკა</span>
+                                <ul className={'mt-1 list-disc pl-3.5 flex flex-col gap-1 text_font text-sm'}>
+                                    <li>დღის ზარების რაოდენობა</li>
+                                    <li>დღის შეხვედრები</li>
+                                    <li>მომლოდინე ლიდები</li>
+                                </ul>
+                            </li>
+                            {/*<li>REST API ინტეგრაცია სხვა სისტემებთან</li>*/}
+                        </ul>
+                    </div>
+                </section>
+            </FadeInSection>
 
             <Separator className="my-5"/>
 
             {/*header*/}
-            <section className={'flex flex-col gap-3'}>
-                <div>
-                    <h1 className={'title_font text-lg'}>ზედა ნავიგაცია</h1>
-                    <p className={'pl-5'}>
-                        ზედა ნავიგაციაში წარმოდგენილია შორთქათები და
-                        დამხმარე ფუნქციები:
+            <FadeInSection>
+                <section className={'flex flex-col gap-3'}>
+                    <div>
+                        <h1 className={'title_font text-lg'}>ზედა ნავიგაცია (ჰედერი)</h1>
+                        <p className={'pl-5'}>
+                            ზედა ნავიგაციაში წარმოდგენილია შორთქათები და
+                            დამხმარე ფუნქციები:
 
-                        <span className={'mt-2 text-xs block italic text-gray-600'}>
-                            *შორთქათი: სწრაფი ღილაკი კონკრეტული ფუნქციის გასააქტიურებლად*
-                        </span>
-                    </p>
+                            <span className={'mt-2 text-xs block italic text-gray-600'}>
+                                *შორთქათი: სწრაფი ღილაკი კონკრეტული ფუნქციის გასააქტიურებლად*
+                            </span>
+                        </p>
+                    </div>
 
-                </div>
-
-                <div className={'pl-3 max-w-full'}>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className={'title_font text-gray-500'}>ელემენტი</TableHead>
-                                <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {topNavItems.map((i) => (
-                                <TableRow key={i.label}>
-                                    <TableCell className={'title_font'}>
-                                        <Link href={i.href} className={`${!(i.button) ? 'underline' : ''}`}>
-                                            {i?.button ?
-                                                i.button
-                                                :
-                                                i.label
-                                            }
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell>{i.desc}</TableCell>
+                    <div className={'pl-3 max-w-full'}>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className={'title_font text-gray-500'}>ელემენტი</TableHead>
+                                    <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
-            </section>
+                            </TableHeader>
+                            <TableBody>
+                                {topNavItems.map((i) => (
+                                    <TableRow key={i.label}>
+                                        <TableCell className={'title_font'}>
+                                            <Link href={i.href} className={`${!(i.button) ? 'underline' : ''}`}>
+                                                {i?.button ?
+                                                    i.button
+                                                    :
+                                                    i.label
+                                                }
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell>{i.desc}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                </section>
+            </FadeInSection>
 
             <Separator className="my-5"/>
 
             {/*sidebar*/}
-            <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dashboard'}>
-                <div>
-                    <h1 className={'title_font text-lg'}>გვერდითი პანელი და გვერდების სტრუქტურა</h1>
-                    <p className={'pl-5'}>
-                        საიტზე მარცხენა მხარეს მდებარეობს ნავიგაციის მენიუ, რომელიც უზრუნველყოფს წვდომას ყველა
-                        მოდულთან.
-                        <br/>
-                        მოდულებზე წვდომა განსაზღვრულია თანამშრომლის პოზიციის მიხედვით
-                    </p>
-                </div>
+            <FadeInSection>
+                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dashboard'}>
+                    <div>
+                        <h1 className={'title_font text-lg'}>გვერდითი პანელი და გვერდების სტრუქტურა</h1>
+                        <p className={'pl-5'}>
+                            საიტზე მარცხენა მხარეს მდებარეობს ნავიგაციის მენიუ, რომელიც უზრუნველყოფს წვდომას ყველა
+                            მოდულთან.
+                            <br/>
+                            მოდულებზე წვდომა განსაზღვრულია თანამშრომლის პოზიციის მიხედვით
+                        </p>
+                    </div>
 
-                <div className={'pl-3 max-w-[900px]'}>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className={'title_font text-gray-500'}>ელემენტები</TableHead>
-                                <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {menuItems.map((item) => (
-                                <TableRow key={item.label}>
-                                    <TableCell>
-                                        <Link href={item.href}
-                                              className={'flex items-center gap-2 hover:underline title_font'}>
-                                            {item.icon}
-                                            <span className={'pt-[1px]'}>{item.label}</span>
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell>{item.desc}</TableCell>
+                    <div className={'pl-3 max-w-[900px]'}>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className={'title_font text-gray-500'}>ელემენტები</TableHead>
+                                    <TableHead className={'title_font text-gray-500'}>ფუნქცია</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
-            </section>
+                            </TableHeader>
+                            <TableBody>
+                                {menuItems.map((item) => (
+                                    <TableRow key={item.label}>
+                                        <TableCell>
+                                            <Link href={item.href}
+                                                  className={'flex items-center gap-2 hover:underline title_font'}>
+                                                {item.icon}
+                                                <span className={'pt-[1px]'}>{item.label}</span>
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell>{item.desc}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                </section>
+            </FadeInSection>
+
+            <Separator className="my-5"/>
+
+            {/*graph*/}
+            <FadeInSection>
+                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'graph'}>
+                    <div className={'flex items-center gap-2'}>
+                        <Button size={'sm'} className={'bg-[#0047b0]'}>
+                            <div className={'flex items-center gap-2'}>
+                                <RiVoiceprintFill/>
+                                <span className={'text-xs'}>გრაფიკი</span>
+                            </div>
+                        </Button>
+
+                        <h1 className={'title_font'}>თანამშრომლების სამუშაო საათების გრაფიკი.</h1>
+                    </div>
+
+                    <div className={'pl-3 max-w-[900px]'}>
+                        მოცემული ღილაკზე დაკლიკებისას გაიხსნება ფანჯარა, რომელშიც მოცემულია ცხრილი თანამშრომლების
+                        სამუშაო საათებით დეპარტამენტების მიხედვით, ცხრილში მოცემულია მთელი თვის გეგმა
+                    </div>
+                </section>
+            </FadeInSection>
+
+            <Separator className="my-5"/>
+
+            {/*sticky notes*/}
+            <FadeInSection>
+                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'notes'}>
+                    <div className={'flex items-center gap-2'}>
+                        <Button size={'sm'}>
+                            <div className={'flex items-center gap-2'}>
+                                <MdNotes/>
+                                <span className={'text-xs'}>სანიშნი</span>
+                            </div>
+                        </Button>
+                        <h1 className={'title_font'}>
+                            წებოვანი ქაღალდი (Sticky notes)
+                        </h1>
+                    </div>
+
+                    <div className={'pl-3 max-w-[900px]'}>
+                        ეს ფუნქციონალი მომხმარებელს აძლევს საშუალებას, საიტზე შექმნას პირადი ან სამუშაო შენიშვნები,
+                        რომლებსაც ნებისმიერ დროს დაინახავს საიტის ნებისმიერი გვერდიდან.
+                    </div>
+                </section>
+            </FadeInSection>
+
+            <Separator className="my-5"/>
+
+            {/*time*/}
+            <FadeInSection>
+                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'time'}>
+                    <div className={'flex items-center gap-2'}>
+                        <Button size={'sm'} className={'bg-[#3b7ddd]'}>
+                            <div className={'flex items-center gap-2'}>
+                                <MdOutlineWatchLater/>
+                                <span className={'text-xs'}>00:00:00</span>
+                            </div>
+                        </Button>
+                        <h1 className={'title_font'}>
+                            საათი
+                        </h1>
+                    </div>
+
+                    <div className={'pl-3 max-w-[900px]'}>
+                        დროის მაჩვენებელი ბეიჯი
+                    </div>
+                </section>
+            </FadeInSection>
+
+            <Separator className="my-5"/>
+
+            {/*dollar*/}
+            <FadeInSection>
+                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dollar'}>
+                    <div className={'flex items-center gap-2'}>
+                        <Button size={'sm'} className={'bg-[#28a745]'}>
+                            <div className={'flex items-center gap-2'}>
+                                <FaDollarSign/>
+                                <span className={'text-xs'}>0.0000</span>
+                            </div>
+                        </Button>
+                        <h1 className={'title_font'}>
+                            დოლარის კურსი
+                        </h1>
+                    </div>
+
+                    <div className={'pl-3 max-w-[900px]'}>
+                        მოცემული ღილაკი გვიჩვენებს დოლარის კურსს ლართან მიმართებაში, დაკლიკებისას რეფრეშდება და მოაქვს
+                        უახლესი კურსი
+                    </div>
+                </section>
+            </FadeInSection>
+
+            <Separator className="my-5"/>
+
+            {/*working hours*/}
+            <FadeInSection>
+                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dollar'}>
+                    <div className={'flex items-center gap-2'}>
+                        <div className={'flex items-center gap-5 p-2 bg-[#486794]/60 rounded'}>
+                            <div className={'flex items-center gap-3'}>
+                                <div className={'flex items-center gap-2 text-white'}>
+                                    <MdTimelapse size={20}/>
+                                    <span>0:00:00</span>
+                                </div>
+                                <div className={'flex items-center gap-1 text-white'}>
+                                    <RiCupFill size={20}/>
+                                    <span>0:00:00</span>
+                                </div>
+                            </div>
+
+                            <div className={'flex items-center gap-2'}>
+                                <Button size={'sm'} className={'bg-[#fd7e14]'}>
+                                    <IoMdPause size={20}/>
+                                </Button>
+
+                                <Button size={'sm'} className={'bg-[#dc3545]'}>
+                                    <div className={'flex items-center gap-2 text-xs'}>
+                                        <FaCheck size={20}/>
+                                        <span>დასრულება</span>
+                                    </div>
+                                </Button>
+                            </div>
+                        </div>
+                        <h1 className={'title_font'}>
+                            სრული სესიის ხანგრძლივობა
+                        </h1>
+                    </div>
+
+                    <div className={'pl-3 max-w-[900px]'}>
+                        ეს კონტეინერი გვიჩვენებს სრულ სამუშაო სესიას, დროის ჩართვიდან დასრულებამდე, დაპაუზების
+                        შემთხვევაში ირთობა შესვენების ტაიმერი და ითვლის რამდენიხანი იყო თანამშრომელი შესვენებაზე.
+                        <br/>
+                        დასრულების შემდეგ ნამუშევარ დროს აკლდება შესვენების დრო და ასე ითვლება სამუშაო სესია
+                    </div>
+                </section>
+            </FadeInSection>
         </>
     );
 }

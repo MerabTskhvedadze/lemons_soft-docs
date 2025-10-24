@@ -72,6 +72,7 @@ body {
 
     /* Prevent horizontal scroll */
     overflow-x: hidden;
+
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -221,4 +222,33 @@ html {
 /* On hover, change the thumb color */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+
+
+/* shimmering diagonal sheen */
+@keyframes lemons-sheen {
+    0%   { transform: translateX(-120%) skewX(-12deg); opacity: 0.0; }
+    12%  { opacity: 0.55; }
+    50%  { opacity: 0.35; }
+    100% { transform: translateX(220%) skewX(-12deg); opacity: 0.0; }
+}
+
+.before\:animate-sheen::before {
+    content: "";
+    transform: translateX(-120%) skewX(-12deg);
+    animation: lemons-sheen 5.5s ease-in-out infinite;
+    will-change: transform, opacity;
+    pointer-events: none;
+}
+
+/* tiny helper if needed */
+.title_font {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* optional: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .before\:animate-sheen::before { animation-duration: 0.001ms !important; }
 }
