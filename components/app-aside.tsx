@@ -34,6 +34,7 @@ import {
     FaCubes,
     FaHome,
 } from "react-icons/fa"
+import {ScrollTrailText} from "@/animations/ScrollTrailText";
 
 export function AppSidebar() {
     const data = [

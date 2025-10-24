@@ -9,6 +9,8 @@ import {SidebarProvider} from "@/components/ui/sidebar";
 import {ScrollProgressBar} from "@/animations/ScrollProgressBar";
 import {Metadata} from "next";
 
+import "driver.js/dist/driver.css";
+
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],

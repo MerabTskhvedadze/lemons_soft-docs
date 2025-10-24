@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 import Link from 'next/link'
 import {Separator} from "@/components/ui/separator";
@@ -27,6 +25,7 @@ import {IoMdPause} from "react-icons/io";
 import {RiVoiceprintFill, RiCupFill} from "react-icons/ri";
 import {Button} from "@/components/ui/button";
 import {ScrollTrailText} from "@/animations/ScrollTrailText";
+
 
 export default function Home() {
     const menuItems = [
@@ -197,7 +196,7 @@ export default function Home() {
                 <section className={'flex flex-col gap-3'}>
                     <div>
                         <h1 className={'title_font text-lg'}>
-                            <ScrollTrailText>ზოგადი მიმოხილვა</ScrollTrailText>
+                            <ScrollTrailText>🔹 ზოგადი მიმოხილვა</ScrollTrailText>
                         </h1>
                         <ScrollTrailText className={'pl-5'}>
                             Lemons CRM - არის გუნდის და კლიენტის მენეჯმენტის სისტემა, რომელიც აერთიანებს ყველა ძირითად
@@ -265,7 +264,7 @@ export default function Home() {
                 <section className={'flex flex-col gap-3'}>
                     <div>
                         <h1 className={'title_font text-lg'}>
-                            <ScrollTrailText>ზედა ნავიგაცია (ჰედერი)</ScrollTrailText>
+                            <ScrollTrailText>🔹 ზედა ნავიგაცია (ჰედერი)</ScrollTrailText>
                         </h1>
                         <ScrollTrailText className={'pl-5'}>
                             ზედა ნავიგაციაში წარმოდგენილია შორთქათები და
@@ -319,7 +318,7 @@ export default function Home() {
                 <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dashboard'}>
                     <div>
                         <h1 className={'title_font text-lg'}>
-                            <ScrollTrailText> გვერდითი პანელი და გვერდების სტრუქტურა </ScrollTrailText>
+                            <ScrollTrailText>🔹 გვერდითი პანელი და გვერდების სტრუქტურა </ScrollTrailText>
                         </h1>
                         <ScrollTrailText className={'pl-5'}>
                             საიტზე მარცხენა მხარეს მდებარეობს ნავიგაციის მენიუ, რომელიც უზრუნველყოფს წვდომას ყველა
