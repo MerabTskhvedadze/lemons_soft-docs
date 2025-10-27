@@ -36,9 +36,9 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
                 <SidebarProvider>
                     <Header/>
 
-                    <main className="gap-10 pt-24 px-5 w-full flex">
+                    <main className="gap-10 pt-24 px-5 w-full flex justify-center">
                         <aside
-                            className="overflow-y-auto overflow-x-hidden max-h-150 w-65 shrink-0 hidden min-[1124px]:block min-[1124px]:sticky top-24 self-start">
+                            className="overflow-y-auto overflow-x-hidden max-h-150 shrink-0 hidden min-[1124px]:block min-[1124px]:sticky top-24 self-start">
                             <AppSidebar/>
                         </aside>
                         {children}

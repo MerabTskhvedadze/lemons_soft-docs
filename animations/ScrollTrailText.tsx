@@ -11,7 +11,7 @@ import {
     useMotionValue,
     useMotionValueEvent,
 } from 'motion/react';
-import { PropsWithChildren, CSSProperties } from 'react';
+import {PropsWithChildren, CSSProperties} from 'react';
 
 type ScrollTrailTextProps = PropsWithChildren<{
     layers?: number;        // number of ghost layers
@@ -33,24 +33,25 @@ type ScrollTrailTextProps = PropsWithChildren<{
  * Velocity-reactive text trail with hysteresis, soft-knee opacity, and
  * reduced-motion support.
  */
-export function ScrollTrailText({
-                                    children,
-                                    layers = 3,
-                                    maxOffset = 20,
-                                    offsetGain = 0.018,
-                                    blur = 5,
-                                    maxAlpha = 0.25,
-                                    decay = 0.48,
-                                    damping = 34,
-                                    stiffness = 180,
-                                    onThreshold = 320,
-                                    offThreshold = 220,
-                                    knee = 260,
-                                    className,
-                                    style,
-                                }: ScrollTrailTextProps) {
+export function ScrollTrailText(
+    {
+        children,
+        layers = 3,
+        maxOffset = 20,
+        offsetGain = 0.018,
+        blur = 5,
+        maxAlpha = 0.25,
+        decay = 0.48,
+        damping = 34,
+        stiffness = 180,
+        onThreshold = 320,
+        offThreshold = 220,
+        knee = 260,
+        className,
+        style,
+    }: ScrollTrailTextProps) {
     const reduce = useReducedMotion();
-    const { scrollY } = useScroll();
+    const {scrollY} = useScroll();
     const vRaw = useVelocity(scrollY); // MotionValue<number>
 
     // absolute speed (px/s)
@@ -72,13 +73,7 @@ export function ScrollTrailText({
     });
 
     // Smooth the motion, but we’ll hard-cut to 0 when inactive
-    const offsetSpring = useSpring(offsetUnsmoothed, { damping, stiffness });
-
-    // --- IMPORTANT: make inputs a typed tuple and the transformer param a tuple ---
-    const baseOffsetInputs = [offsetSpring, active] as [
-        MotionValue<number>,
-        MotionValue<number>
-    ];
+    const offsetSpring = useSpring(offsetUnsmoothed, {damping, stiffness});
 
     // Snap offset to 0 when inactive (no lingering)
     const baseOffset = useTransform(
@@ -116,7 +111,7 @@ export function ScrollTrailText({
             }}
         >
       {/* Ghost layers behind the text */}
-            {Array.from({ length: layers }, (_, idx) => (
+            {Array.from({length: layers}, (_, idx) => (
                 <GhostLayer
                     key={idx}
                     index={idx + 1}
@@ -130,26 +125,27 @@ export function ScrollTrailText({
             ))}
 
             {/* Foreground text */}
-            <span style={{ position: 'relative' }}>{children}</span>
+            <span style={{position: 'relative'}}>{children}</span>
     </span>
     );
 }
 
 /** One ghost/streak layer. Hooks live here, not inside a .map (✅ Rules of Hooks). */
-function GhostLayer({
-                        index,
-                        baseOffset,
-                        baseAlpha,
-                        decay,
-                        blur,
-                        children,
-                    }: PropsWithChildren<{
-    index: number;                       // 1-based
-    baseOffset: MotionValue<number>;
-    baseAlpha: MotionValue<number>;
-    decay: number;
-    blur: number;
-}>) {
+function GhostLayer(
+    {
+        index,
+        baseOffset,
+        baseAlpha,
+        decay,
+        blur,
+        children,
+    }: PropsWithChildren<{
+        index: number;                       // 1-based
+        baseOffset: MotionValue<number>;
+        baseAlpha: MotionValue<number>;
+        decay: number;
+        blur: number;
+    }>) {
     const y = useTransform<number, number>(baseOffset, (o: number) => o * index);
     const opacity = useTransform<number, number>(
         baseAlpha,

@@ -10,7 +10,7 @@ import {FaBookOpen, FaArrowRightFromBracket} from "react-icons/fa6";
 export default function Header() {
     return (
         <motion.header
-            className="py-2.5 px-7.5 max-w-screen-2xl fixed w-full"
+            className="py-2.5 px-1.5 lg:px-7.5 max-w-screen-2xl fixed w-full"
             style={{zIndex: 49}}
         >
             {/* Optimized liquid glass container */}

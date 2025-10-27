@@ -2,8 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import {Separator} from "@/components/ui/separator";
 import {FadeInSection} from "@/animations/FadeInSection";
-
-
 import {
     Table,
     TableHeader,
@@ -12,7 +10,6 @@ import {
     TableBody,
     TableCell,
 } from "@/components/ui/table";
-
 import {
     FaDesktop, FaBars, FaAddressBook, FaShoppingBag,
     FaHandshake, FaUsers, FaPhone, FaMobile, FaComments,
@@ -25,6 +22,7 @@ import {IoMdPause} from "react-icons/io";
 import {RiVoiceprintFill, RiCupFill} from "react-icons/ri";
 import {Button} from "@/components/ui/button";
 import {ScrollTrailText} from "@/animations/ScrollTrailText";
+import ListCards from "@/components/list-cards";
 
 
 export default function Home() {
@@ -363,150 +361,104 @@ export default function Home() {
 
             {/*graph*/}
             <FadeInSection>
-                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'graph'}>
-                    <div className={'flex items-center gap-2'}>
-                        <Button size={'sm'} className={'bg-[#0047b0]'}>
-                            <div className={'flex items-center gap-2'}>
-                                <RiVoiceprintFill/>
-                                <span className={'text-xs'}>გრაფიკი</span>
-                            </div>
-                        </Button>
-
-                        <h1 className={'title_font'}>
-                            <ScrollTrailText>თანამშრომლების სამუშაო საათების გრაფიკი.</ScrollTrailText>
-                        </h1>
-                    </div>
-
-                    <div className={'pl-3 max-w-[900px]'}>
-                        <ScrollTrailText>
-                            მოცემული ღილაკზე დაკლიკებისას გაიხსნება ფანჯარა, რომელშიც მოცემულია ცხრილი თანამშრომლების
-                            სამუშაო საათებით დეპარტამენტების მიხედვით, ცხრილში მოცემულია მთელი თვის გეგმა
-                        </ScrollTrailText>
-                    </div>
-                </section>
+                <ListCards
+                    title={'თანამშრომლების სამუშაო საათების გრაფიკი.'}
+                    description={'მოცემული ღილაკზე დაკლიკებისას გაიხსნება ფანჯარა, რომელშიც მოცემულია ცხრილი თანამშრომლების სამუშაო საათებით დეპარტამენტების მიხედვით, ცხრილში მოცემულია მთელი თვის გეგმა'}
+                >
+                    <Button size={'sm'} className={'bg-[#0047b0]'}>
+                        <div className={'flex items-center gap-2'}>
+                            <RiVoiceprintFill/>
+                            <span className={'text-xs'}>გრაფიკი</span>
+                        </div>
+                    </Button>
+                </ListCards>
             </FadeInSection>
 
             <Separator className="my-5"/>
 
             {/*sticky notes*/}
             <FadeInSection>
-                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'notes'}>
-                    <div className={'flex items-center gap-2'}>
-                        <Button size={'sm'}>
-                            <div className={'flex items-center gap-2'}>
-                                <MdNotes/>
-                                <span className={'text-xs'}>სანიშნი</span>
-                            </div>
-                        </Button>
-                        <h1 className={'title_font'}>
-                            <ScrollTrailText>წებოვანი ქაღალდი (Sticky notes)</ScrollTrailText>
-                        </h1>
-                    </div>
-
-                    <div className={'pl-3 max-w-[900px]'}>
-                        <ScrollTrailText>
-                            ეს ფუნქციონალი მომხმარებელს აძლევს საშუალებას, საიტზე შექმნას პირადი ან სამუშაო შენიშვნები,
-                            რომლებსაც ნებისმიერ დროს დაინახავს საიტის ნებისმიერი გვერდიდან.
-                        </ScrollTrailText>
-                    </div>
-                </section>
+                <ListCards
+                    title={'წებოვანი ქაღალდი (Sticky notes)'}
+                    description={'ეს ფუნქციონალი მომხმარებელს აძლევს საშუალებას, საიტზე შექმნას პირადი ან სამუშაო შენიშვნები, რომლებსაც ნებისმიერ დროს დაინახავს საიტის ნებისმიერი გვერდიდან.'}
+                >
+                    <Button size={'sm'}>
+                        <div className={'flex items-center gap-2'}>
+                            <MdNotes/>
+                            <span className={'text-xs'}>სანიშნი</span>
+                        </div>
+                    </Button>
+                </ListCards>
             </FadeInSection>
 
             <Separator className="my-5"/>
 
             {/*time*/}
             <FadeInSection>
-                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'time'}>
-                    <div className={'flex items-center gap-2'}>
-                        <Button size={'sm'} className={'bg-[#3b7ddd]'}>
-                            <div className={'flex items-center gap-2'}>
-                                <MdOutlineWatchLater/>
-                                <span className={'text-xs'}>00:00:00</span>
-                            </div>
-                        </Button>
-                        <h1 className={'title_font'}>
-                            <ScrollTrailText>საათი</ScrollTrailText>
-                        </h1>
-                    </div>
-
-                    <div className={'pl-3 max-w-[900px]'}>
-                        <ScrollTrailText>დროის მაჩვენებელი ბეიჯი</ScrollTrailText>
-                    </div>
-                </section>
+                <ListCards
+                    title={'საათი'}
+                    description={'დროის მაჩვენებელი ბეიჯი'}
+                >
+                    <Button size={'sm'} className={'bg-[#3b7ddd]'}>
+                        <div className={'flex items-center gap-2'}>
+                            <MdOutlineWatchLater/>
+                            <span className={'text-xs'}>00:00:00</span>
+                        </div>
+                    </Button>
+                </ListCards>
             </FadeInSection>
 
             <Separator className="my-5"/>
 
             {/*dollar*/}
             <FadeInSection>
-                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dollar'}>
-                    <div className={'flex items-center gap-2'}>
-                        <Button size={'sm'} className={'bg-[#28a745]'}>
-                            <div className={'flex items-center gap-2'}>
-                                <FaDollarSign/>
-                                <span className={'text-xs'}>0.0000</span>
-                            </div>
-                        </Button>
-                        <h1 className={'title_font'}>
-                            <ScrollTrailText>დოლარის კურსი</ScrollTrailText>
-                        </h1>
-                    </div>
-
-                    <div className={'pl-3 max-w-[900px]'}>
-                        <ScrollTrailText>
-                            მოცემული ღილაკი გვიჩვენებს დოლარის კურსს ლართან მიმართებაში, დაკლიკებისას რეფრეშდება და
-                            მოაქვს
-                            უახლესი კურსი
-                        </ScrollTrailText>
-                    </div>
-                </section>
+                <ListCards
+                    title={'დოლარის კურსი'}
+                    description={'მოცემული ღილაკი გვიჩვენებს დოლარის კურსს ლართან მიმართებაში, დაკლიკებისას რეფრეშდება და მოაქვს უახლესი კურსი'}
+                >
+                    <Button size={'sm'} className={'bg-[#28a745]'}>
+                        <div className={'flex items-center gap-2'}>
+                            <FaDollarSign/>
+                            <span className={'text-xs'}>0.0000</span>
+                        </div>
+                    </Button>
+                </ListCards>
             </FadeInSection>
 
             <Separator className="my-5"/>
 
             {/*working hours*/}
             <FadeInSection>
-                <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dollar'}>
-                    <div className={'flex items-center gap-2'}>
-                        <div className={'flex items-center gap-5 p-2 bg-[#486794]/60 rounded'}>
-                            <div className={'flex items-center gap-3'}>
-                                <div className={'flex items-center gap-2 text-white'}>
-                                    <MdTimelapse size={20}/>
-                                    <span>0:00:00</span>
-                                </div>
-                                <div className={'flex items-center gap-1 text-white'}>
-                                    <RiCupFill size={20}/>
-                                    <span>0:00:00</span>
-                                </div>
+                <ListCards
+                    title={'სრული სესიის ხანგრძლივობა'}
+                    description={`ეს კონტეინერი გვიჩვენებს სრულ სამუშაო სესიას, დროის ჩართვიდან დასრულებამდე, დაპაუზების შემთხვევაში ირთობა შესვენების ტაიმერი და ითვლის რამდენიხანი იყო თანამშრომელი შესვენებაზე. დასრულების შემდეგ ნამუშევარ დროს აკლდება შესვენების დრო და ასე ითვლება სამუშაო სესია`}
+                >
+                    <div className={'flex items-center gap-5 p-2 bg-[#486794]/60 rounded'}>
+                        <div className={'flex items-center gap-3'}>
+                            <div className={'flex items-center gap-2 text-white'}>
+                                <MdTimelapse size={20}/>
+                                <span>0:00:00</span>
                             </div>
-
-                            <div className={'flex items-center gap-2'}>
-                                <Button size={'sm'} className={'bg-[#fd7e14]'}>
-                                    <IoMdPause size={20}/>
-                                </Button>
-
-                                <Button size={'sm'} className={'bg-[#dc3545]'}>
-                                    <div className={'flex items-center gap-2 text-xs'}>
-                                        <FaCheck size={20}/>
-                                        <span>დასრულება</span>
-                                    </div>
-                                </Button>
+                            <div className={'flex items-center gap-1 text-white'}>
+                                <RiCupFill size={20}/>
+                                <span>0:00:00</span>
                             </div>
                         </div>
-                        <h1 className={'title_font'}>
-                            <ScrollTrailText>სრული სესიის ხანგრძლივობა</ScrollTrailText>
-                        </h1>
-                    </div>
 
-                    <div className={'pl-3 max-w-[900px]'}>
-                        <ScrollTrailText>
-                            ეს კონტეინერი გვიჩვენებს სრულ სამუშაო სესიას, დროის ჩართვიდან დასრულებამდე, დაპაუზების
-                            შემთხვევაში ირთობა შესვენების ტაიმერი და ითვლის რამდენიხანი იყო თანამშრომელი შესვენებაზე.
-                            <br/>
-                            დასრულების შემდეგ ნამუშევარ დროს აკლდება შესვენების დრო და ასე ითვლება სამუშაო სესია
-                        </ScrollTrailText>
+                        <div className={'flex items-center gap-2'}>
+                            <Button size={'sm'} className={'bg-[#fd7e14]'}>
+                                <IoMdPause size={20}/>
+                            </Button>
+
+                            <Button size={'sm'} className={'bg-[#dc3545]'}>
+                                <div className={'flex items-center gap-2 text-xs'}>
+                                    <FaCheck size={20}/>
+                                    <span>დასრულება</span>
+                                </div>
+                            </Button>
+                        </div>
                     </div>
-                </section>
+                </ListCards>
             </FadeInSection>
         </>
     );
