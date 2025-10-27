@@ -69,12 +69,18 @@ export function ScrollStreakText(
         return +a.toFixed(3);
     });
 
+    // ----- FIX: derive multiplied MotionValues before using them in the template -----
+    const streakOffset_1_8 = useTransform(streakOffset, (v) => v * 1.8);
+    const streakOffset_2_6 = useTransform(streakOffset, (v) => v * 2.6);
+
+    const streakAlpha_0_6 = useTransform(streakAlpha, (a) => a * 0.6);
+    const streakAlpha_0_35 = useTransform(streakAlpha, (a) => a * 0.35);
+
     // Build a layered text-shadow for a soft vertical trail
-    // You can adjust multipliers / counts for thicker or thinner streaks.
     const textShadow = useMotionTemplate`
     0 ${streakOffset}px 0 rgba(0,0,0, ${streakAlpha}),
-    0 ${streakOffset * 1.8}px 0 rgba(0,0,0, ${streakAlpha * 0.6}),
-    0 ${streakOffset * 2.6}px 0 rgba(0,0,0, ${streakAlpha * 0.35})
+    0 ${streakOffset_1_8}px 0 rgba(0,0,0, ${streakAlpha_0_6}),
+    0 ${streakOffset_2_6}px 0 rgba(0,0,0, ${streakAlpha_0_35})
   `;
 
     return (
