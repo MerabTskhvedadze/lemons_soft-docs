@@ -10,7 +10,7 @@ import {
     MotionValue,
     useMotionValue,
     useMotionValueEvent,
-} from 'framer-motion';
+} from 'motion/react';
 import { PropsWithChildren, CSSProperties } from 'react';
 
 type ScrollTrailTextProps = PropsWithChildren<{

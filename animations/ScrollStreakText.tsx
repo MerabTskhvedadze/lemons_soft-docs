@@ -8,7 +8,7 @@ import {
     useTransform,
     useMotionTemplate,
     useReducedMotion
-} from 'framer-motion';
+} from 'motion/react';
 import {PropsWithChildren, CSSProperties} from 'react';
 
 type ScrollStreakTextProps = PropsWithChildren<{
