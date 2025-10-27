@@ -191,7 +191,7 @@ export default function Dashboard() {
                                 <span>0</span>
                             </p>
                         </div>
-                        <ProgressBar/>
+                        <ProgressBar goal={'2,638'}/>
                     </Card>
 
                     <Card
@@ -204,7 +204,7 @@ export default function Dashboard() {
                             <p>დღის ბონუსი: <span className={'text-red-400'}>0 ₾</span></p>
                             <p>მოს. თვის ბონუსი: <span className={'text-red-400'}>0 ₾</span></p>
                         </div>
-                        <ProgressBar/>
+                        <ProgressBar goal={'40'}/>
                     </Card>
 
                     <Card
@@ -217,7 +217,7 @@ export default function Dashboard() {
                             <p>დღის ბონუსი: <span className={'text-red-400'}>0 ₾</span></p>
                             <p>მოს. თვის ბონუსი: <span className={'text-red-400'}>0 ₾</span></p>
                         </div>
-                        <ProgressBar/>
+                        <ProgressBar goal={'10'}/>
                     </Card>
 
                     <Card
@@ -275,7 +275,7 @@ function Card({title, icon, footer, children}: {
     children: React.ReactNode
 }) {
     return (
-        <div className="shadow w-full h-[228px] bg-white max-w-[300px] p-3 flex flex-col gap-3">
+        <div className="shadow w-full h-[246px] bg-white max-w-[300px] p-3 flex flex-col gap-3">
             <header className="flex items-center gap-2 justify-between">
                 <div className="title_font text-xs">{title}</div>
                 <p className="flex items-center gap-2">
@@ -292,7 +292,7 @@ function Card({title, icon, footer, children}: {
     )
 }
 
-function ProgressBar() {
+function ProgressBar({goal}: {goal:string}) {
     return (
         <div className={'flex flex-col gap-1'}>
             <p className={'flex items-center justify-between font-bold text-[10px]'}>
@@ -302,7 +302,7 @@ function ProgressBar() {
             <div className="rounded-2xl h-1 bg-gray-300"/>
             <p className={'flex items-center justify-between text-[10px]'}>
                 <span className={''}>0</span>
-                <span>2638</span>
+                <span>{goal}</span>
             </p>
         </div>
     )
@@ -311,7 +311,7 @@ function ProgressBar() {
 function Action({icon, text}: { icon: React.ReactNode, text: string }) {
     return (
         <div
-            className={'select-none cursor-pointer py-1 text-sm border text-red-500 flex items-center gap-1 justify-center border-red-500 rounded-2xl hover:text-white hover:bg-red-500 transition delay-150 duration-300 ease-in'}>
+            className={'select-none cursor-pointer py-[2px] text-[12px] title_font border text-red-500 flex items-center gap-1 justify-center border-red-500 rounded-2xl hover:text-white hover:bg-red-500 transition delay-150 duration-300 ease-in'}>
             {icon}
             <span>{text}</span>
         </div>
