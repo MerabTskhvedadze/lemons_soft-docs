@@ -125,10 +125,10 @@ export default function Dashboard() {
 
             <Separator className="my-4"/>
 
-            <section className={'flex w-full gap-3'}>
-                <div className={'flex flex-col gap-3 bg-gray-50 rounded-lg px-5 py-4'}>
+            <section className={'lg:flex gap-3 bg-gray-50'}>
+                <div className={'lg:max-w-[412px] shrink flex flex-col gap-3 rounded-lg p-2 sm:px-5 sm:py-4'}>
                     {/* calls plan */}
-                    <div className="shadow bg-white max-w-[300px] p-3 rounded-lg border flex flex-col gap-3">
+                    <div className="shadow bg-white p-3 rounded-lg border flex flex-col gap-3">
                         <div className="flex items-center gap-2 justify-between">
                             <h1 className="title_font text-xs">📞 ზარების გეგმა</h1>
                             <p className="flex items-center gap-2">
@@ -154,7 +154,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* today's planned meetings */}
-                    <div className="shadow bg-white max-w-[300px] p-3 rounded-lg border flex flex-col gap-3">
+                    <div className="shadow bg-white p-3 rounded-lg border flex flex-col gap-3">
                         <div className="flex items-center gap-2 justify-between">
                             <h1 className="text-xs title_font flex items-center gap-2">
                                 <MdGroup size={20} color="blue"/>
@@ -174,12 +174,12 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                <div className={'grid gap-2 grid-cols-3 bg-gray-50 rounded-lg px-5 py-4 w-full'}>
-
+                <div className={'flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full'}>
                     <Card
                         title={'ზარები'}
                         icon={<MdPhone size={20} color="white"/>}
                         footer={<Action icon={<FaTimes/>} text={'დღის გეგმა 100'}/>}
+                        className="sm:col-span-2 2xl:col-span-1"
                     >
                         <div className="flex items-center gap-2 justify-between">
                             <p className={'text-xs flex flex-col'}>
@@ -198,6 +198,7 @@ export default function Dashboard() {
                         title={'მომლოდინე'}
                         icon={<CgTimelapse size={20} color="white"/>}
                         footer={<Action icon={<FaTimes/>} text={'დღის გეგმა 15'}/>}
+                        className="sm:col-span-2 2xl:col-span-1"
                     >
                         <p>0</p>
                         <div className="flex flex-col text-xs">
@@ -211,6 +212,7 @@ export default function Dashboard() {
                         title={'შეხვედრა'}
                         icon={<MdGroup size={20} color="white"/>}
                         footer={<Action icon={<FaTimes/>} text={'დღის გეგმა 5'}/>}
+                        className="sm:col-span-4 2xl:col-span-1"
                     >
                         <p>0</p>
                         <div className="flex flex-col text-xs">
@@ -224,10 +226,12 @@ export default function Dashboard() {
                         title={'გაყიდვები'}
                         icon={<BiDollarCircle size={20} color="white"/>}
                         footer={<Action icon={<FaTimes/>} text={'დღის გეგმა 5'}/>}
+                        className="sm:col-span-2 2xl:col-span-1"
                     >
                         <p>0</p>
                         <div className="flex flex-col text-xs">
-                            <p className={'text-gray-400'}>მოს. თვის ბონუსი: <span className={'text-red-500'}>0 ₾</span></p>
+                            <p className={'text-gray-400'}>მოს. თვის ბონუსი: <span className={'text-red-500'}>0 ₾</span>
+                            </p>
                         </div>
                     </Card>
 
@@ -246,6 +250,7 @@ export default function Dashboard() {
                         }
                         icon={<FaLariSign size={20} color="white"/>}
                         footer={<h1 className={'title_font'}>სულ: {show ? '0₾' : '---'}</h1>}
+                        className="sm:col-span-2 2xl:col-span-1"
                     >
                         <div className="flex flex-col text-xs text-gray-400">
                             <p>ზეგანაკვეთური:</p>
@@ -258,31 +263,80 @@ export default function Dashboard() {
                     <Card
                         title={'დაგვიანება'}
                         icon={<MdRemoveRedEye size={20} color="white"/>}
+                        className="sm:col-span-4 2xl:col-span-1"
                     >
                         <p className={'text-sm'}>დაგვიანება არ ფიქსირდება</p>
                     </Card>
-                </div>
 
+                    <div className={' sm:col-span-4 xl:col-span-3 flex flex-col sm:flex-row gap-4'}>
+                        <Card
+                            title={
+                                <div className={'flex items-center gap-4'}>
+                                    <MdRemoveRedEye size={20} color="blue"/>
+                                    <span>სტატისტიკის ჩანაწერი არ არის</span>
+                                </div>
+                            }
+                            className="sm:col-span-4 2xl:col-span-1"
+                        />
+
+                        <Card
+                            title={
+                                <div className={'flex items-center gap-4'}>
+                                    <MdRemoveRedEye size={20} color="blue"/>
+                                    <span>სტატისტიკის ჩანაწერი არ არის</span>
+                                </div>
+                            }
+                            className="sm:col-span-4 2xl:col-span-1"
+                        />
+                    </div>
+
+                    <Card
+                        title={
+                            <div className={'flex items-center gap-4'}>
+                                <BiDollarCircle size={20} color="blue"/>
+                                <div>
+                                    <h1>მომლოდინეები — ხვალ</h1>
+                                    <p className={'text_font text-[0.6rem] text-gray-400'}>
+                                        <span className={'title_font'}>თარიღი: </span>
+                                        წწწწ-თთ-დდ
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                        icon={<BiDollarCircle size={20} color="white"/>}
+                        footer={<Action icon={<FaTimes/>} text={'დღის გეგმა 5'}/>}
+                        className="sm:col-span-4 2xl:col-span-3"
+                    >
+                        <p>0</p>
+                        <div className="flex flex-col text-xs">
+                            <p className={'text-gray-400'}>მოს. თვის ბონუსი: <span className={'text-red-500'}>0 ₾</span>
+                            </p>
+                        </div>
+                    </Card>
+
+                </div>
             </section>
         </>
     );
 }
 
-function Card({title, icon, footer, children}: {
+function Card({title, icon, footer, children, className}: {
     title: string | React.ReactNode,
-    icon: React.ReactNode,
+    icon?: React.ReactNode,
     footer?: React.ReactNode,
-    children: React.ReactNode
+    children?: React.ReactNode,
+    className?: string
 }) {
     return (
-        <div className="shadow w-full h-[246px] bg-white max-w-[300px] p-3 flex flex-col gap-3">
+        <div className={`shadow w-full bg-white p-3 flex flex-col gap-3 ${className}`}>
             <header className="flex items-center gap-2 justify-between">
                 <div className="title_font text-xs">{title}</div>
-                <p className="flex items-center gap-2">
+
+                {icon && <p className="flex items-center gap-2">
                     <span className="history p-1 bg-blue-700 rounded-full">
                         {icon}
                     </span>
-                </p>
+                </p>}
             </header>
 
             {children}
@@ -292,7 +346,7 @@ function Card({title, icon, footer, children}: {
     )
 }
 
-function ProgressBar({goal}: {goal:string}) {
+function ProgressBar({goal}: { goal: string }) {
     return (
         <div className={'flex flex-col gap-1'}>
             <p className={'flex items-center justify-between font-bold text-[10px]'}>

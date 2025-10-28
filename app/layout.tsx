@@ -36,7 +36,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
                 <SidebarProvider>
                     <Header/>
 
-                    <main className="gap-10 pt-24 px-5 w-full flex justify-center">
+                    <main className="gap-10 pt-24 px-2 sm:px-5 w-full flex justify-center">
                         <aside
                             className="overflow-y-auto overflow-x-hidden max-h-150 shrink-0 hidden min-[1124px]:block min-[1124px]:sticky top-24 self-start">
                             <AppSidebar/>
@@ -44,10 +44,6 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
                         {children}
                     </main>
                 </SidebarProvider>
-
-                <footer className="p-12 h-[100px]">
-                    <div className="mx-auto w-fit">Motion is supported by the best in the industry.</div>
-                </footer>
             </body>
         </html>
     );

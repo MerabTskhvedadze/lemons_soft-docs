@@ -55,7 +55,12 @@
 }
 
 :root {
-    --fs-root: clamp(14px, 0.9vw + 12px, 18px);
+    /*--fs-root: clamp(14px, 0.9vw + 12px, 18px);*/
+    --fs-max: 16px; /* font-size at and above 1280px */
+    --fs-min: 14px; /* font-size at the smallest breakpoint */
+    --bp-start: 1280px; /* where shrinking begins */
+    --bp-end: 360px; /* smallest viewport to consider */
+
 
     --radius: 0.625rem;
     --background: oklch(1 0 0);
@@ -93,8 +98,24 @@
 
 
 html {
+    font-size: var(--fs-max); /* default (>= 1280px) */
     scroll-behavior: smooth;
-    font-size: var(--fs-root);
+    font-size: var(--fs-max);
+}
+
+@media (max-width: 1280px) {
+    html {
+        /* Linear interpolation from 1280px -> 360px */
+        font-size: clamp(
+                var(--fs-min),
+                calc(
+                        var(--fs-min) +
+                        (var(--fs-max) - var(--fs-min)) *
+                        ((100vw - var(--bp-end)) / (var(--bp-start) - var(--bp-end)))
+                ),
+                var(--fs-max)
+        );
+    }
 }
 
 body {
@@ -229,13 +250,22 @@ html {
 }
 
 
-
 /* shimmering diagonal sheen */
 @keyframes lemons-sheen {
-    0%   { transform: translateX(-120%) skewX(-12deg); opacity: 0.0; }
-    12%  { opacity: 0.55; }
-    50%  { opacity: 0.35; }
-    100% { transform: translateX(220%) skewX(-12deg); opacity: 0.0; }
+    0% {
+        transform: translateX(-120%) skewX(-12deg);
+        opacity: 0.0;
+    }
+    12% {
+        opacity: 0.55;
+    }
+    50% {
+        opacity: 0.35;
+    }
+    100% {
+        transform: translateX(220%) skewX(-12deg);
+        opacity: 0.0;
+    }
 }
 
 .before\:animate-sheen::before {
@@ -254,5 +284,7 @@ html {
 
 /* optional: respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    .before\:animate-sheen::before { animation-duration: 0.001ms !important; }
+    .before\:animate-sheen::before {
+        animation-duration: 0.001ms !important;
+    }
 }
