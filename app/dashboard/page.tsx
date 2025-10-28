@@ -14,7 +14,11 @@ import {AiOutlineDollar} from "react-icons/ai";
 import {MdPhone, MdOutlineTimelapse, MdRemoveRedEye, MdGroup, MdAccessTime, MdRefresh} from "react-icons/md";
 import {CgTimelapse} from "react-icons/cg";
 
+import {DatePicker, Select} from 'antd';
+
 export default function Dashboard() {
+    const {RangePicker} = DatePicker
+
     const [show, setShow] = React.useState(false);
     const mainSectionList = [
         {
@@ -87,6 +91,7 @@ export default function Dashboard() {
 
     return (
         <>
+
             {/* overview */}
             <FadeInSection>
                 <section className="flex flex-col gap-3">
@@ -108,19 +113,36 @@ export default function Dashboard() {
             <Separator className="my-5"/>
 
             <div className="flex gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg">
-                <div className={'w-fit border rounded py-1 overflow-hidden bg-white'}>
-                    <Image width={268} height={28} src={'/images/dashboard/date-picker.png'} alt={'current-date'}/>
+                <RangePicker placeholder={['საწყისი', 'დასასრული']}/>
+
+                <div className={'title_font bg-[#e9ecef] text-[#153d77] py-2 px-4 text-xs rounded-sm'}>
+                    {new Date().toLocaleDateString('ka-GE', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                    })}-ის სტატისტიკა
                 </div>
 
-                <div className={'w-fit rounded overflow-hidden'}>
-                    <Image width={268} height={28} src={'/images/dashboard/current-date-stats.png'}
-                           alt={'current-date'}/>
-                </div>
-
-                <div className={'w-fit border rounded overflow-hidden'}>
-                    <Image width={268} height={28} src={'/images/dashboard/workers.png'}
-                           alt={'current-date'}/>
-                </div>
+                <Select
+                    style={{maxWidth:300, width:'100%'}}
+                    showSearch
+                    placeholder="აირჩიეთ თანამშრომელი"
+                    optionFilterProp="label"
+                    options={[
+                        {
+                            value: 'jack',
+                            label: 'Jack',
+                        },
+                        {
+                            value: 'lucy',
+                            label: 'Lucy',
+                        },
+                        {
+                            value: 'tom',
+                            label: 'Tom',
+                        },
+                    ]}
+                />
             </div>
 
             <Separator className="my-4"/>
@@ -174,7 +196,8 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                <div className={'flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full'}>
+                <div
+                    className={'flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full'}>
                     <Card
                         title={'ზარები'}
                         icon={<MdPhone size={20} color="white"/>}
@@ -313,7 +336,6 @@ export default function Dashboard() {
                             </p>
                         </div>
                     </Card>
-
                 </div>
             </section>
         </>
