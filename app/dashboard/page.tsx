@@ -6,7 +6,6 @@ import 'driver.js/dist/driver.css' // ← important
 import {DatePicker, Select} from 'antd'
 
 import {Separator} from '@/components/ui/separator'
-import {FadeInSection} from '@/animations/FadeInSection'
 import {ScrollTrailText} from '@/animations/ScrollTrailText'
 
 import {FaTimes} from 'react-icons/fa'
@@ -22,6 +21,10 @@ import {
     MdAccessTime,
     MdRefresh
 } from 'react-icons/md'
+
+import {MeetingsCard} from "@/components/dashboard/meetings-card";
+import {Card} from "@/components/dashboard/card"
+import {ProgressBar} from "@/components/progress-bar";
 
 export default function Dashboard() {
     const {RangePicker} = DatePicker
@@ -43,16 +46,6 @@ export default function Dashboard() {
 
     const startTour = useCallback(() => {
         tourRef.current?.setSteps([
-            {
-                element: '.tour-intro',
-                popover: {
-                    title: 'მოგესალმებით 👋',
-                    description:
-                        'ეს არის მონიტორინგის მთავარი პანელი. ქვემოთ გავიაროთ ძირითადი სექციები და ელემენტები.',
-                    side: 'bottom',
-                    align: 'start'
-                }
-            },
             {
                 element: '.tour-range',
                 popover: {
@@ -241,33 +234,31 @@ export default function Dashboard() {
     return (
         <>
             {/* overview */}
-            <FadeInSection>
-                <section className="flex flex-col gap-3 tour-intro">
-                    <div>
-                        <h1 className="title_font text-lg">
-                            <ScrollTrailText>🔹 გვერდის დანიშნულება</ScrollTrailText>
-                        </h1>
-                        <ScrollTrailText className="pl-5">
-                            დეშბორდის გვერდი წარმოადგენს სისტემის მთავარ მონიტორინგის პანელს, სადაც მომხმარებელი
-                            ხედავს დღის სტატისტიკას, ზარების რაოდენობას, შეხვედრებს, ქოლცენტრის და გაყიდვების აქტივობას,
-                            ასევე
-                            პირად და გუნდურ შედეგებს. გვერდი განკუთვნილია ოპერატორებისთვის, მენეჯერებისთვის და
-                            ადმინისტრატორებისთვის - სამუშაო
-                            პროცესის ყოველდღიური კონტროლისთვის.
-                        </ScrollTrailText>
-                    </div>
+            <section className="flex flex-col gap-3 tour-intro">
+                <div>
+                    <h1 className="title_font text-lg">
+                        <ScrollTrailText>🔹 გვერდის დანიშნულება</ScrollTrailText>
+                    </h1>
+                    <ScrollTrailText className="pl-5">
+                        დეშბორდის გვერდი წარმოადგენს სისტემის მთავარ მონიტორინგის პანელს, სადაც მომხმარებელი
+                        ხედავს დღის სტატისტიკას, ზარების რაოდენობას, შეხვედრებს, ქოლცენტრის და გაყიდვების აქტივობას,
+                        ასევე
+                        პირად და გუნდურ შედეგებს. გვერდი განკუთვნილია ოპერატორებისთვის, მენეჯერებისთვის და
+                        ადმინისტრატორებისთვის - სამუშაო
+                        პროცესის ყოველდღიური კონტროლისთვის.
+                    </ScrollTrailText>
+                </div>
 
-                    {/* manual trigger */}
-                    <div className="mt-2">
-                        <button
-                            onClick={startTour}
-                            className="px-3 py-1 text-xs rounded-md bg-blue-600 text-white hover:opacity-90"
-                        >
-                            გაეცანი გვერდს
-                        </button>
-                    </div>
-                </section>
-            </FadeInSection>
+                {/* manual trigger */}
+                <div className="mt-2">
+                    <button
+                        onClick={startTour}
+                        className="px-3 py-1 text-xs rounded-md bg-blue-600 text-white hover:opacity-90"
+                    >
+                        გაეცანი გვერდს
+                    </button>
+                </div>
+            </section>
 
             <Separator className="my-5"/>
 
@@ -323,12 +314,12 @@ export default function Dashboard() {
                 </div>
 
                 <div className="flex gap-3 items-center tour-actions">
-          <span className="py-1 px-3 bg-blue-600 rounded-full">
-            <IoMdRefresh color="white" size={20}/>
-          </span>
+                    <span className="py-1 px-3 bg-blue-600 rounded-full">
+                        <IoMdRefresh color="white" size={20}/>
+                    </span>
                     <span className="py-1 px-3 bg-yellow-600 rounded-full">
-            <MdOutlineTableChart color="white" size={20}/>
-          </span>
+                        <MdOutlineTableChart color="white" size={20}/>
+                    </span>
                 </div>
             </div>
 
@@ -341,12 +332,12 @@ export default function Dashboard() {
                         <div className="flex items-center gap-2 justify-between">
                             <h1 className="title_font text-xs">📞 ზარების გეგმა</h1>
                             <p className="flex items-center gap-2">
-                <span className="history p-1 border border-gray-200 rounded-full">
-                  <MdAccessTime size={20} color="blue"/>
-                </span>
+                                <span className="history p-1 border border-gray-200 rounded-full">
+                                  <MdAccessTime size={20} color="blue"/>
+                                </span>
                                 <span className="refresh p-1 border border-gray-200 rounded-full">
-                  <MdRefresh size={20} color="blue"/>
-                </span>
+                                  <MdRefresh size={20} color="blue"/>
+                                </span>
                             </p>
                         </div>
 
@@ -354,12 +345,15 @@ export default function Dashboard() {
                             <Card
                                 title={
                                     <div className="flex flex-col gap-2 tour-hourly-plan">
-                                        <span>საათობრივი გეგმა</span>
-                                        <ProgressBar onlyBar/>
-                                        <div className="flex items-center justify-between gap-2">
-                                            <p>0 / 253</p>
-                                            <p className="title_font font-extrabold">0.0%</p>
-                                        </div>
+                                        <ProgressBar
+                                            value={196}
+                                            max={253}
+                                            variant={'footer2'}
+                                            size={'sm'}
+                                            leftLabel={'დღიური გეგმა'}
+                                            showNumbers
+                                            fillColor={'#3b7ddd'}
+                                        />
                                     </div>
                                 }
                                 className="border"
@@ -368,12 +362,14 @@ export default function Dashboard() {
                             <Card
                                 title={
                                     <div className="flex flex-col gap-2 tour-daily-plan">
-                                        <span>დღიური გეგმა</span>
-                                        <ProgressBar onlyBar/>
-                                        <div className="flex items-center justify-between gap-2">
-                                            <p>0 / 253</p>
-                                            <p className="title_font font-extrabold">0.0%</p>
-                                        </div>
+                                        <ProgressBar
+                                            value={1527}
+                                            max={2024}
+                                            variant={'footer2'}
+                                            size={'sm'}
+                                            leftLabel={'თვიური გეგმა'}
+                                            showNumbers
+                                        />
                                     </div>
                                 }
                                 className="border"
@@ -389,32 +385,33 @@ export default function Dashboard() {
                                 <span>დღეს ჩანიშნული შეხვედრები</span>
                             </h1>
                             <p className="flex items-center gap-2">
-                <span className="refresh-meetings p-1 border border-gray-300 rounded-full">
-                  <MdRefresh size={20} color="blue"/>
-                </span>
+                                <span className="refresh-meetings p-1 border border-gray-300 rounded-full">
+                                  <MdRefresh size={20} color="blue"/>
+                                </span>
                             </p>
                         </div>
 
                         <div className="w-full meetings-list flex flex-col gap-3 ">
                             {Array.from({length: 3}).map((_, idx) => (
                                 <div key={idx} className="flex flex-col gap-1">
-                                    <div className="flex items-center gap-2 justify-between">
-                                        <span className="text-sm">მარიამ დუმბაძე</span>
-                                        <span className="text-sm">სულ 8</span>
-                                    </div>
-                                    <ProgressBar onlyBar height={0.8}/>
-                                    <div className="flex items-center gap-2 justify-between">
-                                        <span className="text-xs">შემდგარი შეხვედრა 3</span>
-                                        <span className="text-xs">შესასრულებელი დარჩა 5</span>
-                                    </div>
+                                    <ProgressBar
+                                        variant="double"
+                                        size="sm"
+                                        value={idx+1}
+                                        secondaryValue={idx+2}
+                                        max={8}
+                                        leftLabel="მადაგილდა ბარათლია"
+                                        rightLabel="სულ 6"
+                                        fillFrom="#addbb8" fillTo="#4fba5c"
+                                        secondaryFrom="#b1f13d" secondaryTo="#32e41e"
+                                    />
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
 
-                <div
-                    className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full">
+                <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full">
                     <Card
                         title="ზარები"
                         icon={<MdPhone size={20} color="white"/>}
@@ -424,14 +421,20 @@ export default function Dashboard() {
                         <div className="flex items-center gap-2 justify-between">
                             <p className="text-xs flex flex-col">
                                 <span className="text-gray-400">ნასაუბრები</span>
-                                <span>0</span>
+                                <span>256</span>
                             </p>
                             <p className="text-xs text-right flex flex-col">
                                 <span className="text-gray-400">სულ</span>
-                                <span>0</span>
+                                <span>1523</span>
                             </p>
                         </div>
-                        <ProgressBar goal="2,638"/>
+                        <ProgressBar
+                            value={1335}
+                            max={2024}
+                            variant={'detailed'}
+                            size={'sm'}
+                            leftLabel={'დღიური გეგმა'}
+                        />
                     </Card>
 
                     <Card
@@ -440,12 +443,18 @@ export default function Dashboard() {
                         footer={<Action icon={<FaTimes/>} text="დღის გეგმა 15"/>}
                         className="sm:col-span-2 2xl:col-span-1 tour-card-waiting"
                     >
-                        <p>0</p>
+                        <p>27</p>
                         <div className="flex flex-col text-xs">
-                            <p>დღის ბონუსი: <span className="text-red-400">0 ₾</span></p>
-                            <p>მოს. თვის ბონუსი: <span className="text-red-400">0 ₾</span></p>
+                            <p>დღის ბონუსი: <span className="text-red-400">50₾</span></p>
+                            <p>მოს. თვის ბონუსი: <span className="text-red-400">500₾</span></p>
                         </div>
-                        <ProgressBar goal="40"/>
+                        <ProgressBar
+                            value={1335}
+                            max={2024}
+                            variant={'detailed'}
+                            size={'sm'}
+                            leftLabel={'დღიური გეგმა'}
+                        />
                     </Card>
 
                     <Card
@@ -454,12 +463,18 @@ export default function Dashboard() {
                         footer={<Action icon={<FaTimes/>} text="დღის გეგმა 5"/>}
                         className="sm:col-span-4 2xl:col-span-1 tour-card-meeting"
                     >
-                        <p>0</p>
+                        <p>10</p>
                         <div className="flex flex-col text-xs">
-                            <p>დღის ბონუსი: <span className="text-red-400">0 ₾</span></p>
-                            <p>მოს. თვის ბონუსი: <span className="text-red-400">0 ₾</span></p>
+                            <p>დღის ბონუსი: <span className="text-red-400">50₾</span></p>
+                            <p>მოს. თვის ბონუსი: <span className="text-red-400">500 ₾</span></p>
                         </div>
-                        <ProgressBar goal="10"/>
+                        <ProgressBar
+                            value={1335}
+                            max={2024}
+                            variant={'detailed'}
+                            size={'sm'}
+                            leftLabel={'დღიური გეგმა'}
+                        />
                     </Card>
 
                     <Card
@@ -468,9 +483,10 @@ export default function Dashboard() {
                         footer={<Action icon={<FaTimes/>} text="დღის გეგმა 5"/>}
                         className="sm:col-span-2 2xl:col-span-1 tour-card-sales"
                     >
-                        <p>0</p>
+                        <p>2</p>
                         <div className="flex flex-col text-xs">
-                            <p className="text-gray-400">მოს. თვის ბონუსი: <span className="text-red-500">0 ₾</span></p>
+                            <p className="text-gray-400">მოს. თვის ბონუსი: <span className="text-red-500">500 ₾</span>
+                            </p>
                         </div>
                     </Card>
 
@@ -488,14 +504,14 @@ export default function Dashboard() {
                             </div>
                         }
                         icon={<FaLariSign size={20} color="white"/>}
-                        footer={<h1 className="title_font">სულ: {show ? '0₾' : '---'}</h1>}
+                        footer={<h1 className="title_font">სულ: {show ? '3550₾' : '---'}</h1>}
                         className="sm:col-span-2 2xl:col-span-1 tour-card-salary"
                     >
                         <div className="flex flex-col text-xs text-gray-400">
                             <p>ზეგანაკვეთური:</p>
-                            <p>{show ? <span className="text-green-500">0₾</span> : '---'}</p>
+                            <p>{show ? <span className="text-green-500">100₾</span> : '---'}</p>
                             <p>მოს. ბონუსი:</p>
-                            <p>{show ? <span className="text-green-500">0₾</span> : '---'}</p>
+                            <p>{show ? <span className="text-green-500">500₾</span> : '---'}</p>
                         </div>
                     </Card>
 
@@ -507,7 +523,7 @@ export default function Dashboard() {
                         <p className="text-sm">დაგვიანება არ ფიქსირდება</p>
                     </Card>
 
-                    <div className="sm:col-span-4 xl:col-span-3 flex flex-col sm:flex-row gap-4">
+                    <div className="sm:col-span-4 2xl:col-span-3 flex flex-col sm:flex-row gap-4">
                         <Card
                             title={
                                 <div className="flex items-center gap-4">
@@ -543,66 +559,35 @@ export default function Dashboard() {
                             </div>
                         }
                         icon={<BiDollarCircle size={20} color="white"/>}
-                        footer={<Action icon={<FaTimes/>} text="დღის გეგმა 5"/>}
                         className="sm:col-span-4 2xl:col-span-3 tour-waiting-tomorrow"
                     >
-                        <p>0</p>
-                        <div className="flex flex-col text-xs">
-                            <p className="text-gray-400">მოს. თვის ბონუსი: <span className="text-red-500">0 ₾</span></p>
+                        <div className={'grid sm:grid-cols-2 grid-cols-1 gap-4'}>
+                            <MeetingsCard agent={'გვანცა გურული'} total={2} meetings={[{project: 'გლდანი', count: 3}]}/>
+
+                            <MeetingsCard
+                                agent={'გვანცა გურული'}
+                                total={2}
+                                meetings={[
+                                    {project: 'გლდანი', count: 3},
+                                    {project: 'გლდანი', count: 3},
+                                    {project: 'გლდანი', count: 3},
+                                    {project: 'გლდანი', count: 3}
+                                ]}
+                            />
+
+                            <MeetingsCard
+                                agent={'გვანცა გურული'}
+                                total={2}
+                                meetings={[
+                                    {project: 'გლდანი', count: 3},
+                                    {project: 'გლდანი', count: 3},
+                                    {project: 'გლდანი', count: 3}
+                                ]}/>
                         </div>
                     </Card>
                 </div>
             </section>
         </>
-    )
-}
-
-function Card(
-    {
-        title, icon, footer, children, className
-    }: {
-        title: string | React.ReactNode,
-        icon?: React.ReactNode,
-        footer?: React.ReactNode,
-        children?: React.ReactNode,
-        className?: string
-    }) {
-    return (
-        <div className={`shadow w-full bg-white p-3 flex flex-col gap-3 ${className || ''}`}>
-            <header className="flex items-center gap-2 justify-between">
-                <div className="title_font text-xs w-full">{title}</div>
-                {icon && (
-                    <p className="flex items-center gap-2">
-            <span className="history p-1 bg-blue-700 rounded-full">
-              {icon}
-            </span>
-                    </p>
-                )}
-            </header>
-
-            {children}
-
-            {footer && <footer className="mt-auto">{footer}</footer>}
-        </div>
-    )
-}
-
-function ProgressBar({goal, onlyBar = false, height = 0.25}: { goal?: string, onlyBar?: boolean, height?: number }) {
-    if (onlyBar) {
-        return <div className="w-full rounded-2xl bg-gray-300" style={{height: `${height}rem`}}/>
-    }
-    return (
-        <div className="flex flex-col gap-1">
-            <p className="flex items-center justify-between font-bold text-[10px]">
-                <span>თვის გეგმა</span>
-                <span className="text-red-500">0%</span>
-            </p>
-            <div className="rounded-2xl h-1 bg-gray-300"/>
-            <p className="flex items-center justify-between text-[10px]">
-                <span>0</span>
-                <span>{goal}</span>
-            </p>
-        </div>
     )
 }
 

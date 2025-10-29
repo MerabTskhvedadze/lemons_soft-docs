@@ -9,7 +9,6 @@ import {SidebarProvider} from "@/components/ui/sidebar";
 import {ScrollProgressBar} from "@/animations/ScrollProgressBar";
 import {Metadata} from "next";
 
-import '@ant-design/v5-patch-for-react-19'
 import StyledComponentsRegistry from '@/lib/registry'
 
 import "driver.js/dist/driver.css";
