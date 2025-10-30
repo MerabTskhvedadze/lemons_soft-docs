@@ -25,8 +25,10 @@ import {
 import {MeetingsCard} from "@/components/dashboard/meetings-card";
 import {Card} from "@/components/dashboard/card"
 import {ProgressBar} from "@/components/progress-bar";
+import {getGeorgianDateString} from "@/lib/utils";
 
 export default function Dashboard() {
+    const today = getGeorgianDateString();
     const {RangePicker} = DatePicker
     const [show, setShow] = React.useState(false)
     const tourRef = useRef<Driver | null>(null)
@@ -231,6 +233,7 @@ export default function Dashboard() {
         }
     }, [startTour])
 
+
     return (
         <>
             {/* overview */}
@@ -268,11 +271,7 @@ export default function Dashboard() {
 
                 <div
                     className="text-nowrap title_font bg-[#e9ecef] text-[#153d77] py-2 px-4 text-xs rounded-sm tour-today-badge">
-                    {new Date().toLocaleDateString('ka-GE', {
-                        day: '2-digit',
-                        month: 'long',
-                        year: 'numeric'
-                    })}-ის სტატისტიკა
+                    {today}-ის სტატისტიკა
                 </div>
 
                 <Select
@@ -392,26 +391,65 @@ export default function Dashboard() {
                         </div>
 
                         <div className="w-full meetings-list flex flex-col gap-3 ">
-                            {Array.from({length: 3}).map((_, idx) => (
-                                <div key={idx} className="flex flex-col gap-1">
-                                    <ProgressBar
-                                        variant="double"
-                                        size="sm"
-                                        value={idx+1}
-                                        secondaryValue={idx+2}
-                                        max={8}
-                                        leftLabel="მადაგილდა ბარათლია"
-                                        rightLabel="სულ 6"
-                                        fillFrom="#addbb8" fillTo="#4fba5c"
-                                        secondaryFrom="#b1f13d" secondaryTo="#32e41e"
-                                    />
+                            <div className="flex flex-col gap-1">
+                                <ProgressBar
+                                    variant="double"
+                                    size="sm"
+                                    max={6}
+                                    value={1}
+                                    secondaryValue={5}
+                                    leftLabel="მადაგილდა ბარათლია"
+                                    rightLabel="სულ 6"
+                                    fillFrom="#addbb8" fillTo="#4fba5c"
+                                    secondaryFrom="#b1f13d" secondaryTo="#32e41e"
+                                />
+                                <div className={'flex items-center gap-2 justify-between text-xs'}>
+                                    <span>შემდგარი შეხვედრა 1</span>
+                                    <span>შესასრულებელი დარჩა 4</span>
                                 </div>
-                            ))}
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <ProgressBar
+                                    variant="double"
+                                    size="sm"
+                                    max={4}
+                                    value={1}
+                                    secondaryValue={2}
+                                    leftLabel="მადაგილდა ბარათლია"
+                                    rightLabel="სულ 4"
+                                    fillFrom="#addbb8" fillTo="#4fba5c"
+                                    secondaryFrom="#b1f13d" secondaryTo="#32e41e"
+                                />
+                                <div className={'flex items-center gap-2 justify-between text-xs'}>
+                                    <span>შემდგარი შეხვედრა 1</span>
+                                    <span>შესასრულებელი დარჩა 1</span>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <ProgressBar
+                                    variant="double"
+                                    size="sm"
+                                    max={10}
+                                    value={3}
+                                    secondaryValue={10}
+                                    leftLabel="მადაგილდა ბარათლია"
+                                    rightLabel="სულ 10"
+                                    fillFrom="#addbb8" fillTo="#4fba5c"
+                                    secondaryFrom="#b1f13d" secondaryTo="#32e41e"
+                                />
+                                <div className={'flex items-center gap-2 justify-between text-xs'}>
+                                    <span>შემდგარი შეხვედრა 3</span>
+                                    <span>შესასრულებელი დარჩა 7</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full">
+                <div
+                    className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full">
                     <Card
                         title="ზარები"
                         icon={<MdPhone size={20} color="white"/>}

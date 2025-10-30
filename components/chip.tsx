@@ -17,7 +17,7 @@ export function Chip(
             <span>{title}</span>
 
             {count && <span
-                className={'font-bold py-1 pr-2.5 pl-2 text-center text-white bg-[#96d370] rounded-md title_font text-xs'}
+                className={'font-bold py-1 px-2.5 text-center text-white bg-[#96d370] rounded-md title_font text-xs'}
             >
                 {count}
             </span>}
