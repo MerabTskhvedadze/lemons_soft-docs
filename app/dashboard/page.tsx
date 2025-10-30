@@ -19,8 +19,11 @@ import {
     MdRemoveRedEye,
     MdGroup,
     MdAccessTime,
-    MdRefresh
+    MdRefresh,
+    MdTimeline
 } from 'react-icons/md'
+
+import {Chip} from '@/components/chip'
 
 import {MeetingsCard} from "@/components/dashboard/meetings-card";
 import {Card} from "@/components/dashboard/card"
@@ -29,9 +32,26 @@ import {getGeorgianDateString} from "@/lib/utils";
 
 export default function Dashboard() {
     const today = getGeorgianDateString();
+    const tomorrow = getGeorgianDateString({addDays: 1, format: 'DD-MM-YYYY'});
     const {RangePicker} = DatePicker
     const [show, setShow] = React.useState(false)
     const tourRef = useRef<Driver | null>(null)
+
+    const meetings = [
+        {agent: 'თორნიკე ოსეფაშვილი', total: 2, meeting: [{project: 'სხვა უბანი დიდ დიღომი', count: 2}]},
+        {agent: 'მარიამ დუმბაძე', total: 2, meeting: [{project: 'სხვა უბანი დიდ დიღომი', count: 2}]},
+        {
+            agent: 'მატილდა ბარკალაია',
+            total: 10,
+            meeting: [
+                {project: 'სხვა უბანი დიდ დიღომში', count: 5},
+                {project: 'სოლუმ გლდანი 2', count: 1},
+                {project: 'გლდანი', count: 3},
+                {project: 'დიდი დიღომი', count: 1},
+            ]
+        },
+        {agent: 'ლიზი ბიწაძე', total: 4, meeting: [{project: 'ფონიჭალა', count: 4}]},
+    ]
 
     useEffect(() => {
         tourRef.current = driver({
@@ -53,7 +73,7 @@ export default function Dashboard() {
                 popover: {
                     title: 'თარიღის ფილტრი',
                     description:
-                        'აირჩიეთ დროის შუალედი – დეშბორდის მთელი სტატისტიკა განახლდება ამ ფილტრით.',
+                        'აირჩიეთ დროის შუალედი - დეშბორდის მთელი სტატისტიკა განახლდება ამ ფილტრით.',
                     side: 'bottom'
                 }
             },
@@ -71,25 +91,25 @@ export default function Dashboard() {
                 popover: {
                     title: 'თანამშრომლის არჩევა',
                     description:
-                        'გაფილტრეთ დეშბორდი კონკრეტულ ოპერატორზე/თანამშრომელზე.',
+                        'გაფილტრეთ დეშბორდი კონკრეტული თანამშრომლის მიხედვით.',
                     side: 'bottom'
                 }
             },
             {
                 element: '.tour-counters',
                 popover: {
-                    title: 'სწრაფი რიცხვები',
+                    title: 'მონაცემები',
                     description:
-                        'შემაჯამებელი მინი-მეტრიკები: ზარები სულ, ნასაუბრები, შეხვედრები და გაყიდვები.',
+                        'შემაჯამებელი მონაცემები მოკლედ: ზარები, ნასაუბრები, შეხვედრები და გაყიდვები.',
                     side: 'bottom'
                 }
             },
             {
                 element: '.tour-actions',
                 popover: {
-                    title: 'ქმედებები',
+                    title: 'ღილაკები',
                     description:
-                        'რეფრეში – მონაცემების განახლება. ცხრილი – დეტალური ნახვა/ეგზპორტი.',
+                        'რეფრეში - მონაცემების განახლება. ცხრილი - ხელფასების ცხრილი.',
                     side: 'left'
                 }
             },
@@ -98,7 +118,25 @@ export default function Dashboard() {
                 popover: {
                     title: '📞 ზარების გეგმა',
                     description:
-                        'საათობრივი და დღიური გეგმის პროგრესი. გამოიყენეთ ღილაკები ისტორიასა და რეფრეშზე.',
+                        'საათობრივი და დღიური გეგმის პროგრესი.',
+                    side: 'bottom'
+                }
+            },
+            {
+                element: '.tour-calls-plan-time',
+                popover: {
+                    title: 'ისტორია',
+                    description:
+                        'აჩვენებს საათში განხორციელებული ზარების ისტორიას დღის განმავლობაში.',
+                    side: 'bottom'
+                }
+            },
+            {
+                element: '.tour-calls-plan-refresh',
+                popover: {
+                    title: 'რესტარტი',
+                    description:
+                        'რესტარტი გამოიყენება მონაცემების გასაახლებლად.',
                     side: 'bottom'
                 }
             },
@@ -107,7 +145,7 @@ export default function Dashboard() {
                 popover: {
                     title: 'საათობრივი გეგმა',
                     description:
-                        'სატელეფონო აქტივობის მიზანი თითო საათზე და შესრულების პროცენტი.',
+                        'საათში განსახორციელებელი ზარების გეგმა მიმდინარე რაოდენობა და შესრულების პროცენტი.',
                     side: 'bottom'
                 }
             },
@@ -116,7 +154,7 @@ export default function Dashboard() {
                 popover: {
                     title: 'დღიური გეგმა',
                     description:
-                        'დღის ბოლოსთვის მიზნადი ზარების რაოდენობა და პროგრესი.',
+                        'დღის გეგმა, მიზანი და შესრულებული რაოდენობა, პროცენტი.',
                     side: 'bottom'
                 }
             },
@@ -130,11 +168,20 @@ export default function Dashboard() {
                 }
             },
             {
+                element: '.tour-meetings-today-progress',
+                popover: {
+                    title: 'შეხვედრა თითო ოპერატორთან',
+                    description:
+                        'ჩანიშნული შეხვედრები კონკრეტულ ოპერატორთან: სულ, შესრულებული და დარჩენილი შეხვედრები.',
+                    side: 'bottom'
+                }
+            },
+            {
                 element: '.tour-card-calls',
                 popover: {
                     title: 'ზარები',
                     description:
-                        'ნაჩვენებია ნასაუბრები და სულ ზარები + თვის გეგმის პროგრესი.',
+                        'ნასაუბრები და სულ ზარები + თვის გეგმის პროგრესი.',
                     side: 'top'
                 }
             },
@@ -143,7 +190,7 @@ export default function Dashboard() {
                 popover: {
                     title: 'მომლოდინე',
                     description:
-                        'მიმდინარე პაიპლაინის მოცულობა და დღიური/თვიური ბონუსის ორიენტირი.',
+                        'დღის მომლოდინე შეხვედრების რაოდენობა, თანამშრომლის დღის ბონუსი და მოსალოდნელი თვის ბონუსი.',
                     side: 'top'
                 }
             },
@@ -152,7 +199,7 @@ export default function Dashboard() {
                 popover: {
                     title: 'შეხვედრები',
                     description:
-                        'გეგმიური შეხვედრების შესრულება და ბონუსები – გაყიდვამდე ძირითადი საფეხური.',
+                        'შესრულებული შეხვედრების რაოდენობა და ბონუსები.',
                     side: 'top'
                 }
             },
@@ -161,7 +208,7 @@ export default function Dashboard() {
                 popover: {
                     title: 'გაყიდვები',
                     description:
-                        'დადასტურებული გაყიდვები და დაგეგმილი დღიური მიზანი.',
+                        'დადასტურებული გაყიდვები, გაყიდვებიდან გამომდინარე ბონუსი.',
                     side: 'top'
                 }
             },
@@ -170,16 +217,16 @@ export default function Dashboard() {
                 popover: {
                     title: 'ხელფასი',
                     description:
-                        'ზეგანაკვეთური და მოსალოდნელი ბონუსი. თვალის ღილოთი შეგიძლიათ დამალვა/ჩვენება.',
+                        'ზეგანაკვეთური და მოსალოდნელი ბონუსი. თვალის ღილაკით შეგიძლიათ დამალვა/ჩვენება.',
                     side: 'left'
                 }
             },
             {
                 element: '.tour-card-late',
                 popover: {
-                    title: 'დაგვიანება',
+                    title: 'შვებულება',
                     description:
-                        'დასწრების მონიტორინგი – დაფიქსირებული დაგვიანებები გამოჩნდება აქ.',
+                        'შვებულების მონიტორინგი, აჩვენებს შვებულების გამოყენებულ დღეებს, დასვენებებს, ბიულეტენს და სხვა .',
                     side: 'top'
                 }
             },
@@ -188,36 +235,26 @@ export default function Dashboard() {
                 popover: {
                     title: 'დეტალური ბლოკები',
                     description:
-                        'თუ მონაცემი არ არის, ბლოკი შემოგთავაზებთ მოკლე აღწერას/სტატუსს.',
+                        'წარმოდგენილია გრაფიკული სტატისტიკა დიაგრამის სახით',
                     side: 'top'
                 }
             },
             {
                 element: '.tour-empty-stats-2',
                 popover: {
-                    title: 'თუ სტატისტიკა არ არის',
+                    title: 'დეტალური ბლოკები',
                     description:
-                        'სისტემა მაინც ინახავს ვიზუალურ სტრუქტურას, რომ იცოდეთ სად რას ელოდოთ.',
+                        'წარმოდგენილია გრაფიკული სტატისტიკა დიაგრამის სახით',
                     side: 'top'
                 }
             },
             {
                 element: '.tour-waiting-tomorrow',
                 popover: {
-                    title: 'მომლოდინეები — ხვალ',
+                    title: 'მომლოდინეები - ხვალ',
                     description:
-                        'ხვალინდელი დღის პროგნოზი/გეგმა: დაეხმარება რესურსის სწორად გადანაწილებას.',
+                        'ხვალინდელი დღის პროგნოზი/გეგმა: თანამშრომლები და მათთან ჩანიშნული შეხვედრები მომდევნო დღეს პროექტების მიხედვით.',
                     side: 'top'
-                }
-            },
-            {
-                element: '.tour-outro',
-                popover: {
-                    title: 'მორჩა! 🎉',
-                    description:
-                        'ახლა უკვე შეგიძლიათ თავისუფლად იმოძრაოთ დეშბორდზე. სურვილის შემთხვევაში, გაამეორეთ ტური.',
-                    side: 'bottom',
-                    align: 'start'
                 }
             }
         ])
@@ -233,11 +270,10 @@ export default function Dashboard() {
         }
     }, [startTour])
 
-
     return (
         <>
             {/* overview */}
-            <section className="flex flex-col gap-3 tour-intro">
+            <header className="flex flex-col gap-3 tour-intro">
                 <div>
                     <h1 className="title_font text-lg">
                         <ScrollTrailText>🔹 გვერდის დანიშნულება</ScrollTrailText>
@@ -261,12 +297,14 @@ export default function Dashboard() {
                         გაეცანი გვერდს
                     </button>
                 </div>
-            </section>
+            </header>
 
             <Separator className="my-5"/>
 
+            {/* filters */}
             <div
-                className="flex flex-wrap gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg tour-outro">
+                className="flex flex-wrap gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg tour-outro"
+            >
                 <RangePicker placeholder={['საწყისი', 'დასასრული']} className="tour-range"/>
 
                 <div
@@ -290,6 +328,7 @@ export default function Dashboard() {
 
             <Separator className="my-1 bg-transparent"/>
 
+            {/* fast information */}
             <div
                 className="flex gap-3 flex-wrap justify-center items-center sm:justify-between bg-gray-50 rounded-lg py-4 px-5"
             >
@@ -301,13 +340,13 @@ export default function Dashboard() {
                         {bg: '#fdeaea', label: 'გაყიდვები', value: '0'}
                     ].map((item, i) => {
                         return (
-                            <div
+                            <Chip
+                                bg={item.bg}
                                 key={i}
-                                style={{background: item.bg}}
-                                className="py-2 px-4 text-xs rounded-4xl transition duration-200 ease-in"
-                            >
-                                {item.label} {item.value}
-                            </div>
+                                dot={false}
+                                title={`${item.label} ${item.value}`}
+                                className={'border'}
+                            />
                         )
                     })}
                 </div>
@@ -324,17 +363,19 @@ export default function Dashboard() {
 
             <Separator className="my-1 bg-transparent"/>
 
-            <section className="lg:flex gap-3 bg-gray-50">
+            <section className="lg:flex bg-gray-50">
+                {/* calls and planned meetings */}
                 <div className="lg:max-w-[420px] w-full shrink flex flex-col gap-3 rounded-lg p-2 sm:px-5 sm:py-4">
                     {/* calls plan */}
                     <div className="shadow bg-white p-3 rounded-lg border flex flex-col gap-3 tour-calls-plan">
                         <div className="flex items-center gap-2 justify-between">
                             <h1 className="title_font text-xs">📞 ზარების გეგმა</h1>
                             <p className="flex items-center gap-2">
-                                <span className="history p-1 border border-gray-200 rounded-full">
+                                <span className="tour-calls-plan-time history p-1 border border-gray-200 rounded-full">
                                   <MdAccessTime size={20} color="blue"/>
                                 </span>
-                                <span className="refresh p-1 border border-gray-200 rounded-full">
+                                <span
+                                    className="tour-calls-plan-refresh refresh p-1 border border-gray-200 rounded-full">
                                   <MdRefresh size={20} color="blue"/>
                                 </span>
                             </p>
@@ -390,7 +431,7 @@ export default function Dashboard() {
                             </p>
                         </div>
 
-                        <div className="w-full meetings-list flex flex-col gap-3 ">
+                        <div className="w-full meetings-list flex flex-col gap-3 tour-meetings-today-progress ">
                             <div className="flex flex-col gap-1">
                                 <ProgressBar
                                     variant="double"
@@ -398,7 +439,7 @@ export default function Dashboard() {
                                     max={6}
                                     value={1}
                                     secondaryValue={5}
-                                    leftLabel="მადაგილდა ბარათლია"
+                                    leftLabel="მატილდა ბარკალაია"
                                     rightLabel="სულ 6"
                                     fillFrom="#addbb8" fillTo="#4fba5c"
                                     secondaryFrom="#b1f13d" secondaryTo="#32e41e"
@@ -416,7 +457,7 @@ export default function Dashboard() {
                                     max={4}
                                     value={1}
                                     secondaryValue={2}
-                                    leftLabel="მადაგილდა ბარათლია"
+                                    leftLabel="მარიამ დუმბაძე"
                                     rightLabel="სულ 4"
                                     fillFrom="#addbb8" fillTo="#4fba5c"
                                     secondaryFrom="#b1f13d" secondaryTo="#32e41e"
@@ -434,7 +475,7 @@ export default function Dashboard() {
                                     max={10}
                                     value={3}
                                     secondaryValue={10}
-                                    leftLabel="მადაგილდა ბარათლია"
+                                    leftLabel="თორნიკე ოსეფაშვილი"
                                     rightLabel="სულ 10"
                                     fillFrom="#addbb8" fillTo="#4fba5c"
                                     secondaryFrom="#b1f13d" secondaryTo="#32e41e"
@@ -450,6 +491,7 @@ export default function Dashboard() {
 
                 <div
                     className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full">
+                    {/* calls */}
                     <Card
                         title="ზარები"
                         icon={<MdPhone size={20} color="white"/>}
@@ -475,10 +517,18 @@ export default function Dashboard() {
                         />
                     </Card>
 
+                    {/* waiting meetings */}
                     <Card
                         title="მომლოდინე"
                         icon={<CgTimelapse size={20} color="white"/>}
-                        footer={<Action icon={<FaTimes/>} text="დღის გეგმა 15"/>}
+                        footer={
+                            <div className={'flex items-center gap-2 w-full'}>
+                                <Action icon={<FaTimes/>} text="გეგმა 15"/>
+                                <div className={'py-1 px-1.5 bg-blue-500 rounded w-fit'}>
+                                    <MdRemoveRedEye color={'white'} size={20}/>
+                                </div>
+                            </div>
+                        }
                         className="sm:col-span-2 2xl:col-span-1 tour-card-waiting"
                     >
                         <p>27</p>
@@ -495,10 +545,18 @@ export default function Dashboard() {
                         />
                     </Card>
 
+                    {/* Meetings */}
                     <Card
                         title="შეხვედრა"
                         icon={<MdGroup size={20} color="white"/>}
-                        footer={<Action icon={<FaTimes/>} text="დღის გეგმა 5"/>}
+                        footer={
+                            <div className={'flex items-center gap-2 w-full'}>
+                                <Action icon={<FaTimes/>} text="გეგმა 5"/>
+                                <div className={'py-1 px-1.5 bg-blue-500 rounded w-fit'}>
+                                    <MdRemoveRedEye color={'white'} size={20}/>
+                                </div>
+                            </div>
+                        }
                         className="sm:col-span-4 2xl:col-span-1 tour-card-meeting"
                     >
                         <p>10</p>
@@ -515,10 +573,15 @@ export default function Dashboard() {
                         />
                     </Card>
 
+                    {/* sells */}
                     <Card
                         title="გაყიდვები"
                         icon={<BiDollarCircle size={20} color="white"/>}
-                        footer={<Action icon={<FaTimes/>} text="დღის გეგმა 5"/>}
+                        footer={
+                            <div className={'py-1 px-1.5 bg-blue-500 rounded w-fit'}>
+                                <MdRemoveRedEye color={'white'} size={20}/>
+                            </div>
+                        }
                         className="sm:col-span-2 2xl:col-span-1 tour-card-sales"
                     >
                         <p>2</p>
@@ -528,6 +591,7 @@ export default function Dashboard() {
                         </div>
                     </Card>
 
+                    {/* salary */}
                     <Card
                         title={
                             <div className="flex items-center gap-1">
@@ -541,7 +605,7 @@ export default function Dashboard() {
                                 </div>
                             </div>
                         }
-                        icon={<FaLariSign size={20} color="white"/>}
+                        icon={<FaLariSign size={18} color="white"/>}
                         footer={<h1 className="title_font">სულ: {show ? '3550₾' : '---'}</h1>}
                         className="sm:col-span-2 2xl:col-span-1 tour-card-salary"
                     >
@@ -553,14 +617,28 @@ export default function Dashboard() {
                         </div>
                     </Card>
 
+                    {/* vacations card */}
                     <Card
-                        title="დაგვიანება"
-                        icon={<MdRemoveRedEye size={20} color="white"/>}
+                        title="შვებულება"
+                        icon={<MdTimeline size={20} color="white"/>}
                         className="sm:col-span-4 2xl:col-span-1 tour-card-late"
                     >
-                        <p className="text-sm">დაგვიანება არ ფიქსირდება</p>
+                        <div className="flex flex-col text-xs text-gray-500">
+                            <p className={'font-bold'}>2025 წელს გამოყენებული</p>
+
+                            <Separator className={'my-1'}/>
+
+                            <p>სამუშაო დღეები წელიწადში: <span className={'font-bold'}>261</span></p>
+                            <p>შვებულება: <span className={'font-bold'}>7 დღე</span></p>
+                            <p>დასვენება (day-off): <span className={'font-bold'}>2 დღე</span></p>
+                            <p>ბიულეტენი: <span className={'font-bold'}>0 დღე</span></p>
+                            <p>უშვ. ანაზღაურება: <span className={'font-bold'}>0 დღე</span></p>
+                            <p>აღდგენა: <span className={'font-bold'}>0 დღე</span></p>
+                            <p>სულ გამოყენებული: <span className={'font-bold'}>9 დღე</span></p>
+                        </div>
                     </Card>
 
+                    {/* charts statistics */}
                     <div className="sm:col-span-4 2xl:col-span-3 flex flex-col sm:flex-row gap-4">
                         <Card
                             title={
@@ -583,44 +661,39 @@ export default function Dashboard() {
                         />
                     </div>
 
+                    {/* waiting meetings  */}
                     <Card
                         title={
+                        <div className={'flex items-center gap-4 justify-between'}>
                             <div className="flex items-center gap-4">
-                                <BiDollarCircle size={20} color="blue"/>
+                                <MdAccessTime size={24} color="blue"/>
                                 <div>
                                     <h1>მომლოდინეები — ხვალ</h1>
                                     <p className="text_font text-[0.6rem] text-gray-400">
                                         <span className="title_font">თარიღი: </span>
-                                        წწწწ-თთ-დდ
+                                        {tomorrow}
                                     </p>
                                 </div>
                             </div>
+
+                            <div className={'bg-gray-100 p-1 rounded-full border'}>
+                                <MdRefresh color={'blue'} size={20}/>
+                            </div>
+                        </div>
                         }
-                        icon={<BiDollarCircle size={20} color="white"/>}
                         className="sm:col-span-4 2xl:col-span-3 tour-waiting-tomorrow"
                     >
                         <div className={'grid sm:grid-cols-2 grid-cols-1 gap-4'}>
-                            <MeetingsCard agent={'გვანცა გურული'} total={2} meetings={[{project: 'გლდანი', count: 3}]}/>
-
-                            <MeetingsCard
-                                agent={'გვანცა გურული'}
-                                total={2}
-                                meetings={[
-                                    {project: 'გლდანი', count: 3},
-                                    {project: 'გლდანი', count: 3},
-                                    {project: 'გლდანი', count: 3},
-                                    {project: 'გლდანი', count: 3}
-                                ]}
-                            />
-
-                            <MeetingsCard
-                                agent={'გვანცა გურული'}
-                                total={2}
-                                meetings={[
-                                    {project: 'გლდანი', count: 3},
-                                    {project: 'გლდანი', count: 3},
-                                    {project: 'გლდანი', count: 3}
-                                ]}/>
+                            {meetings.map((item, i) => {
+                                return (
+                                    <MeetingsCard
+                                        key={i}
+                                        agent={item.agent}
+                                        total={item.total}
+                                        meetings={item.meeting}
+                                    />
+                                )
+                            })}
                         </div>
                     </Card>
                 </div>
@@ -632,7 +705,7 @@ export default function Dashboard() {
 function Action({icon, text}: { icon: React.ReactNode, text: string }) {
     return (
         <div
-            className="select-none cursor-pointer py-[2px] text-[12px] title_font border text-red-500 flex items-center gap-1 justify-center border-red-500 rounded-2xl hover:text-white hover:bg-red-500 transition duration-300 ease-in"
+            className="w-full select-none cursor-pointer py-[2px] text-[12px] border text-red-500 flex items-center gap-1 justify-center border-red-500 rounded-2xl hover:text-white hover:bg-red-500 transition duration-300 ease-in"
         >
             {icon}
             <span>{text}</span>
