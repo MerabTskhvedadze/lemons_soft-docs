@@ -25,7 +25,6 @@ import {
 
 import {Chip} from '@/components/chip'
 import {Button} from '@/components/ui/button'
-import {useHoverHint} from "@/hooks/hoverHint/useHoverHint";
 
 import {MeetingsCard} from "@/components/dashboard/meetings-card";
 import {Card} from "@/components/dashboard/card"
