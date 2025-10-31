@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import {Separator} from "@/components/ui/separator";
-import {FadeInSection} from "@/animations/FadeInSection";
 import {
     Table,
     TableHeader,
