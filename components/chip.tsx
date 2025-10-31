@@ -9,7 +9,7 @@ export function Chip(
         bg
     }: {
         dot?: boolean,
-        title: string,
+        title: string | React.ReactNode,
         count?: number,
         className?: string
         bg?:string
@@ -23,6 +23,7 @@ export function Chip(
                 transition-all duration-[250ms] ease-[ease]
                 hover:-translate-y-[0.3px] hover:scale-[1.01]
                 hover:shadow-[0_0_12px_rgba(0,0,0,0.15),0_0_8px_rgba(0,150,255,0.2)]
+                cursor-default
                 ${className}
             `}
             style={{background:bg}}

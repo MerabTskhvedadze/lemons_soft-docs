@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useEffect, useRef, useCallback} from 'react'
+import React, {useState, useEffect, useRef, useCallback} from 'react'
 import {driver, Driver} from 'driver.js'
 import 'driver.js/dist/driver.css' // ← important
 import {DatePicker, Select} from 'antd'
@@ -24,6 +24,8 @@ import {
 } from 'react-icons/md'
 
 import {Chip} from '@/components/chip'
+import {Button} from '@/components/ui/button'
+import {useHoverHint} from "@/hooks/hoverHint/useHoverHint";
 
 import {MeetingsCard} from "@/components/dashboard/meetings-card";
 import {Card} from "@/components/dashboard/card"
@@ -273,48 +275,49 @@ export default function Dashboard() {
     return (
         <>
             {/* overview */}
-            <header className="flex flex-col gap-3 tour-intro">
-                <div>
-                    <h1 className="title_font text-lg">
-                        <ScrollTrailText>🔹 გვერდის დანიშნულება</ScrollTrailText>
-                    </h1>
-                    <ScrollTrailText className="pl-5">
-                        დეშბორდის გვერდი წარმოადგენს სისტემის მთავარ მონიტორინგის პანელს, სადაც მომხმარებელი
-                        ხედავს დღის სტატისტიკას, ზარების რაოდენობას, შეხვედრებს, ქოლცენტრის და გაყიდვების აქტივობას,
-                        ასევე
-                        პირად და გუნდურ შედეგებს. გვერდი განკუთვნილია ოპერატორებისთვის, მენეჯერებისთვის და
-                        ადმინისტრატორებისთვის - სამუშაო
-                        პროცესის ყოველდღიური კონტროლისთვის.
-                    </ScrollTrailText>
-                </div>
-
-                {/* manual trigger */}
-                <div className="mt-2">
-                    <button
+            <header className="flex flex-col gap-3">
+                <div className={'flex items-center gap-3'}>
+                    <ScrollTrailText className={'title_font text-lg'}>🔹 გვერდის დანიშნულება</ScrollTrailText>
+                    <Button
                         onClick={startTour}
-                        className="px-3 py-1 text-xs rounded-md bg-blue-600 text-white hover:opacity-90"
+                        className="title_font"
                     >
                         გაეცანი გვერდს
-                    </button>
+                    </Button>
                 </div>
+
+                <ScrollTrailText className="pl-5">
+                    დეშბორდის გვერდი წარმოადგენს სისტემის მთავარ მონიტორინგის პანელს, სადაც მომხმარებელი
+                    ხედავს დღის სტატისტიკას, ზარების რაოდენობას, შეხვედრებს, ქოლცენტრის და გაყიდვების აქტივობას,
+                    ასევე
+                    პირად და გუნდურ შედეგებს. გვერდი განკუთვნილია ოპერატორებისთვის, მენეჯერებისთვის და
+                    ადმინისტრატორებისთვის - სამუშაო
+                    პროცესის ყოველდღიური კონტროლისთვის.
+                </ScrollTrailText>
             </header>
 
             <Separator className="my-5"/>
 
             {/* filters */}
-            <div
-                className="flex flex-wrap gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg tour-outro"
+            <section
+                className="flex flex-col lg:flex-row gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg"
+                // className="grid grid-cols-3 justify-items-stretch py-4 px-5 bg-gray-50 rounded-lg"
             >
-                <RangePicker placeholder={['საწყისი', 'დასასრული']} className="tour-range"/>
+                <RangePicker
+                    placeholder={['საწყისი', 'დასასრული']}
+                    className="tour-range"
+                    style={{maxWidth: 246, width: '100%'}}
+                />
 
-                <div
-                    className="text-nowrap title_font bg-[#e9ecef] text-[#153d77] py-2 px-4 text-xs rounded-sm tour-today-badge">
-                    {today}-ის სტატისტიკა
-                </div>
+                <Chip
+                    title={`${today}-ის სტატისტიკა`}
+                    dot={false}
+                    className={'tour-today-badge py-2 px-4 rounded-sm text-xs title_font text-indigo-800 bg-indigo-100'}
+                />
 
                 <Select
                     className="tour-employee"
-                    style={{maxWidth: 300, width: '100%'}}
+                    style={{maxWidth: 246, width: '100%'}}
                     showSearch
                     placeholder="აირჩიეთ თანამშრომელი"
                     optionFilterProp="label"
@@ -324,14 +327,13 @@ export default function Dashboard() {
                         {value: 'tom', label: 'Tom'}
                     ]}
                 />
-            </div>
+            </section>
 
             <Separator className="my-1 bg-transparent"/>
 
             {/* fast information */}
-            <div
-                className="flex gap-3 flex-wrap justify-center items-center sm:justify-between bg-gray-50 rounded-lg py-4 px-5"
-            >
+            <section
+                className="flex gap-3 flex-wrap justify-center items-center sm:justify-between bg-gray-50 rounded-lg py-4 px-5">
                 <div className="flex flex-wrap justify-center gap-3 items-center tour-counters">
                     {[
                         {bg: '#f1f3f5', label: 'ზარები სულ', value: '0'},
@@ -350,16 +352,24 @@ export default function Dashboard() {
                         )
                     })}
                 </div>
-
                 <div className="flex gap-3 items-center tour-actions">
-                    <span className="py-1 px-3 bg-blue-600 rounded-full">
-                        <IoMdRefresh color="white" size={20}/>
-                    </span>
-                    <span className="py-1 px-3 bg-yellow-600 rounded-full">
-                        <MdOutlineTableChart color="white" size={20}/>
-                    </span>
+                    <Chip
+                        title={
+                            <IoMdRefresh color="white" size={20}/>
+                        }
+                        dot={false}
+                        className="!py-1 px-3 bg-blue-600 rounded-full"
+                    />
+
+                    <Chip
+                        title={
+                            <MdOutlineTableChart color="white" size={20}/>
+                        }
+                        dot={false}
+                        className="!py-1 px-3 bg-yellow-600 rounded-full"
+                    />
                 </div>
-            </div>
+            </section>
 
             <Separator className="my-1 bg-transparent"/>
 
@@ -371,13 +381,14 @@ export default function Dashboard() {
                         <div className="flex items-center gap-2 justify-between">
                             <h1 className="title_font text-xs">📞 ზარების გეგმა</h1>
                             <p className="flex items-center gap-2">
-                                <span className="tour-calls-plan-time history p-1 border border-gray-200 rounded-full">
-                                  <MdAccessTime size={20} color="blue"/>
-                                </span>
+                                    <span
+                                        className="tour-calls-plan-time history p-1 border border-gray-200 rounded-full">
+                                      <MdAccessTime size={20} color="blue"/>
+                                    </span>
                                 <span
                                     className="tour-calls-plan-refresh refresh p-1 border border-gray-200 rounded-full">
-                                  <MdRefresh size={20} color="blue"/>
-                                </span>
+                                      <MdRefresh size={20} color="blue"/>
+                                    </span>
                             </p>
                         </div>
 
@@ -425,9 +436,9 @@ export default function Dashboard() {
                                 <span>დღეს ჩანიშნული შეხვედრები</span>
                             </h1>
                             <p className="flex items-center gap-2">
-                                <span className="refresh-meetings p-1 border border-gray-300 rounded-full">
-                                  <MdRefresh size={20} color="blue"/>
-                                </span>
+                                    <span className="refresh-meetings p-1 border border-gray-300 rounded-full">
+                                      <MdRefresh size={20} color="blue"/>
+                                    </span>
                             </p>
                         </div>
 
@@ -489,6 +500,7 @@ export default function Dashboard() {
                     </div>
                 </div>
 
+                {/* agent stats */}
                 <div
                     className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full">
                     {/* calls */}
@@ -664,22 +676,22 @@ export default function Dashboard() {
                     {/* waiting meetings  */}
                     <Card
                         title={
-                        <div className={'flex items-center gap-4 justify-between'}>
-                            <div className="flex items-center gap-4">
-                                <MdAccessTime size={24} color="blue"/>
-                                <div>
-                                    <h1>მომლოდინეები — ხვალ</h1>
-                                    <p className="text_font text-[0.6rem] text-gray-400">
-                                        <span className="title_font">თარიღი: </span>
-                                        {tomorrow}
-                                    </p>
+                            <div className={'flex items-center gap-4 justify-between'}>
+                                <div className="flex items-center gap-4">
+                                    <MdAccessTime size={24} color="blue"/>
+                                    <div>
+                                        <h1>მომლოდინეები — ხვალ</h1>
+                                        <p className="text_font text-[0.6rem] text-gray-400">
+                                            <span className="title_font">თარიღი: </span>
+                                            {tomorrow}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className={'bg-gray-100 p-1 rounded-full border'}>
+                                    <MdRefresh color={'blue'} size={20}/>
                                 </div>
                             </div>
-
-                            <div className={'bg-gray-100 p-1 rounded-full border'}>
-                                <MdRefresh color={'blue'} size={20}/>
-                            </div>
-                        </div>
                         }
                         className="sm:col-span-4 2xl:col-span-3 tour-waiting-tomorrow"
                     >
@@ -705,7 +717,7 @@ export default function Dashboard() {
 function Action({icon, text}: { icon: React.ReactNode, text: string }) {
     return (
         <div
-            className="w-full select-none cursor-pointer py-[2px] text-[12px] border text-red-500 flex items-center gap-1 justify-center border-red-500 rounded-2xl hover:text-white hover:bg-red-500 transition duration-300 ease-in"
+            className="w-full cursor-default py-[2px] text-[12px] border text-red-500 flex items-center gap-1 justify-center border-red-500 rounded-2xl hover:text-white hover:bg-red-500 transition duration-300 ease-in"
         >
             {icon}
             <span>{text}</span>

@@ -16,9 +16,9 @@ export function Card(
                 <div className="title_font text-xs w-full">{title}</div>
                 {icon && (
                     <p className="flex items-center gap-2">
-            <span className="history p-1 bg-blue-700 rounded-full">
-              {icon}
-            </span>
+                        <span className="history p-1 bg-blue-700 rounded-full">
+                          {icon}
+                        </span>
                     </p>
                 )}
             </header>
