@@ -12,6 +12,7 @@ import {Metadata} from "next";
 import StyledComponentsRegistry from '@/lib/registry'
 
 import "driver.js/dist/driver.css";
+import {CursorProvider} from "@/context/cursor-context";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -35,18 +36,23 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
                 className={`flex flex-col max-w-screen-2xl mx-auto ${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <StyledComponentsRegistry>
-                    <ScrollProgressBar/>
-                    <SidebarProvider>
-                        <Header/>
+                    <CursorProvider>
+                        <ScrollProgressBar/>
+                        <SidebarProvider>
+                            <Header/>
 
-                        <main className="gap-10 pt-24 px-2 sm:px-5 w-full flex justify-center">
-                            <aside
-                                className="overflow-y-auto overflow-x-hidden max-h-150 shrink-0 hidden min-[1124px]:block min-[1124px]:sticky top-24 self-start">
-                                <AppSidebar/>
-                            </aside>
-                            {children}
-                        </main>
-                    </SidebarProvider>
+                            <main className="pt-24 px-2 sm:px-5 w-full flex justify-center gap-7">
+                                <aside
+                                    className="overflow-y-auto overflow-x-hidden max-h-150 shrink-0 hidden min-[1124px]:block min-[1124px]:sticky top-24 self-start">
+                                    <AppSidebar/>
+                                </aside>
+
+                                <div className={'grow'}>
+                                    {children}
+                                </div>
+                            </main>
+                        </SidebarProvider>
+                    </CursorProvider>
                 </StyledComponentsRegistry>
             </body>
         </html>

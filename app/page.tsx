@@ -205,7 +205,7 @@ export default function Home() {
                     </ScrollTrailText>
                 </div>
 
-                <div className={'flex flex-col gap-3'}>
+                <div className={'flex flex-col gap-3 '}>
                     <h1 className={'title_font text-sm'}>
                         <ScrollTrailText>მთავარი შესაძლებლობები</ScrollTrailText>
                     </h1>
@@ -252,7 +252,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <Separator className="my-5"/>
+            <Separator className="my-5 bg-transparent"/>
 
             {/*header*/}
             <section className={'flex flex-col gap-3'}>
@@ -270,7 +270,7 @@ export default function Home() {
                     </ScrollTrailText>
                 </div>
 
-                <div className={'pl-3 max-w-full'}>
+                <div className={'pl-3 max-w-[900px]'}>
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -304,7 +304,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <Separator className="my-5"/>
+            <Separator className="my-5 bg-transparent"/>
 
             {/*sidebar*/}
             <section className={'flex flex-col gap-3 scroll-mt-28'} id={'dashboard'}>
@@ -350,7 +350,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <Separator className="my-5"/>
+            <Separator className="my-5 bg-transparent"/>
 
             {/*graph*/}
             <ListCards title={'თანამშრომლების სამუშაო საათების გრაფიკი.'} description={'მოცემული ღილაკზე დაკლიკებისას გაიხსნება ფანჯარა, რომელშიც მოცემულია ცხრილი თანამშრომლების სამუშაო საათებით დეპარტამენტების მიხედვით, ცხრილში მოცემულია მთელი თვის გეგმა'}>
@@ -362,7 +362,7 @@ export default function Home() {
                 </Button>
             </ListCards>
 
-            <Separator className="my-5"/>
+            <Separator className="my-5 bg-transparent"/>
 
             {/*sticky notes*/}
             <ListCards title={'წებოვანი ქაღალდი (Sticky notes)'} description={'ეს ფუნქციონალი მომხმარებელს აძლევს საშუალებას, საიტზე შექმნას პირადი ან სამუშაო შენიშვნები, რომლებსაც ნებისმიერ დროს დაინახავს საიტის ნებისმიერი გვერდიდან.'}>
@@ -374,7 +374,7 @@ export default function Home() {
                 </Button>
             </ListCards>
 
-            <Separator className="my-5"/>
+            <Separator className="my-5 bg-transparent"/>
 
             {/*time*/}
             <ListCards title={'საათი'} description={'დროის მაჩვენებელი ბეიჯი'}>
@@ -386,7 +386,7 @@ export default function Home() {
                 </Button>
             </ListCards>
 
-            <Separator className="my-5"/>
+            <Separator className="my-5 bg-transparent"/>
 
             {/*dollar*/}
             <ListCards title={'დოლარის კურსი'} description={'მოცემული ღილაკი გვიჩვენებს დოლარის კურსს ლართან მიმართებაში, დაკლიკებისას რეფრეშდება და მოაქვს უახლესი კურსი'}>
@@ -398,7 +398,7 @@ export default function Home() {
                 </Button>
             </ListCards>
 
-            <Separator className="my-5"/>
+            <Separator className="my-5 bg-transparent"/>
 
             {/*working hours*/}
             <ListCards title={'სრული სესიის ხანგრძლივობა'} description={`ეს კონტეინერი გვიჩვენებს სრულ სამუშაო სესიას, დროის ჩართვიდან დასრულებამდე, დაპაუზების შემთხვევაში ირთობა შესვენების ტაიმერი და ითვლის რამდენიხანი იყო თანამშრომელი შესვენებაზე. დასრულების შემდეგ ნამუშევარ დროს აკლდება შესვენების დრო და ასე ითვლება სამუშაო სესია`}>
