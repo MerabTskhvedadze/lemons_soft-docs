@@ -1,23 +1,23 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { driver, Driver } from 'driver.js'
-import { DatePicker, Select } from 'antd'
+import React, {useState, useEffect, useRef, useCallback} from 'react'
+import {driver, Driver} from 'driver.js'
+import {DatePicker, Select} from 'antd'
 
-import { Chip } from '@/components/chip'
-import { Button } from '@/components/ui/button'
-import { Card } from "@/components/dashboard/card"
-import { getGeorgianDateString } from "@/lib/utils";
-import { Separator } from '@/components/ui/separator'
-import { ProgressBar } from "@/components/progress-bar";
-import { ScrollTrailText } from '@/animations/ScrollTrailText'
-import { MeetingsCard } from "@/components/dashboard/meetings-card";
+import {Chip} from '@/components/chip'
+import {Button} from '@/components/ui/button'
+import {Card} from "@/components/dashboard/card"
+import {getGeorgianDateString} from "@/lib/utils";
+import {Separator} from '@/components/ui/separator'
+import {ProgressBar} from "@/components/progress-bar";
+import {ScrollTrailText} from '@/animations/ScrollTrailText'
+import {MeetingsCard} from "@/components/dashboard/meetings-card";
 
-import { FaTimes } from 'react-icons/fa'
-import { CgTimelapse } from 'react-icons/cg'
-import { IoMdRefresh } from 'react-icons/io'
-import { FaLariSign } from 'react-icons/fa6'
-import { BiDollarCircle } from 'react-icons/bi'
+import {FaTimes} from 'react-icons/fa'
+import {CgTimelapse} from 'react-icons/cg'
+import {IoMdRefresh} from 'react-icons/io'
+import {FaLariSign} from 'react-icons/fa6'
+import {BiDollarCircle} from 'react-icons/bi'
 import {
     MdPhone,
     MdOutlineTableChart,
@@ -27,32 +27,32 @@ import {
     MdRefresh,
     MdTimeline
 } from 'react-icons/md'
-import { useCursor } from "@/context/cursor-context";
-import { Tooltip } from '@/components/tooltip'
+import {useCursor} from "@/context/cursor-context";
+import {Tooltip} from '@/components/tooltip'
 
 export default function Dashboard() {
-    const { setCursor } = useCursor()
+    const {setCursor} = useCursor()
     const today = getGeorgianDateString();
-    const tomorrow = getGeorgianDateString({ addDays: 1, format: 'DD-MM-YYYY' });
-    const { RangePicker } = DatePicker
+    const tomorrow = getGeorgianDateString({addDays: 1, format: 'DD-MM-YYYY'});
+    const {RangePicker} = DatePicker
     const [show, setShow] = useState(false)
     const [tourStatus, setTourStatus] = useState(false)
     const tourRef = useRef<Driver | null>(null)
 
     const meetings = [
-        { agent: 'თორნიკე ოსეფაშვილი', total: 2, meeting: [{ project: 'სხვა უბანი დიდ დიღომი', count: 2 }] },
-        { agent: 'მარიამ დუმბაძე', total: 2, meeting: [{ project: 'სხვა უბანი დიდ დიღომი', count: 2 }] },
+        {agent: 'თორნიკე ოსეფაშვილი', total: 2, meeting: [{project: 'სხვა უბანი დიდ დიღომი', count: 2}]},
+        {agent: 'მარიამ დუმბაძე', total: 2, meeting: [{project: 'სხვა უბანი დიდ დიღომი', count: 2}]},
         {
             agent: 'მატილდა ბარკალაია',
             total: 10,
             meeting: [
-                { project: 'სხვა უბანი დიდ დიღომში', count: 5 },
-                { project: 'სოლუმ გლდანი 2', count: 1 },
-                { project: 'გლდანი', count: 3 },
-                { project: 'დიდი დიღომი', count: 1 },
+                {project: 'სხვა უბანი დიდ დიღომში', count: 5},
+                {project: 'სოლუმ გლდანი 2', count: 1},
+                {project: 'გლდანი', count: 3},
+                {project: 'დიდი დიღომი', count: 1},
             ]
         },
-        { agent: 'ლიზი ბიწაძე', total: 4, meeting: [{ project: 'ფონიჭალა', count: 4 }] },
+        {agent: 'ლიზი ბიწაძე', total: 4, meeting: [{project: 'ფონიჭალა', count: 4}]},
     ]
 
     useEffect(() => {
@@ -286,7 +286,8 @@ export default function Dashboard() {
                     <ScrollTrailText className={'title_font text-lg'}>🔹 გვერდის დანიშნულება</ScrollTrailText>
                     <Button
                         onClick={startTour}
-                        className="title_font"
+                        className="title_font bg-blue-700 text-sm"
+                        size={'sm'}
                     >
                         გაეცანი გვერდს
                     </Button>
@@ -302,20 +303,23 @@ export default function Dashboard() {
                 </ScrollTrailText>
             </header>
 
-            <Separator className="my-5" />
+            <Separator className="my-5"/>
 
             {/* filters */}
-            <section className="flex flex-col lg:flex-row gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg">
+            <section
+                // className="flex flex-col sm:flex-row gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg"
+                // className="grid grid-cols-[repeat(3,_minmax(0,_256px))] gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg"
+                className="grid grid-col-4 sm:grid-cols-[repeat(3,_minmax(0,_256px))] gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg"
+            >
                 <RangePicker
-                    className="tour-range"
+                    className="tour-range col-span-2 sm:col-span-1"
                     placeholder={['საწყისი', 'დასასრული']}
-                    style={{ maxWidth: 246, width: '100%' }}
                     onMouseLeave={() => setCursor(null)}
                     onMouseEnter={() => {
                         if (tourStatus) return
                         setCursor(
                             <Tooltip title={'თარიღის ფილტრი'}
-                                description={'აირჩიეთ დროის შუალედი - დეშბორდის მთელი სტატისტიკა განახლდება ამ ფილტრით.'}
+                                     description={'აირჩიეთ დროის შუალედი - დეშბორდის მთელი სტატისტიკა განახლდება ამ ფილტრით.'}
                             />
                         )
                     }}
@@ -324,7 +328,7 @@ export default function Dashboard() {
                 <Chip
                     title={`${today}-ის სტატისტიკა`}
                     dot={false}
-                    className={'tour-today-badge py-2 px-4 rounded-sm text-xs title_font text-indigo-800 bg-indigo-100'}
+                    className={'col-span-2 sm:col-span-1 w-full tour-today-badge py-2 border-[1.5px] border-gray-300 px-4 rounded-sm text-xs title_font text-indigo-800 bg-indigo-100'}
                     onMouseLeave={() => setCursor(null)}
                     onMouseEnter={() => {
                         if (tourStatus) return
@@ -338,15 +342,14 @@ export default function Dashboard() {
                 />
 
                 <Select
-                    className="tour-employee"
-                    style={{ maxWidth: 246, width: '100%' }}
+                    className="tour-employee w-full col-span-4 sm:col-span-1"
                     showSearch
                     placeholder="აირჩიეთ თანამშრომელი"
                     optionFilterProp="label"
                     options={[
-                        { value: 'jack', label: 'Jack' },
-                        { value: 'lucy', label: 'Lucy' },
-                        { value: 'tom', label: 'Tom' }
+                        {value: 'jack', label: 'Jack'},
+                        {value: 'lucy', label: 'Lucy'},
+                        {value: 'tom', label: 'Tom'}
                     ]}
                     onMouseLeave={() => setCursor(null)}
                     onMouseEnter={() => {
@@ -361,12 +364,13 @@ export default function Dashboard() {
                 />
             </section>
 
-            <Separator className="my-1 bg-transparent" />
+            <Separator className="my-1 bg-transparent"/>
 
             {/* fast information */}
-            <section className="flex gap-3 flex-wrap justify-center items-center sm:justify-between bg-gray-50 rounded-lg py-4 px-5">
+            <section className="flex gap-3 justify-between items-center sm:justify-between bg-gray-50 rounded-lg py-4 px-5">
                 <div
-                    className="flex flex-wrap justify-center gap-3 items-center tour-counters"
+                    // className="flex flex-wrap justify-center gap-3 items-center tour-counters"
+                    className="grid grid-cols-2 sm:grid-cols-4 gap-3 items-center tour-counters"
                     onMouseLeave={() => setCursor(null)}
                     onMouseEnter={() => {
                         if (tourStatus) return
@@ -379,10 +383,10 @@ export default function Dashboard() {
                     }}
                 >
                     {[
-                        { bg: '#f1f3f5', label: 'ზარები სულ', value: '0' },
-                        { bg: '#e6f9f0', label: 'ნასაუბრები', value: '0' },
-                        { bg: '#fff5e6', label: 'შეხვედრები', value: '0' },
-                        { bg: '#fdeaea', label: 'გაყიდვები', value: '0' }
+                        {bg: '#f1f3f5', label: 'ზარები სულ', value: '0'},
+                        {bg: '#e6f9f0', label: 'ნასაუბრები', value: '0'},
+                        {bg: '#fff5e6', label: 'შეხვედრები', value: '0'},
+                        {bg: '#fdeaea', label: 'გაყიდვები', value: '0'}
                     ].map((item, i) => {
                         return (
                             <Chip
@@ -397,7 +401,7 @@ export default function Dashboard() {
                 </div>
 
                 <div
-                    className="flex gap-3 items-center tour-actions"
+                    className="flex flex-col sm:flex-row gap-3 items-center tour-actions"
                     onMouseLeave={() => setCursor(null)}
                     onMouseEnter={() => {
                         if (tourStatus) return
@@ -410,91 +414,175 @@ export default function Dashboard() {
                     }}
                 >
                     <Chip
-                        title={<IoMdRefresh color="white" size={20} />}
+                        title={<IoMdRefresh color="white" size={20}/>}
                         dot={false}
                         className="py-1! px-3 bg-blue-600 rounded-full"
                     />
 
                     <Chip
-                        title={<MdOutlineTableChart color="white" size={20} />}
+                        title={<MdOutlineTableChart color="white" size={20}/>}
                         dot={false}
                         className="py-1! px-3 bg-yellow-600 rounded-full"
                     />
                 </div>
             </section>
 
-            <Separator className="my-1 bg-transparent" />
+            <Separator className="my-1 bg-transparent"/>
 
             <section className="lg:flex bg-gray-50">
                 {/* calls and planned meetings */}
-                <div className="lg:max-w-[420px] w-full shrink flex flex-col gap-3 rounded-lg p-2 sm:px-5 sm:py-4">
+                <div className="lg:max-w-[420px] w-full shrink flex flex-col gap-3 rounded-lg p-2 sm:px-5 sm:py-4"
+                >
                     {/* calls plan */}
-                    <div className="shadow bg-white p-3 rounded-lg border flex flex-col gap-3 tour-calls-plan">
+                    <div
+                        className="shadow bg-white p-3 rounded-lg border flex flex-col gap-3 tour-calls-plan"
+                        onMouseLeave={() => setCursor(null)}
+                        onMouseEnter={() => {
+                            if (tourStatus) return
+                            setCursor(
+                                <Tooltip
+                                    title={'📞 ზარების გეგმა'}
+                                    description={'საათობრივი და დღიური გეგმის პროგრესი.'}
+                                />
+                            )
+                        }}
+                    >
                         <div className="flex items-center gap-2 justify-between">
                             <h1 className="title_font text-xs">📞 ზარების გეგმა</h1>
                             <p className="flex items-center gap-2">
                                 <span
+                                    onMouseLeave={() => setCursor(null)}
+                                    onMouseEnter={() => {
+                                        if (tourStatus) return
+                                        setCursor(
+                                            <Tooltip title={'ისტორია'}
+                                                     description={'აჩვენებს საათში განხორციელებული ზარების ისტორიას დღის განმავლობაში.'}
+                                            />
+                                        )
+                                    }}
                                     className="tour-calls-plan-time history p-1 border border-gray-200 rounded-full">
-                                    <MdAccessTime size={20} color="blue" />
+                                    <MdAccessTime size={20} color="blue"/>
                                 </span>
                                 <span
+                                    onMouseLeave={() => setCursor(null)}
+                                    onMouseEnter={() => {
+                                        if (tourStatus) return
+                                        setCursor(
+                                            <Tooltip title={'განახლება'}
+                                                     description={'განახლების ღილაკი გამოიყენება უახლესი მონაცემების მისაღებად.'}
+                                            />
+                                        )
+                                    }}
                                     className="tour-calls-plan-refresh refresh p-1 border border-gray-200 rounded-full">
-                                    <MdRefresh size={20} color="blue" />
+                                    <MdRefresh size={20} color="blue"/>
                                 </span>
                             </p>
                         </div>
 
                         <div className="flex items-center gap-2 ">
-                            <Card
-                                title={
-                                    <div className="flex flex-col gap-2 tour-hourly-plan">
-                                        <ProgressBar
-                                            value={196}
-                                            max={253}
-                                            variant={'footer2'}
-                                            size={'sm'}
-                                            leftLabel={'დღიური გეგმა'}
-                                            showNumbers
-                                            fillColor={'#3b7ddd'}
+                            <div
+                                className={'w-full'}
+                                onMouseLeave={() => setCursor(null)}
+                                onMouseEnter={() => {
+                                    if (tourStatus) return
+                                    setCursor(
+                                        <Tooltip
+                                            title={'საათობრივი გეგმა'}
+                                            description={'საათში განსახორციელებელი ზარების გეგმა მიმდინარე რაოდენობა და შესრულების პროცენტი.'}
                                         />
-                                    </div>
-                                }
-                                className="border"
-                            />
+                                    )
+                                }}
+                            >
 
-                            <Card
-                                title={
-                                    <div className="flex flex-col gap-2 tour-daily-plan">
-                                        <ProgressBar
-                                            value={1527}
-                                            max={2024}
-                                            variant={'footer2'}
-                                            size={'sm'}
-                                            leftLabel={'თვიური გეგმა'}
-                                            showNumbers
+                                <Card
+                                    title={
+                                        <div className="flex flex-col gap-2 tour-hourly-plan">
+                                            <ProgressBar
+                                                value={196}
+                                                max={253}
+                                                variant={'footer2'}
+                                                size={'sm'}
+                                                leftLabel={'დღიური გეგმა'}
+                                                showNumbers
+                                                fillColor={'#3b7ddd'}
+                                            />
+                                        </div>
+                                    }
+                                    className="border"
+                                />
+                            </div>
+
+                            <div
+                                className={'w-full'}
+                                onMouseLeave={() => setCursor(null)}
+                                onMouseEnter={() => {
+                                    if (tourStatus) return
+                                    setCursor(
+                                        <Tooltip
+                                            title={'დღიური გეგმა'}
+                                            description={'დღის გეგმა, მიზანი და შესრულებული რაოდენობა, პროცენტი.'}
                                         />
-                                    </div>
-                                }
-                                className="border"
-                            />
+                                    )
+                                }}
+                            >
+                                <Card
+                                    title={
+                                        <div className="flex flex-col gap-2 tour-daily-plan">
+                                            <ProgressBar
+                                                value={1527}
+                                                max={2024}
+                                                variant={'footer2'}
+                                                size={'sm'}
+                                                leftLabel={'თვიური გეგმა'}
+                                                showNumbers
+                                            />
+                                        </div>
+                                    }
+                                    className="border"
+                                />
+                            </div>
                         </div>
                     </div>
 
                     {/* today's planned meetings */}
                     <div className="shadow bg-white p-3 rounded-lg border flex flex-col gap-3 tour-meetings-today">
-                        <div className="flex items-center gap-2 justify-between">
+                        <div
+                            className="flex items-center gap-2 justify-between"
+                            onMouseLeave={() => setCursor(null)}
+                            onMouseEnter={() => {
+                                if (tourStatus) return
+                                setCursor(
+                                    <Tooltip
+                                        title={'დღევანდელი შეხვედრები'}
+                                        description={'გუნდური გეგმის შესრულება: სულ, შესრულებული და დარჩენილი შეხვედრები.'}
+                                    />
+                                )
+                            }}
+                        >
                             <h1 className="text-xs title_font flex items-center gap-2">
-                                <MdGroup size={20} color="blue" />
+                                <MdGroup size={20} color="blue"/>
                                 <span>დღეს ჩანიშნული შეხვედრები</span>
                             </h1>
                             <p className="flex items-center gap-2">
                                 <span className="refresh-meetings p-1 border border-gray-300 rounded-full">
-                                    <MdRefresh size={20} color="blue" />
+                                    <MdRefresh size={20} color="blue"/>
                                 </span>
                             </p>
                         </div>
 
-                        <div className="w-full meetings-list flex flex-col gap-3 tour-meetings-today-progress ">
+                        <div
+                            className="w-full meetings-list flex flex-col gap-3 tour-meetings-today-progress "
+                            onMouseLeave={() => setCursor(null)}
+                            onMouseEnter={() => {
+                                if (tourStatus) return
+                                setCursor(
+                                    <Tooltip
+                                        title={'შეხვედრა თითო ოპერატორთან'}
+                                        description={'ჩანიშნული შეხვედრები კონკრეტულ ოპერატორთან: სულ, შესრულებული და დარჩენილი შეხვედრები.'}
+                                    />
+                                )
+                            }}
+                        >
                             <div className="flex flex-col gap-1">
                                 <ProgressBar
                                     variant="double"
@@ -553,13 +641,24 @@ export default function Dashboard() {
                 </div>
 
                 {/* agent stats */}
-                <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full">
+                <div
+                    className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-4 2xl:grid-cols-3 gap-4 rounded-lg p-2 sm:px-5 sm:py-4 w-full">
                     {/* calls */}
                     <Card
-                        title="ზარები"
-                        icon={<MdPhone size={20} color="white" />}
-                        footer={<Action icon={<FaTimes />} text="დღის გეგმა 100" />}
                         className="sm:col-span-2 2xl:col-span-1 tour-card-calls"
+                        title="ზარები"
+                        icon={<MdPhone size={20} color="white"/>}
+                        footer={<Action icon={<FaTimes/>} text="დღის გეგმა 100"/>}
+                        onMouseLeave={() => setCursor(null)}
+                        onMouseEnter={() => {
+                            if (tourStatus) return
+                            setCursor(
+                                <Tooltip
+                                    title={'ზარები'}
+                                    description={'ნასაუბრები და სულ ზარები + თვის გეგმის პროგრესი.'}
+                                />
+                            )
+                        }}
                     >
                         <div className="flex items-center gap-2 justify-between">
                             <p className="text-xs flex flex-col">
@@ -583,16 +682,26 @@ export default function Dashboard() {
                     {/* waiting meetings */}
                     <Card
                         title="მომლოდინე"
-                        icon={<CgTimelapse size={20} color="white" />}
+                        icon={<CgTimelapse size={20} color="white"/>}
                         footer={
                             <div className={'flex items-center gap-2 w-full'}>
-                                <Action icon={<FaTimes />} text="გეგმა 15" />
+                                <Action icon={<FaTimes/>} text="გეგმა 15"/>
                                 <div className={'py-1 px-1.5 bg-blue-500 rounded w-fit'}>
-                                    <MdRemoveRedEye color={'white'} size={20} />
+                                    <MdRemoveRedEye color={'white'} size={20}/>
                                 </div>
                             </div>
                         }
                         className="sm:col-span-2 2xl:col-span-1 tour-card-waiting"
+                        onMouseLeave={() => setCursor(null)}
+                        onMouseEnter={() => {
+                            if (tourStatus) return
+                            setCursor(
+                                <Tooltip
+                                    title={'მომლოდინე'}
+                                    description={'დღის მომლოდინე შეხვედრების რაოდენობა, თანამშრომლის დღის ბონუსი და მოსალოდნელი თვის ბონუსი.'}
+                                />
+                            )
+                        }}
                     >
                         <p>27</p>
                         <div className="flex flex-col text-xs">
@@ -611,16 +720,26 @@ export default function Dashboard() {
                     {/* Meetings */}
                     <Card
                         title="შეხვედრა"
-                        icon={<MdGroup size={20} color="white" />}
+                        icon={<MdGroup size={20} color="white"/>}
                         footer={
                             <div className={'flex items-center gap-2 w-full'}>
-                                <Action icon={<FaTimes />} text="გეგმა 5" />
+                                <Action icon={<FaTimes/>} text="გეგმა 5"/>
                                 <div className={'py-1 px-1.5 bg-blue-500 rounded w-fit'}>
-                                    <MdRemoveRedEye color={'white'} size={20} />
+                                    <MdRemoveRedEye color={'white'} size={20}/>
                                 </div>
                             </div>
                         }
                         className="sm:col-span-4 2xl:col-span-1 tour-card-meeting"
+                        onMouseLeave={() => setCursor(null)}
+                        onMouseEnter={() => {
+                            if (tourStatus) return
+                            setCursor(
+                                <Tooltip
+                                    title={'შეხვედრები'}
+                                    description={'შესრულებული შეხვედრების რაოდენობა და ბონუსები.'}
+                                />
+                            )
+                        }}
                     >
                         <p>10</p>
                         <div className="flex flex-col text-xs">
@@ -639,13 +758,23 @@ export default function Dashboard() {
                     {/* sells */}
                     <Card
                         title="გაყიდვები"
-                        icon={<BiDollarCircle size={20} color="white" />}
+                        icon={<BiDollarCircle size={20} color="white"/>}
                         footer={
                             <div className={'py-1 px-1.5 bg-blue-500 rounded w-fit'}>
-                                <MdRemoveRedEye color={'white'} size={20} />
+                                <MdRemoveRedEye color={'white'} size={20}/>
                             </div>
                         }
                         className="sm:col-span-2 2xl:col-span-1 tour-card-sales"
+                        onMouseLeave={() => setCursor(null)}
+                        onMouseEnter={() => {
+                            if (tourStatus) return
+                            setCursor(
+                                <Tooltip
+                                    title={'გაყიდვები'}
+                                    description={'დადასტურებული გაყიდვები, გაყიდვებიდან გამომდინარე ბონუსი.'}
+                                />
+                            )
+                        }}
                     >
                         <p>2</p>
                         <div className="flex flex-col text-xs">
@@ -668,9 +797,19 @@ export default function Dashboard() {
                                 </div>
                             </div>
                         }
-                        icon={<FaLariSign size={18} color="white" />}
+                        icon={<FaLariSign size={18} color="white"/>}
                         footer={<h1 className="title_font">სულ: {show ? '3550₾' : '---'}</h1>}
                         className="sm:col-span-2 2xl:col-span-1 tour-card-salary"
+                        onMouseLeave={() => setCursor(null)}
+                        onMouseEnter={() => {
+                            if (tourStatus) return
+                            setCursor(
+                                <Tooltip
+                                    title={'ხელფასი'}
+                                    description={'ზეგანაკვეთური და მოსალოდნელი ბონუსი. თვალის ღილაკით შეგიძლიათ დამალვა/ჩვენება.'}
+                                />
+                            )
+                        }}
                     >
                         <div className="flex flex-col text-xs text-gray-400">
                             <p>ზეგანაკვეთური:</p>
@@ -683,13 +822,23 @@ export default function Dashboard() {
                     {/* vacations card */}
                     <Card
                         title="შვებულება"
-                        icon={<MdTimeline size={20} color="white" />}
+                        icon={<MdTimeline size={20} color="white"/>}
                         className="sm:col-span-4 2xl:col-span-1 tour-card-late"
+                        onMouseLeave={() => setCursor(null)}
+                        onMouseEnter={() => {
+                            if (tourStatus) return
+                            setCursor(
+                                <Tooltip
+                                    title={'შვებულება'}
+                                    description={'შვებულების მონიტორინგი, აჩვენებს შვებულების გამოყენებულ დღეებს, დასვენებებს, ბიულეტენს და სხვა.'}
+                                />
+                            )
+                        }}
                     >
                         <div className="flex flex-col text-xs text-gray-500">
                             <p className={'font-bold'}>2025 წელს გამოყენებული</p>
 
-                            <Separator className={'my-1'} />
+                            <Separator className={'my-1'}/>
 
                             <p>სამუშაო დღეები წელიწადში: <span className={'font-bold'}>261</span></p>
                             <p>შვებულება: <span className={'font-bold'}>7 დღე</span></p>
@@ -706,7 +855,7 @@ export default function Dashboard() {
                         <Card
                             title={
                                 <div className="flex items-center gap-4">
-                                    <MdRemoveRedEye size={20} color="blue" />
+                                    <MdRemoveRedEye size={20} color="blue"/>
                                     <span>სტატისტიკის ჩანაწერი არ არის</span>
                                 </div>
                             }
@@ -716,7 +865,7 @@ export default function Dashboard() {
                         <Card
                             title={
                                 <div className="flex items-center gap-4">
-                                    <MdRemoveRedEye size={20} color="blue" />
+                                    <MdRemoveRedEye size={20} color="blue"/>
                                     <span>სტატისტიკის ჩანაწერი არ არის</span>
                                 </div>
                             }
@@ -729,7 +878,7 @@ export default function Dashboard() {
                         title={
                             <div className={'flex items-center gap-4 justify-between'}>
                                 <div className="flex items-center gap-4">
-                                    <MdAccessTime size={24} color="blue" />
+                                    <MdAccessTime size={24} color="blue"/>
                                     <div>
                                         <h1>მომლოდინეები — ხვალ</h1>
                                         <p className="text_font text-[0.6rem] text-gray-400">
@@ -740,13 +889,23 @@ export default function Dashboard() {
                                 </div>
 
                                 <div className={'bg-gray-100 p-1 rounded-full border'}>
-                                    <MdRefresh color={'blue'} size={20} />
+                                    <MdRefresh color={'blue'} size={20}/>
                                 </div>
                             </div>
                         }
                         className="sm:col-span-4 2xl:col-span-3 tour-waiting-tomorrow"
+                        onMouseLeave={() => setCursor(null)}
+                        onMouseEnter={() => {
+                            if (tourStatus) return
+                            setCursor(
+                                <Tooltip
+                                    title={'მომლოდინეები - ხვალ'}
+                                    description={'ხვალინდელი დღის პროგნოზი/გეგმა: თანამშრომლები და მათთან ჩანიშნული შეხვედრები მომდევნო დღეს პროექტების მიხედვით.'}
+                                />
+                            )
+                        }}
                     >
-                        <div className={'grid sm:grid-cols-2 grid-cols-1 gap-4'}>
+                        <div className={'grid 2xl:grid-cols-2 grid-cols-1 gap-4'}>
                             {meetings.map((item, i) => {
                                 return (
                                     <MeetingsCard
@@ -765,7 +924,7 @@ export default function Dashboard() {
     )
 }
 
-function Action({ icon, text }: { icon: React.ReactNode, text: string }) {
+function Action({icon, text}: { icon: React.ReactNode, text: string }) {
     return (
         <div
             className="w-full cursor-default py-[2px] text-[12px] border text-red-500 flex items-center gap-1 justify-center border-red-500 rounded-2xl hover:text-white hover:bg-red-500 transition duration-300 ease-in"

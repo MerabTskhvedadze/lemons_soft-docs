@@ -19,7 +19,7 @@ export function Chip({
     return (
         <div
             className={`
-                py-1.5 px-2.5 text-sm flex items-center gap-1
+                py-1.5 px-2.5 text-sm flex items-center justify-center gap-1
                 bg-[hsla(80,51%,76%,.42)] w-fit rounded-full
                 transition-all duration-[250ms] ease-[ease]
                 hover:-translate-y-[0.3px] hover:scale-[1.01]

@@ -18,7 +18,7 @@ export const CursorOverlay = ({content}: { content: ReactNode | null }) => {
 
     useEffect(() => {
         motionX.set(x);
-        motionY.set(y+24);
+        motionY.set(y+56);
     }, [x, y, motionX, motionY]);
 
     // Detect edge overflow based on cursor + overlay size
@@ -26,7 +26,7 @@ export const CursorOverlay = ({content}: { content: ReactNode | null }) => {
         const el = containerRef.current;
         if (!el) return;
 
-        const margin = 20;
+        const margin = 24;
         const w = window.innerWidth;
         const h = window.innerHeight;
 
@@ -88,8 +88,8 @@ export const CursorOverlay = ({content}: { content: ReactNode | null }) => {
                         style={{
                             position: 'relative',
                             transformOrigin: 'top left',
-                            translateX: flipX ? '-100%' : '0%',
-                            translateY: flipY ? '-100%' : '0%',
+                            translateX: flipX ? '-100%' : '-100%',
+                            translateY: flipY ? '-200%' : '0%',
                         }}
                     >
                         <motion.div
