@@ -364,9 +364,20 @@ export default function Dashboard() {
             <Separator className="my-1 bg-transparent" />
 
             {/* fast information */}
-            <section
-                className="flex gap-3 flex-wrap justify-center items-center sm:justify-between bg-gray-50 rounded-lg py-4 px-5">
-                <div className="flex flex-wrap justify-center gap-3 items-center tour-counters">
+            <section className="flex gap-3 flex-wrap justify-center items-center sm:justify-between bg-gray-50 rounded-lg py-4 px-5">
+                <div
+                    className="flex flex-wrap justify-center gap-3 items-center tour-counters"
+                    onMouseLeave={() => setCursor(null)}
+                    onMouseEnter={() => {
+                        if (tourStatus) return
+                        setCursor(
+                            <Tooltip
+                                title={'მონაცემები'}
+                                description={'შემაჯამებელი მონაცემები მოკლედ (ამ დღის): ზარები, ნასაუბრები, შეხვედრები და გაყიდვები.'}
+                            />
+                        )
+                    }}
+                >
                     {[
                         { bg: '#f1f3f5', label: 'ზარები სულ', value: '0' },
                         { bg: '#e6f9f0', label: 'ნასაუბრები', value: '0' },
@@ -384,7 +395,20 @@ export default function Dashboard() {
                         )
                     })}
                 </div>
-                <div className="flex gap-3 items-center tour-actions">
+
+                <div
+                    className="flex gap-3 items-center tour-actions"
+                    onMouseLeave={() => setCursor(null)}
+                    onMouseEnter={() => {
+                        if (tourStatus) return
+                        setCursor(
+                            <Tooltip
+                                title={'ღილაკები'}
+                                description={'რეფრეში - მონაცემების განახლება. ცხრილი - ხელფასების ცხრილი.'}
+                            />
+                        )
+                    }}
+                >
                     <Chip
                         title={<IoMdRefresh color="white" size={20} />}
                         dot={false}
@@ -478,7 +502,7 @@ export default function Dashboard() {
                                     max={6}
                                     value={1}
                                     secondaryValue={5}
-                                    leftLabel="მატილდა ბარკალაია"
+                                    leftLabel="ოპერატორი N1"
                                     rightLabel="სულ 6"
                                     fillFrom="#addbb8" fillTo="#4fba5c"
                                     secondaryFrom="#b1f13d" secondaryTo="#32e41e"
@@ -496,7 +520,7 @@ export default function Dashboard() {
                                     max={4}
                                     value={1}
                                     secondaryValue={2}
-                                    leftLabel="მარიამ დუმბაძე"
+                                    leftLabel="ოპერატორი N2"
                                     rightLabel="სულ 4"
                                     fillFrom="#addbb8" fillTo="#4fba5c"
                                     secondaryFrom="#b1f13d" secondaryTo="#32e41e"
@@ -514,7 +538,7 @@ export default function Dashboard() {
                                     max={10}
                                     value={3}
                                     secondaryValue={10}
-                                    leftLabel="თორნიკე ოსეფაშვილი"
+                                    leftLabel="ოპერატორი N3"
                                     rightLabel="სულ 10"
                                     fillFrom="#addbb8" fillTo="#4fba5c"
                                     secondaryFrom="#b1f13d" secondaryTo="#32e41e"
