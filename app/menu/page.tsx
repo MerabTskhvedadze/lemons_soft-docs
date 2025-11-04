@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-// import {Separator} from '@/components/ui/separator'
 import {ScrollTrailText} from '@/animations/ScrollTrailText'
-import {MenuItem} from '@/components/menu'
+import Board from '@/components/board/Board'
+import {initialBoard} from '@/data/boardSample'
 
 export default function Menu() {
     return (
@@ -15,7 +15,7 @@ export default function Menu() {
                 </h1>
             </header>
 
-            <MenuItem/>
+            <Board initial={initialBoard} />
         </>
     )
 }
