@@ -1,8 +1,9 @@
-'use client'
-import {useState, useId} from 'react'
+"use client";
 
+import React, {useId, useState} from "react";
 import {
     Box,
+    Grid,
     Stack,
     TextField,
     Switch,
@@ -11,8 +12,10 @@ import {
     InputLabel,
     Select,
     MenuItem,
-    Button
-} from '@mui/material'
+    Button,
+    Typography,
+} from "@mui/material";
+import SaveIcon from '@mui/icons-material/Save';
 
 export default function Form() {
     const uid = useId();
@@ -22,20 +25,14 @@ export default function Form() {
 
     // form state
     const [title, setTitle] = useState("");
-    const [subtitle, setSubtitle] = useState("");
-    const [isActive, setIsActive] = useState(false);
-    const [isPinned, setIsPinned] = useState(true);
-    const [category, setCategory] = useState<string>("");
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        const payload = {title, subtitle, isActive, isPinned, category};
-        console.log("submit:", payload);
-    };
-
+    const [template, setTemplate] = useState("");
+    const [status, setStatus] = useState(true);
+    const [toggleB, setToggleB] = useState(false);
+    const [icon, setIcon] = useState("");
 
     return (
-        <section className="w-full h-fit shadow-sm rounded">
+        <aside className="w-full h-fit shadow-sm rounded">
+            {/* header with your fixed SVG */}
             <header className="py-3 px-5 flex items-center gap-2 bg-gray-100">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +40,7 @@ export default function Form() {
                     viewBox="0 0 300 200"
                     width={22}
                     height={32}
-                    preserveAspectRatio="xMidYMid meet" // change to "none" to stretch
+                    preserveAspectRatio="xMidYMid meet"
                 >
                     <defs>
                         <g id={groupId}>
@@ -66,72 +63,102 @@ export default function Form() {
                     <use xlinkHref={`#${groupId}`} transform="translate(64.45 160.55)" fill="red"/>
                 </svg>
 
-                <span className={'title_font text-sm'}>მენიუ</span>
+                <span className="title_font text-sm">მენიუ</span>
             </header>
 
-            <main className="py-3 px-5 shadow">
-                <Box component="form" onSubmit={handleSubmit} noValidate>
-                    <Stack spacing={2}>
-                        <TextField
-                            label="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            fullWidth
-                        />
-                        <TextField
-                            label="Subtitle"
-                            value={subtitle}
-                            onChange={(e) => setSubtitle(e.target.value)}
-                            size="small"
-                            fullWidth
-                        />
-
-                        {/* Switches */}
-                        <Stack direction="row" spacing={2}>
-                            <FormControlLabel
-                                control={
-                                    <Switch
-                                        checked={isActive}
-                                        onChange={(e) => setIsActive(e.target.checked)}
-                                    />
-                                }
-                                label="Active"
+            <main className="py-3 px-5 flex flex-col gap-4 shadow">
+                <div className={'flex items-center gap-5'}>
+                    {/* Left column */}
+                    <div className={'grow flex flex-col gap-3'} >
+                        <div>
+                            <p>სახელი</p>
+                            <TextField
+                                placeholder="სახელი"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                fullWidth
+                                size={'small'}
                             />
-                            <FormControlLabel
-                                control={
-                                    <Switch
-                                        checked={isPinned}
-                                        onChange={(e) => setIsPinned(e.target.checked)}
-                                    />
-                                }
-                                label="Pinned"
+                        </div>
+
+                        <div>
+                            <p>შაბლონი</p>
+                            <FormControl fullWidth>
+                                <InputLabel id="tmpl-label">აირჩიე შაბლონი</InputLabel>
+                                <Select
+                                    labelId="tmpl-label"
+                                    label=""
+                                    value={template}
+                                    onChange={(e) => setTemplate(e.target.value as string)}
+                                    size={'small'}
+                                >
+                                    <MenuItem value="base">საბაზო</MenuItem>
+                                    <MenuItem value="docs">დოკუმენტები</MenuItem>
+                                    <MenuItem value="tools">ინსტრუმენტები</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                    </div>
+
+                    {/* Right column */}
+                    <div className={'flex flex-col gap-3'}>
+                        {/* Top row: two switches aligned to screenshot style */}
+                        <div className={'flex items-center gap-5'}>
+                            <div>
+                                <p>სტატუსი</p>
+                                <FormControlLabel
+                                    sx={{m: 0}}
+                                    control={
+                                        <Switch
+                                            checked={status}
+                                            onChange={(e) => setStatus(e.target.checked)}
+                                        />
+                                    }
+                                    label=""
+                                />
+                            </div>
+                            <div>
+                                <p>მორგებული</p>
+                                <FormControlLabel
+                                    sx={{m: 0}}
+                                    control={
+                                        <Switch
+                                            checked={toggleB}
+                                            onChange={(e) => setToggleB(e.target.checked)}
+                                        />
+                                    }
+                                    label=""
+                                />
+                            </div>
+                        </div>
+
+                        {/* Small TextField with label + placeholder to the right column */}
+                        <div>
+                            <p>
+                                აიქონი <span style={{opacity: 0.7}}>აირჩიოთ აიქონი</span>
+                            </p>
+                            <TextField
+                                placeholder="აიქონი"
+                                size="small"
+                                value={icon}
+                                onChange={(e) => setIcon(e.target.value)}
+                                fullWidth
                             />
-                        </Stack>
+                        </div>
+                    </div>
+                </div>
 
-                        {/* Select */}
-                        <FormControl fullWidth>
-                            <InputLabel id="category-label">Category</InputLabel>
-                            <Select
-                                labelId="category-label"
-                                label="Category"
-                                value={category}
-                                onChange={(e) => setCategory(e.target.value as string)}
-                            >
-                                <MenuItem value="">None</MenuItem>
-                                <MenuItem value="news">News</MenuItem>
-                                <MenuItem value="docs">Docs</MenuItem>
-                                <MenuItem value="tools">Tools</MenuItem>
-                            </Select>
-                        </FormControl>
-
-                        <Stack direction="row" justifyContent="flex-end">
-                            <Button type="submit" variant="contained">
-                                Save
-                            </Button>
-                        </Stack>
-                    </Stack>
-                </Box>
+                {/* Submit button bottom-left */}
+                <Button
+                    size={'small'}
+                    type="submit"
+                    variant="contained"
+                    startIcon={<SaveIcon/>}
+                    className={'title_font self-start'}
+                >
+                    შენახვა
+                </Button>
             </main>
-        </section>
-    )
+        </aside>
+    );
 }
