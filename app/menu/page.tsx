@@ -1,9 +1,13 @@
 'use client'
 
 import React from 'react'
+import {Separator} from "@/components/ui/separator";
 import {ScrollTrailText} from '@/animations/ScrollTrailText'
-import Board from '@/components/board/Board'
-import {initialBoard} from '@/data/boardSample'
+
+import Form from "@/components/menu/Form"
+import SidebarBoard from '@/components/menu/SidebarBoard'
+
+import {sidebarInitial} from '@/data/sidebarInitials'
 
 export default function Menu() {
     return (
@@ -15,7 +19,13 @@ export default function Menu() {
                 </h1>
             </header>
 
-            <Board initial={initialBoard} />
+            <Separator className={'py-3 bg-transparent'}/>
+
+            <section className={'flex flex-col-reverse sm:flex-row gap-10'}>
+                <SidebarBoard sections={sidebarInitial} />
+
+                <Form/>
+            </section>
         </>
     )
 }

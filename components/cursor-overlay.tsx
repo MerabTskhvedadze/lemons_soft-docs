@@ -18,7 +18,7 @@ export const CursorOverlay = ({content}: { content: ReactNode | null }) => {
 
     useEffect(() => {
         motionX.set(x);
-        motionY.set(y+56);
+        motionY.set(y + 56);
     }, [x, y, motionX, motionY]);
 
     // Detect edge overflow based on cursor + overlay size
@@ -65,46 +65,46 @@ export const CursorOverlay = ({content}: { content: ReactNode | null }) => {
         exit: {opacity: 0, scale: 0.95},
     };
 
+    if (!content) return
+
     return (
-        <motion.div
-            style={{
-                position: 'fixed',
-                pointerEvents: 'none',
-                zIndex: 9999,
-                x: smoothX,
-                y: smoothY,
-            }}
-        >
-            <AnimatePresence>
-                {content && (
+        <AnimatePresence>
+            <motion.div
+                style={{
+                    position: 'fixed',
+                    pointerEvents: 'none',
+                    zIndex: 9999,
+                    x: smoothX,
+                    y: smoothY,
+                }}
+            >
+                <motion.div
+                    key="container"
+                    ref={containerRef}
+                    className="text-indigo-800 bg-indigo-100 ring-2 ring-gray-200 px-3 pb-2 pt-1 rounded-md shadow-xl flex items-center justify-center"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    style={{
+                        position: 'relative',
+                        transformOrigin: 'top left',
+                        translateX: flipX ? '-100%' : '-100%',
+                        translateY: flipY ? '-200%' : '0%',
+                    }}
+                >
                     <motion.div
-                        key="container"
-                        ref={containerRef}
-                        className="text-indigo-800 bg-indigo-100 ring-2 ring-gray-200 px-3 pb-2 pt-1 rounded-md shadow-xl flex items-center justify-center"
-                        variants={containerVariants}
+                        key="content"
+                        variants={contentVariants}
                         initial="hidden"
                         animate="visible"
                         exit="exit"
-                        style={{
-                            position: 'relative',
-                            transformOrigin: 'top left',
-                            translateX: flipX ? '-100%' : '-100%',
-                            translateY: flipY ? '-200%' : '0%',
-                        }}
+                        style={{pointerEvents: 'auto'}}
                     >
-                        <motion.div
-                            key="content"
-                            variants={contentVariants}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            style={{pointerEvents: 'auto'}}
-                        >
-                            {content}
-                        </motion.div>
+                        {content}
                     </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.div>
+                </motion.div>
+            </motion.div>
+        </AnimatePresence>
     );
 };

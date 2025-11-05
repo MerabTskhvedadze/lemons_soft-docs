@@ -3,7 +3,6 @@
 
 @plugin 'tailwind-scrollbar';
 
-
 @font-face {
     font-family: "FiraGO";
     src: url("/fonts/FiraGO-Bold.woff");
@@ -95,7 +94,6 @@
     --sidebar-border: oklch(0.92 0.004 286.32);
     --sidebar-ring: oklch(0.705 0.015 286.067);
 }
-
 
 html {
     font-size: var(--fs-max); /* default (>= 1280px) */
@@ -248,7 +246,6 @@ html {
     background: #555;
 }
 
-
 /* shimmering diagonal sheen */
 @keyframes lemons-sheen {
     0% {
@@ -286,4 +283,70 @@ html {
     .before\:animate-sheen::before {
         animation-duration: 0.001ms !important;
     }
+}
+
+/* === React-Nestable skin (works with Tailwind) === */
+.nestable {
+    @apply space-y-2;
+}
+
+.nestable-list {
+    @apply space-y-2 pl-0;
+}
+
+.nestable-item {
+    @apply list-none;
+}
+
+.nestable-item.is-dragging .row {
+    @apply opacity-50;
+}
+
+.nestable-handle {
+    @apply shrink-0 w-8 h-8 grid place-items-center rounded-xl border;
+    @apply border-zinc-200 bg-zinc-50 text-zinc-500;
+    @apply dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400;
+    cursor: grab;
+}
+
+.nestable-content {
+    @apply flex-1;
+}
+
+.nestable-item .children {
+    @apply pl-6 mt-2 space-y-2 border-l;
+    @apply border-zinc-200 dark:border-zinc-800;
+}
+
+/* Placeholder where item will drop */
+.nestable-placeholder {
+    @apply h-12 rounded-xl border-2 border-dashed;
+    @apply border-zinc-300 dark:border-zinc-600;
+}
+
+/* Dragging clone layer */
+.nestable-drag-layer {
+    pointer-events: none;
+}
+.nestable-drag-layer .row {
+    @apply shadow-xl;
+}
+
+/* Utility: row card */
+.row {
+    @apply flex items-center gap-3 rounded-2xl border px-3 py-2 bg-white/70 backdrop-blur;
+    @apply border-zinc-200 hover:border-zinc-300 transition;
+    @apply dark:bg-zinc-900/60 dark:border-zinc-800 dark:hover:border-zinc-700;
+}
+
+.row .title {
+    @apply font-medium text-sm;
+}
+.row .meta {
+    @apply text-xs text-zinc-500 dark:text-zinc-400;
+}
+
+/* Action buttons (you’re using shadcn Button; these help spacing) */
+.row .actions {
+    @apply ml-auto flex items-center gap-1;
 }
