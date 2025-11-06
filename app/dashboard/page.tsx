@@ -306,10 +306,7 @@ export default function Dashboard() {
             <Separator className="my-5"/>
 
             {/* filters */}
-            <section
-                // className="flex flex-col sm:flex-row gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg"
-                // className="grid grid-cols-[repeat(3,_minmax(0,_256px))] gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg"
-                className="grid grid-col-4 sm:grid-cols-[repeat(3,_minmax(0,_256px))] gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg"
+            <section className="grid grid-col-4 sm:grid-cols-[repeat(3,_minmax(0,_256px))] gap-3 items-center justify-between py-4 px-5 bg-gray-50 rounded-lg"
             >
                 <RangePicker
                     className="tour-range col-span-2 sm:col-span-1"

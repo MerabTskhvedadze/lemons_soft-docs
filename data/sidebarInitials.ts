@@ -8,7 +8,7 @@ export const sidebarInitial: MenuSection[] = [
     {
         id: "leads", label: "ლიდები", icon: "addressBook", link: "/",
         items: [
-            { id: "phone-database", label: "ნომრების ბაზა", href: "/leads/phone-database" },
+            { id: "phone-database", label: "ნომრების ბაზა", href: "/leads/number-base" },
             { id: "facebook-numbers", label: "FACEBOOK ნომრები", href: "/leads/facebook-numbers" },
             { id: "orc-import", label: "Orc import", href: "/leads/orc-import" },
             { id: "duplicates", label: "დუბლირებული", href: "/leads/duplicates" },

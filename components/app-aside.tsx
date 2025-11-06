@@ -1,6 +1,3 @@
-
-// -----------------------------------------------------------------------------
-// AppSidebar.tsx — no logic change required; consumes ordered sections from context
 "use client";
 import Link from "next/link";
 import {
@@ -33,7 +30,7 @@ export function AppSidebar() {
                         {sections.map(({ id, label, link, icon, items }) => (
                             <SidebarMenuItem key={id}>
                                 <SidebarMenuButton asChild>
-                                    <Link href={link}>
+                                    <Link href={link} className={'group-hover/inner:bg-red-500'}>
                                         {iconFromKey(icon)}
                                         <span>{label}</span>
                                     </Link>
@@ -58,8 +55,3 @@ export function AppSidebar() {
         </Sidebar>
     );
 }
-
-// Usage:
-// - Mount <SidebarBoard /> somewhere in your app (e.g., /settings/sidebar or an admin page)
-// - Drag to reorder sections and sub-items; order is saved in localStorage
-// - The visible <AppSidebar /> will immediately reflect the new order

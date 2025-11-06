@@ -2,7 +2,7 @@ export type IconKey =
     | "home" | "desktop" | "bars" | "addressBook" | "shoppingBag" | "handshake"
     | "users" | "phone" | "mobile" | "comments" | "bookmark" | "creditCard"
     | "hourglass" | "map" | "university" | "building" | "file" | "archive"
-    | "language" | "book" | "cubes";
+    | "language" | "book" | "cubes" | 'workspace';
 
 export type MenuSubItem = {
     id: string;         // unique and stable (use slug)

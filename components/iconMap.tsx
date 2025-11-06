@@ -4,9 +4,12 @@ import {
     FaPhone, FaMobile, FaComments, FaBookmark, FaCreditCard, FaHourglassStart, FaMap,
     FaUniversity, FaBuilding, FaFile, FaArchive, FaLanguage, FaBook, FaCubes
 } from "react-icons/fa";
+import { BsPersonWorkspace } from "react-icons/bs";
+
 import type { IconKey } from "@/types/menu";
 
 const map: Record<IconKey, React.ReactNode> = {
+    workspace: <BsPersonWorkspace/>,
     home: <FaHome/>, desktop: <FaDesktop/>, bars: <FaBars/>, addressBook: <FaAddressBook/>,
     shoppingBag: <FaShoppingBag/>, handshake: <FaHandshake/>, users: <FaUsers/>, phone: <FaPhone/>,
     mobile: <FaMobile/>, comments: <FaComments/>, bookmark: <FaBookmark/>, creditCard: <FaCreditCard/>,
