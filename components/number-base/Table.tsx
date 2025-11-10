@@ -43,6 +43,16 @@ import {driver} from 'driver.js';
 import 'driver.js/dist/driver.css';
 import {useCursor} from "@/context/cursor-context";
 
+import {
+    MoveModal,
+    SearchModal,
+    SplitModal,
+    AnalyzesModal,
+    MyLiddyModal,
+    RequestLiddyModal,
+    ReplaceModal
+} from '@/components/modals'
+
 interface RowData {
     id: number;
     phone: string;
@@ -95,7 +105,7 @@ export default function Table() {
         const onEnter = () => {
             if (!desc) return;
             setCursor(
-                <CToolTip title={desc.title} description={desc.description} />
+                <CToolTip title={desc.title} description={desc.description}/>
             );
         };
 
@@ -717,42 +727,14 @@ export default function Table() {
                     </Tooltip>
                 </Toolbar>
 
-                <div
-                    className="bg-gray-100 border-b border-gray-200 py-4 px-4 title_font flex justify-end items-center gap-2">
-                    <Button size={'xs'} className=" bg-blue-500/90 hover:bg-blue-700" id="tour-cta-move">
-                        <MdDashboard/>
-                        გადატანა
-                    </Button>
-
-                    <Button size={'xs'} className=" bg-green-600 hover:bg-green-700" id="tour-cta-fullsearch">
-                        <MdSearch/>
-                        სრული ძებნა
-                    </Button>
-
-                    <Button size={'xs'} className="" variant={'destructive'} id="tour-cta-filters">
-                        <FaSlidersH/>
-                    </Button>
-
-                    <Button size={'xs'} className=" bg-blue-500/90 hover:bg-blue-700" id="tour-cta-replace">
-                        <MdSearch/>
-                        <FaExchangeAlt/>
-                        კომ.ჩანაცვლება
-                    </Button>
-
-                    <Button size={'xs'} className=" bg-blue-500/90 hover:bg-blue-700" id="tour-cta-myLeads">
-                        <FaUserClock/>
-                        ჩემი ლიდები
-                    </Button>
-
-                    <Button size={'xs'} className=" bg-yellow-600 hover:bg-yellow-700" id="tour-cta-requestLead">
-                        <FaPhone/>
-                        ლიდის მოთხოვნა
-                    </Button>
-
-                    <Button size={'xs'} className=" bg-blue-700 hover:bg-blue-800" id="tour-cta-distribute">
-                        <MdGroups/>
-                        განაწილება
-                    </Button>
+                <div className="bg-gray-100 border-b border-gray-200 py-4 px-4 title_font flex justify-end items-center gap-2">
+                    <MoveModal/>
+                    <SearchModal/>
+                    <AnalyzesModal/>
+                    <ReplaceModal/>
+                    <MyLiddyModal/>
+                    <RequestLiddyModal/>
+                    <SplitModal/>
                 </div>
             </div>
         );
