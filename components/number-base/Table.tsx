@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useMemo, useState} from 'react';
+import React, {useState} from 'react';
 import {
     ColumnsPanelTrigger,
     DataGridPremium,
@@ -31,6 +31,8 @@ import {
     MdCached, MdSearch, MdDashboard, MdGroups, MdHelpOutline
 } from 'react-icons/md';
 
+import {Tooltip as CToolTip} from '@/components/tooltip'
+
 import {Dropdown, FilterInput} from '../'
 
 import {DatePicker} from 'antd'
@@ -39,6 +41,7 @@ import {FaExchangeAlt, FaPhone, FaSlidersH, FaUserClock} from "react-icons/fa";
 
 import {driver} from 'driver.js';
 import 'driver.js/dist/driver.css';
+import {useCursor} from "@/context/cursor-context";
 
 interface RowData {
     id: number;
@@ -66,7 +69,16 @@ interface RowData {
     isNew?: boolean;
 }
 
+type TourItem = {
+    id: string;                 // DOM id like "tour-filter-phone" or "tour-btn-export"
+    title: string;
+    description: string;
+    side?: 'top' | 'bottom' | 'left' | 'right';
+    field?: string;             // DataGrid column field for auto-scroll (optional)
+};
+
 export default function Table() {
+    const {setCursor} = useCursor()
     const {RangePicker} = DatePicker
     const apiRef = useGridApiRef();
     const [paginationModel, setPaginationModel] = useState({page: 0, pageSize: 30});
@@ -74,9 +86,191 @@ export default function Table() {
     const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
     // ---------- small helper to attach tour ids ----------
-    const withTourId = (id: string, node: React.ReactNode) => (
-        <span id={id} className="inline-flex items-center">{node}</span>
-    );
+    const withTourId = (id: string, node: React.ReactNode) => {
+        const desc = hoverDesc(id);
+        return (
+            <span
+                id={id}
+                className="inline-flex items-center pointer-events-auto"
+                onMouseEnter={desc ? () => setCursor(<CToolTip title={desc.title}
+                                                               description={desc.description}/>) : undefined}
+                onMouseLeave={() => setCursor(null)}
+            >
+              {node}
+            </span>
+        );
+    };
+
+    const TOUR_ITEMS: TourItem[] = [
+        // Toolbar
+        {
+            id: 'tour-btn-columns',
+            title: 'სვეტები ცხრილში',
+            description: 'ცხრილში სვეტების მართვა, დამალე ან გამოაჩინე სვეტები',
+            side: 'bottom'
+        },
+        {id: 'tour-btn-export', title: 'ექსპორტი', description: 'გადმოწერე ცხრილი Excel ფაილად', side: 'bottom'},
+        {
+            id: 'tour-btn-upload',
+            title: 'ატვირთვა',
+            description: 'დაამატე ჩანაწერები Excel-ის საშუალებით',
+            side: 'bottom'
+        },
+        {
+            id: 'tour-btn-duplicate',
+            title: 'დუბლები',
+            description: 'დუბლირებული ნომრების სწრაფი ამოცნობა',
+            side: 'bottom'
+        },
+        {id: 'tour-btn-refresh', title: 'განახლება', description: 'მონაცემების განახლება', side: 'bottom'},
+        {id: 'tour-btn-recompute', title: 'სრული განახლება', description: 'გვერდის სრული განახლება', side: 'bottom'},
+        {id: 'tour-btn-add', title: 'დამატება', description: 'ახალი ლიდის ხელით დამატება', side: 'bottom'},
+
+        // CTAs
+        {id: 'tour-cta-move', title: 'გადატანა', description: 'ნომრის გადატანა სხვა ცხრილში', side: 'top'},
+        {id: 'tour-cta-fullsearch', title: 'სრული ძებნა', description: 'ძებნა მთელ ბაზაში', side: 'top'},
+        {id: 'tour-cta-filters', title: 'სტატისტიკა', description: 'ბაზის სტატისტიკა და მეტრიკები', side: 'top'},
+        {
+            id: 'tour-cta-replace',
+            title: 'ჩანაცვლება',
+            description: 'კომენტარებში ტექსტის მასობრივი ჩანაცვლება',
+            side: 'top'
+        },
+        {id: 'tour-cta-myLeads', title: 'ჩემი ლიდები', description: 'ჩემზე გამანაწილებელი ლიდები', side: 'top'},
+        {id: 'tour-cta-requestLead', title: 'ლიდის მოთხოვნა', description: 'კონკრეტული ლიდის მოთხოვნა', side: 'top'},
+        {id: 'tour-cta-distribute', title: 'განაწილება', description: 'ლიდების განაწილება გუნდზე', side: 'top'},
+
+        // Filters (add field for auto-scroll)
+        {
+            id: 'tour-filter-created_at',
+            title: 'თარიღის ფილტრი',
+            description: 'გაფილტრე შემოსვლის თარიღით',
+            side: 'bottom',
+            field: 'created_at'
+        },
+        {
+            id: 'tour-filter-phone',
+            title: 'მობილური',
+            description: 'ნომრის მიხედვით ძებნა',
+            side: 'bottom',
+            field: 'phone'
+        },
+        {
+            id: 'tour-filter-status',
+            title: 'სტატუსი',
+            description: 'ლიდის სტატუსით ფილტრი',
+            side: 'bottom',
+            field: 'status'
+        },
+        {
+            id: 'tour-filter-subStatus',
+            title: 'ქვესტატუსი',
+            description: 'ქვესტატუსით ფილტრი',
+            side: 'bottom',
+            field: 'subStatus'
+        },
+        {id: 'tour-filter-area', title: 'კვადრატი', description: 'ფილტრი კვადრატულობით', side: 'bottom', field: 'area'},
+        {id: 'tour-filter-name', title: 'სახელი', description: 'სახელით ძებნა', side: 'bottom', field: 'name'},
+        {
+            id: 'tour-filter-comment',
+            title: 'კომენტარი',
+            description: 'კომენტარით ძებნა',
+            side: 'bottom',
+            field: 'comment'
+        },
+        {
+            id: 'tour-filter-call_date',
+            title: 'დარეკვის თარიღი',
+            description: 'დარეკვის თარიღით ფილტრი',
+            side: 'bottom',
+            field: 'call_date'
+        },
+        {
+            id: 'tour-filter-liddy_status',
+            title: 'ლიდ სტატუსი',
+            description: 'ლიდის სტატუსით',
+            side: 'bottom',
+            field: 'liddy_status'
+        },
+        {
+            id: 'tour-filter-special_offers',
+            title: 'აქციები',
+            description: 'აქციების მიხედვით',
+            side: 'bottom',
+            field: 'special_offers'
+        },
+        {
+            id: 'tour-filter-sales_agent',
+            title: 'გაყიდვების მენეჯერი',
+            description: 'მენეჯერის მიხედვით',
+            side: 'bottom',
+            field: 'sales_agent'
+        },
+        {
+            id: 'tour-filter-operator',
+            title: 'ოპერატორი',
+            description: 'ოპერატორის მიხედვით',
+            side: 'bottom',
+            field: 'operator'
+        },
+        {
+            id: 'tour-filter-projects',
+            title: 'პროექტები',
+            description: 'პროექტ(ებ)ის მიხედვით',
+            side: 'bottom',
+            field: 'projects'
+        },
+        {id: 'tour-filter-answer', title: 'პასუხი', description: 'კლიენტის პასუხი', side: 'bottom', field: 'answer'},
+        {
+            id: 'tour-filter-meeting',
+            title: 'შეხვედრა',
+            description: 'შეხვედრის სტატუსი',
+            side: 'bottom',
+            field: 'meeting'
+        },
+        {id: 'tour-filter-lang', title: 'ენა', description: 'ენის ფილტრი', side: 'bottom', field: 'lang'},
+        {id: 'tour-filter-w_v', title: 'W/V', description: 'დამუშავების ეტაპი', side: 'bottom', field: 'w_v'},
+        {id: 'tour-filter-date', title: 'თარიღი', description: 'დამუშავების თარიღი', side: 'bottom', field: 'date'},
+        {
+            id: 'tour-filter-from_user_id',
+            title: 'გადამისამართება',
+            description: 'ვისგან ჩაიგდო ლიდი',
+            side: 'bottom',
+            field: 'from_user_id'
+        },
+        {id: 'tour-filter-sms', title: 'SMS', description: 'SMS-ის მიხედვით', side: 'bottom', field: 'sms'},
+        {
+            id: 'tour-filter-whatsapp',
+            title: 'WhatsApp',
+            description: 'WhatsApp კომუნიკაცია',
+            side: 'bottom',
+            field: 'whatsapp'
+        },
+
+        // Actions
+        {
+            id: '.MuiDataGrid-columnHeader[data-field="actions"]',
+            title: 'ქმედებები',
+            description: 'რედაქტირება/შენახვა/გაუქმება/წაშლა',
+            side: 'bottom'
+        },
+        {id: 'tour-action-edit', title: 'რედაქტირება', description: 'გახსენით სტრიქონი რედაქტირებისთვის', side: 'left'},
+        {id: 'tour-action-save', title: 'შენახვა', description: 'ცვლილებების შენახვა', side: 'left'},
+        {id: 'tour-action-cancel', title: 'გაუქმება', description: 'რედაქტირების გაუქმება', side: 'left'},
+        {id: 'tour-action-delete', title: 'წაშლა', description: 'სტრიქონის წაშლა', side: 'left'},
+    ];
+
+    const TOUR_MAP = Object.fromEntries(TOUR_ITEMS.map(i => [i.id, i]))
+
+    // Get tooltip content by id
+    const hoverDesc = (id: string) => TOUR_MAP[id] ? {
+        title: TOUR_MAP[id].title,
+        description: TOUR_MAP[id].description
+    } : undefined;
+
+    // Simple query helper
+    const q = (sel: string) => document.querySelector(sel) as HTMLElement | null;
+
 
     // Smoothly bring a column’s header filter into view
     const scrollColumnIntoView = (field: string) => {
@@ -214,14 +408,13 @@ export default function Table() {
             renderHeader: renderTableHeader,
             editable: true,
             renderHeaderFilter: () => withTourId('tour-filter-created_at',
-                <RangePicker placeholder={['დაწყება', 'დასრულება']}/>
-            )
+                <RangePicker placeholder={['დაწყება', 'დასრულება']}/>)
         },
         {
             field: 'phone', headerName: 'მობილური', width: 104,
             renderHeader: renderTableHeader,
             editable: true,
-            renderHeaderFilter: () => <SearchFormFilter id="tour-filter-phone"/>
+            renderHeaderFilter: () => <SearchFormFilter id="tour-filter-phone"/>,
         },
         {
             field: 'status', headerName: 'სტატუსი', width: 64,
@@ -242,7 +435,7 @@ export default function Table() {
                         ]}
                         value={''}
                         onChange={(e) => console.log(e.target.value)}
-                    />
+                    />,
                 )
         },
         {
@@ -555,7 +748,6 @@ export default function Table() {
         );
     }
 
-    // ---------- driver.js tour definition ----------
     function startTour() {
         const drv = driver({
             showProgress: true,
@@ -564,218 +756,28 @@ export default function Table() {
             prevBtnText: 'უკან',
             doneBtnText: 'დასრულება',
             overlayOpacity: 0.5,
-            stagePadding: 6,
             overlayClickBehavior: 'nextStep',
+            stagePadding: 6,
             smoothScroll: true,
         });
 
-        // Build steps just once (memoized) or inline:
-        const steps = [
-            {
-                element: '#tour-btn-columns',
-                popover: {
-                    title: 'სვეტები ცხრილში',
-                    description: 'ცხრილში სვეტების მართვა, დამალე ან გმაოაჩინე სვეტები ცხრილში',
-                    side: 'bottom'
+        const steps = TOUR_ITEMS.map(item => {
+            const element: any = item.field
+                ? () => {
+                    scrollColumnIntoView(item.field!);
+                    return q(`#${item.id}`)!;
                 }
-            },
-            {
-                element: '#tour-btn-export',
-                popover: {title: 'ექსპორტი', description: 'გადმოწერე ცხრილი ექსელ ფაილად', side: 'bottom'}
-            },
-            {
-                element: '#tour-btn-upload',
-                popover: {
-                    title: 'ატვირთვა',
-                    description: 'დაამატე ახალი ჩანაწერები ექსელ ფაილის გამოყენებით',
-                    side: 'bottom'
-                }
-            },
-            {
-                element: '#tour-btn-duplicate',
-                popover: {
-                    title: 'დუბლები',
-                    description: 'დუბლირებული ნომერბის სწრაფი ფილტრაცია და მონიშვნა',
-                    side: 'bottom'
-                }
-            },
-            {
-                element: '#tour-btn-refresh',
-                popover: {title: 'განახლება', description: 'ცრილის მონაცემების განახლება', side: 'bottom'}
-            },
-            {
-                element: '#tour-btn-recompute',
-                popover: {title: 'სრული განახლება', description: 'გვერდის სრული განახლება', side: 'bottom'}
-            },
-            {
-                element: '#tour-btn-add',
-                popover: {title: 'დამატება', description: 'დაამატე ახალი ლიდი ცხრილში მექანიკურად', side: 'bottom'}
-            },
+                : (item.id.startsWith('.') ? item.id : `#${item.id}`);
 
-            // CTA row
-            {
-                element: '#tour-cta-move',
-                popover: {title: 'გადატანა', description: 'ნომრის გადატანა სხვა ცხრილში', side: 'top'}
-            },
-            {
-                element: '#tour-cta-fullsearch',
+            return {
+                element,
                 popover: {
-                    title: 'სრული ძებნა',
-                    description: 'ნომრის მოძებნის ფუნქცია მთლიან ბაზაში',
-                    side: 'top'
+                    title: item.title,
+                    description: item.description,
+                    side: item.side ?? 'bottom',
                 }
-            },
-            {
-                element: '#tour-cta-filters',
-                popover: {
-                    title: 'სტატისტიკა',
-                    description: 'ნომრების ბაზის სტატისტიკა, შემომავალი ნომრები, დამუშავებული და დაუმუშავებელი ნომრების რაოდენობა და სხვა...',
-                    side: 'top'
-                }
-            },
-            {
-                element: '#tour-cta-replace',
-                popover: {
-                    title: 'ჩანაცვლება',
-                    description: 'კონკრეტული სიტყვის ან წინადადების მოძებნა კომენტარში და მათი ერთიანად ჩანაცვლება მითითებული სიტყვით',
-                    side: 'top'
-                }
-            },
-            {
-                element: '#tour-cta-myLeads',
-                popover: {title: 'ჩემი ლიდები', description: 'ჩემთვის განაწილებული ლიდების ნახვა', side: 'top'}
-            },
-            {
-                element: '#tour-cta-requestLead',
-                popover: {title: 'ლიდის მოთხოვნა', description: 'კონკრეტული ლიდის მოთხოვნა', side: 'top'}
-            },
-            {
-                element: '#tour-cta-distribute',
-                popover: {title: 'განაწილება', description: 'გუნდის წევრებისთვის ლიდების განაწილება', side: 'top'}
-            },
-
-            // Header filters (representative; you can add/remove easily)
-            {
-                element: '#tour-filter-created_at',
-                popover: {
-                    title: 'თარიღის ფილტრი',
-                    description: 'სვეტების გაფილტვრა კონკრეტული თარიღით შემომავალი ლიდის მიხედვით',
-                    side: 'bottom'
-                }
-            },
-            {
-                element: '#tour-filter-phone',
-                popover: {title: 'მობილური', description: 'კონკრეტული ნომრის მოძებნა ცხრილში', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-status',
-                popover: {
-                    title: 'სტატუსი',
-                    description: 'ცხრილის სვეტების გაფილტვრა ლიდის სტატუსის მიხედვით',
-                    side: 'bottom'
-                }
-            },
-            {
-                element: '#tour-filter-subStatus',
-                popover: {title: 'ქვესტატუსი', description: 'ლიდის ქვესტატუსის ფილტრი', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-area',
-                popover: {title: 'კვადრატი', description: 'ფილტრი კვადრატულობის მიხედვით', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-name',
-                popover: {title: 'სახელი', description: 'მომხმარებლის სახელით გაფილტვრა', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-comment',
-                popover: {title: 'კომენტარი', description: 'კომენტარის მიხედვით ძებნა', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-call_date',
-                popover: {
-                    title: 'დარეკვის თარიღი',
-                    description: 'გაფილტრე ცხრილი დარეკვის თარიღის მიხედვით',
-                    side: 'bottom'
-                }
-            },
-            {
-                element: '#tour-filter-liddy_status',
-                popover: {title: 'ლიდ სტატუსი', description: 'ლიდის სტატუსით ფილტრაცია', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-special_offers',
-                popover: {title: 'აქციები', description: 'აქციების მიხედვით გაფილტვრა', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-sales_agent',
-                popover: {
-                    title: 'გაყიდვების მენეჯერი',
-                    description: 'გაფილტრე მენეჯერის მიხედვით',
-                    side: 'bottom'
-                }
-            },
-            {
-                element: '#tour-filter-operator',
-                popover: {title: 'ოპერატორი', description: 'ფილტრი ოპერატორის მიხედვით', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-projects',
-                popover: {title: 'პროექტები', description: 'სასურველი პროექტ(ებ)ი', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-answer',
-                popover: {title: 'პასუხი', description: 'ფილტრი კლიენტის პასუხით', side: 'bottom'}
-            },
-            {
-                // element: '#tour-filter-meeting',
-                element: () => {
-                    scrollColumnIntoView('meeting');
-                    return document.querySelector('#tour-filter-meeting')!;
-                },
-                popover: {title: 'შეხვედრა', description: 'შეხვედრის სტატუსი', side: 'bottom'}
-            },
-            {element: '#tour-filter-lang', popover: {title: 'ენა', description: 'ენის ფილტრი', side: 'bottom'}},
-            {
-                element: '#tour-filter-w_v',
-                popover: {title: 'W/V', description: 'კავშირის ფილტრი, რა ეტაპზეა ლიდის დამუშავება', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-date',
-                popover: {title: 'თარიღი', description: 'დამუშავების თარიღი', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-from_user_id',
-                popover: {title: 'გადამისამართება', description: 'ვისგან არის ლიდი ჩაგდებული ჩემთან', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-sms',
-                popover: {title: 'SMS', description: 'შესაბამისი შეტყობინებებით', side: 'bottom'}
-            },
-            {
-                element: '#tour-filter-whatsapp',
-                popover: {title: 'WhatsApp', description: 'ვიციით კომუნიკაცია WhatsApp-ით.', side: 'bottom'}
-            },
-
-            // Actions column (use header cell as anchor; per-row buttons appear dynamically)
-            {
-                element: '.MuiDataGrid-columnHeader[data-field="actions"]',
-                popover: {title: 'ქმედებები', description: 'რედაქტირება, შენახვა, გაუქმება, წაშლა.', side: 'bottom'}
-            },
-            {
-                element: '#tour-action-edit',
-                popover: {title: 'რედაქტირება', description: 'გახსენით სტრიქონი რედაქტირებისთვის.', side: 'left'},
-            },
-            {
-                element: '#tour-action-save',
-                popover: {title: 'შენახვა', description: 'დანაშაულების შენახვა.', side: 'left'}
-            },
-            {
-                element: '#tour-action-cancel',
-                popover: {title: 'გაუქმება', description: 'რედაქტირების გაუქმება.', side: 'left'}
-            },
-            {element: '#tour-action-delete', popover: {title: 'წაშლა', description: 'სტრიქონის წაშლა.', side: 'left'}},
-        ];
+            };
+        });
 
         drv.setSteps(steps);
         drv.drive();
