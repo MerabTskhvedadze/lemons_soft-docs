@@ -86,21 +86,32 @@ export default function Table() {
     const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
     // ---------- small helper to attach tour ids ----------
-    const withTourId = (id: string, node: React.ReactNode) => {
+    const withTourId = (
+        id: string,
+        node: React.ReactNode
+    ) => {
         const desc = hoverDesc(id);
+
+        const onEnter = () => {
+            if (!desc) return;
+            setCursor(
+                <CToolTip title={desc.title} description={desc.description} />
+            );
+        };
+
+        const onLeave = () => setCursor(null);
+
         return (
-            <span
+            <div
                 id={id}
-                className="inline-flex items-center pointer-events-auto"
-                onMouseEnter={desc ? () => setCursor(<CToolTip title={desc.title}
-                                                               description={desc.description}/>) : undefined}
-                onMouseLeave={() => setCursor(null)}
+                className="inline-flex w-full h-full items-center"
+                onMouseEnter={onEnter}
+                onMouseLeave={onLeave}
             >
-              {node}
-            </span>
+                {node}
+            </div>
         );
     };
-
     const TOUR_ITEMS: TourItem[] = [
         // Toolbar
         {
@@ -300,8 +311,7 @@ export default function Table() {
 
     // Search filter
     const SearchFormFilter = ({id}: { id: string }) => {
-        return withTourId(
-            id,
+        return (
             <div className={'w-full flex items-center gap-1'}>
                 <input
                     className={'border border-black rounded-[2px] p-1.5 w-full'}
@@ -414,7 +424,7 @@ export default function Table() {
             field: 'phone', headerName: 'მობილური', width: 104,
             renderHeader: renderTableHeader,
             editable: true,
-            renderHeaderFilter: () => <SearchFormFilter id="tour-filter-phone"/>,
+            renderHeaderFilter: () => withTourId('tour-filter-phone', <SearchFormFilter/>)
         },
         {
             field: 'status', headerName: 'სტატუსი', width: 64,

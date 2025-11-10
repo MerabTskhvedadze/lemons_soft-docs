@@ -30,6 +30,7 @@ export const Dropdown = ({options, onChange, value}: DropdownProps) => {
                     onChange(e)
                 }}
                 className={'title_font text-xs!'}
+                fullWidth
             >
                 {options.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
