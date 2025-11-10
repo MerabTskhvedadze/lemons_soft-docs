@@ -14,6 +14,7 @@ import StyledComponentsRegistry from '@/lib/registry'
 import "driver.js/dist/driver.css";
 import {CursorProvider} from "@/context/cursor-context";
 import {SidebarMenuProvider} from '@/context/SidebarMenuContext'
+import MuiXLicense from "@/components/MuiXLicense";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -57,6 +58,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
                             </CursorProvider>
                         </SidebarMenuProvider>
                 </StyledComponentsRegistry>
+                <MuiXLicense/>
             </body>
         </html>
     );

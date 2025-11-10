@@ -7,8 +7,8 @@ import React, {
     useRef,
     type ReactNode, useId,
 } from "react";
-import {createPortal} from "react-dom";
-import {AnimatePresence, motion} from "framer-motion";
+import { createPortal } from "react-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
 export type MotionModalProps = {
     open: boolean;
@@ -125,18 +125,18 @@ export function Modal(
 
     const backdropVariants = useMemo(
         () => ({
-            hidden: {opacity: 0},
-            visible: {opacity: 1, transition: {duration: 0.15, ease: "easeOut"}},
-            exit: {opacity: 0, transition: {duration: 0.15, ease: "easeIn"}},
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { duration: 0.15, ease: "easeOut" } },
+            exit: { opacity: 0, transition: { duration: 0.15, ease: "easeIn" } },
         }),
         []
     );
 
     const panelVariants = useMemo(
         () => ({
-            hidden: {opacity: 0, y: -50},
-            visible: {opacity: 1, y: 0, transition: {duration: 0.3, ease: "easeOut"}},
-            exit: {opacity: 0, y: -50, transition: {duration: 0.2, ease: "easeIn"}},
+            hidden: { opacity: 0, y: -50 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
+            exit: { opacity: 0, y: -50, transition: { duration: 0.2, ease: "easeIn" } },
         }),
         []
     );
@@ -190,9 +190,9 @@ export function Modal(
                                         type="button"
                                     >
                                         <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"
-                                             aria-hidden="true">
+                                            aria-hidden="true">
                                             <path
-                                                d="M13.41 12l4.3-4.29a1 1 0 10-1.42-1.42L12 10.59 7.71 6.29a1 1 0 10-1.42 1.42L10.59 12l-4.3 4.29a1 1 0 101.42 1.42L12 13.41l4.29 4.3a1 1 0 001.42-1.42z"/>
+                                                d="M13.41 12l4.3-4.29a1 1 0 10-1.42-1.42L12 10.59 7.71 6.29a1 1 0 10-1.42 1.42L10.59 12l-4.3 4.29a1 1 0 101.42 1.42L12 13.41l4.29 4.3a1 1 0 001.42-1.42z" />
                                         </svg>
                                     </button>
                                 </div>
