@@ -8,14 +8,34 @@ import {Button} from '@/components/ui/button'
 import {Reorder} from 'framer-motion'
 
 import {MdEdit, MdDelete} from "react-icons/md";
+import {IconKey} from "@/types/menu";
+
+/** Adjust these if you already have exported types in your context */
+type SidebarItem = {
+    id: string;
+    label: string;
+    href: string;
+};
+
+type SidebarSection = {
+    id: string;
+    label: string;
+    icon: string;   // whatever key type iconFromKey expects
+    link: string;
+    items: SidebarItem[];
+};
 
 export default function SidebarBoard() {
-    const {sections, saveOrder} = useSidebarMenu()
+    // If your context is already typed, remove the cast and import the types instead.
+    const {sections, saveOrder} = useSidebarMenu() as {
+        sections: SidebarSection[];
+        saveOrder: (next: SidebarSection[]) => void;
+    };
 
     const handleSubReorder =
         (sectionId: string) =>
-            (nextItems: any[]) => {
-                const nextSections = sections.map((s) =>
+            (nextItems: SidebarItem[]) => {
+                const nextSections: SidebarSection[] = sections.map((s) =>
                     s.id === sectionId ? {...s, items: nextItems} : s
                 );
                 saveOrder(nextSections);
@@ -35,7 +55,7 @@ export default function SidebarBoard() {
                         <div className={'inline-flex flex-col text-md'}>
                             <div className={'flex items-center gap-2'}>
                                 {section.label}:
-                                <span>{iconFromKey(section.icon)}</span>
+                                <span>{iconFromKey(section.icon as IconKey)}</span>
                             </div>
                             <span className={'text-[11px]'}>Link: {section.link}</span>
                         </div>

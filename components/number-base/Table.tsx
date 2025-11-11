@@ -13,6 +13,8 @@ import {
     ToolbarButton,
     useGridApiRef,
     ExportCsv,
+    GridRowEditStopParams,
+    GridRowEditStopReasons
 } from '@mui/x-data-grid-premium';
 
 import {Box, IconButton, Tooltip} from '@mui/material';
@@ -85,6 +87,8 @@ type TourItem = {
     side?: 'top' | 'bottom' | 'left' | 'right';
     field?: string;             // DataGrid column field for auto-scroll (optional)
 };
+
+type DriverTarget = string | Element | (() => Element);
 
 export default function Table({modals, hideCustomTooltip}: { modals?: React.ReactNode, hideCustomTooltip?: boolean }) {
     const {setCursor} = useCursor()
@@ -351,8 +355,9 @@ export default function Table({modals, hideCustomTooltip}: { modals?: React.Reac
         setRowModesModel(newRowModesModel);
     };
 
-    const handleRowEditStop = (params: any, event: any) => {
-        if (event.key === 'Escape') {
+    const handleRowEditStop = (params: GridRowEditStopParams) => {
+        // use reason instead of peeking at the keyboard event
+        if (params.reason === GridRowEditStopReasons.escapeKeyDown) {
             const editedRow = rows.find((row) => row.id === params.id);
             if (editedRow?.isNew) {
                 setTimeout(() => {
@@ -361,7 +366,6 @@ export default function Table({modals, hideCustomTooltip}: { modals?: React.Reac
             }
         }
     };
-
     const handleAddNewRow = () => {
         const newId = Math.max(...rows.map(r => r.id), 0) + 1;
         const newRow: RowData = {
@@ -750,11 +754,13 @@ export default function Table({modals, hideCustomTooltip}: { modals?: React.Reac
             smoothScroll: true,
         });
 
+
+        // In startTour():
         const steps = TOUR_ITEMS.map(item => {
-            const element: any = item.field
+            const element: DriverTarget = item.field
                 ? () => {
                     scrollColumnIntoView(item.field!);
-                    return q(`#${item.id}`)!;
+                    return q(`#${item.id}`)!; // we assert it's present during the tour
                 }
                 : (item.id.startsWith('.') ? item.id : `#${item.id}`);
 

@@ -16,7 +16,9 @@ import {
     LocalizationProvider
 } from '@mui/x-date-pickers-pro/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers-pro/AdapterDayjs';
-import {DateRangePicker, DateRange} from '@mui/x-date-pickers-pro/DateRangePicker';
+import {DateRangePicker} from '@mui/x-date-pickers-pro/DateRangePicker';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
 import {
     Box,
@@ -31,6 +33,7 @@ import {
     Stack
 } from "@mui/material";
 import dayjs, {Dayjs} from "dayjs";
+import {DateRange} from "@mui/lab";
 
 // ---------- Mock history data ----------
 type HistoryRow = {
@@ -140,7 +143,10 @@ export default function History() {
             }
             // date range (inclusive)
             if (start || end) {
-                const d = dayjs(row.date, ["M/D/YYYY", "MM/DD/YYYY", dayjs.ISO_8601 as any], true);
+                // try strict parse for known formats first; if invalid, fall back to native/ISO parse
+                let d = dayjs(row.date, ["M/D/YYYY", "MM/DD/YYYY"], true);
+                if (!d.isValid()) d = dayjs(row.date); // handles ISO 8601 without any casts
+
                 if (!d.isValid()) return false;
                 if (start && d.isBefore(start, 'day')) return false;
                 if (end && d.isAfter(end, 'day')) return false;

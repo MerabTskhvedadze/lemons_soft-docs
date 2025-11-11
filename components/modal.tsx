@@ -155,7 +155,6 @@ export function Modal(
                     className="fixed inset-0 z-[100] flex items-center justify-center p-4"
                     role="dialog"
                     aria-modal="true"
-                    aria-labelledby={title ? titleId.current : undefined}
                     initial="hidden"
                     animate="visible"
                     exit="exit"

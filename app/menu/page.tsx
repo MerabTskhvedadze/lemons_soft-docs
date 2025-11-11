@@ -6,7 +6,6 @@ import {ScrollTrailText} from '@/animations/ScrollTrailText'
 import Form from "@/components/menu/Form"
 import SidebarBoard from '@/components/menu/SidebarBoard'
 
-import {sidebarInitial} from '@/data/sidebarInitials'
 import {Button} from "@/components/ui/button";
 
 export default function Menu() {
@@ -27,7 +26,7 @@ export default function Menu() {
             <Separator className={'py-3 bg-transparent'}/>
 
             <section className={'flex flex-col-reverse sm:flex-row gap-10'}>
-                <SidebarBoard sections={sidebarInitial}/>
+                <SidebarBoard />
 
                 <Form/>
 

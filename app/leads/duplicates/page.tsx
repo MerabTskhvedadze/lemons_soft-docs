@@ -15,7 +15,6 @@ import {
 
 import {CSS} from "@dnd-kit/utilities";
 import {
-    Box,
     Paper,
     Table,
     TableBody,
