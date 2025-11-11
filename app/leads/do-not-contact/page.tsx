@@ -7,7 +7,7 @@ import {Separator} from "@/components/ui/separator";
 
 import Table from '@/components/number-base/Table'
 
-export default function NumberBase() {
+export default function NotInMeetings() {
 
     return (
         <>
@@ -32,7 +32,7 @@ export default function NumberBase() {
             <Separator className="my-5 bg-transparent"/>
 
             <div className="bg-gray-100 p-2 rounded flex flex-col gap-4 title_font">
-                <Table/>
+                <Table hideCustomTooltip/>
             </div>
 
         </>

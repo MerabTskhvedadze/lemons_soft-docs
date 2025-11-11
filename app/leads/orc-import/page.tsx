@@ -1,14 +1,10 @@
-'use client'
-import React from 'react'
-import {Separator} from "@/components/ui/separator";
-import {ScrollTrailText} from '@/animations/ScrollTrailText'
-
-import Form from "@/components/menu/Form"
-import SidebarBoard from '@/components/menu/SidebarBoard'
-
+import {ScrollTrailText} from "@/animations/ScrollTrailText";
 import {Button} from "@/components/ui/button";
+import {Separator} from "@/components/ui/separator";
+import React from "react";
+import FileInput from '@/components/file-input'
 
-export default function Menu() {
+export default function OrcImport() {
     return (
         <>
             <header className=" flex flex-col gap-3">
@@ -25,13 +21,10 @@ export default function Menu() {
 
             <Separator className={'py-3 bg-transparent'}/>
 
-            <section className={'flex flex-col-reverse sm:flex-row gap-10'}>
-                <SidebarBoard />
-
-                <Form/>
-
-
-            </section>
+            <div className={'flex flex-col gap-3 bg-gray-100 p-3 rounded'}>
+                <h1>📄 OCR + Field Mapping</h1>
+                <FileInput/>
+            </div>
         </>
     )
 }

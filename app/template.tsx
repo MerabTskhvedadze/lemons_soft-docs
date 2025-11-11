@@ -1,5 +1,6 @@
+'use client'
+
 import React from 'react'
-// import {FadeInSection} from "@/animations/FadeInSection";
 
 export default function template({children}: { children: React.ReactNode }) {
     return (
