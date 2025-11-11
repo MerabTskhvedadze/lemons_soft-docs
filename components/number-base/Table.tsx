@@ -15,7 +15,7 @@ import {
     ExportCsv,
 } from '@mui/x-data-grid-premium';
 
-import {IconButton, Tooltip} from '@mui/material';
+import {Box, IconButton, Tooltip} from '@mui/material';
 
 import {
     MdAddBox,
@@ -28,7 +28,7 @@ import {
     MdCloudUpload,
     MdFileCopy,
     MdRefresh,
-    MdCached, MdSearch, MdDashboard, MdGroups, MdHelpOutline
+    MdCached, MdSearch
 } from 'react-icons/md';
 
 import {Tooltip as CToolTip} from '@/components/tooltip'
@@ -37,8 +37,7 @@ import {Dropdown, FilterInput} from '../'
 
 import {DatePicker} from 'antd'
 import {Button} from "@/components/ui/button";
-import {FaExchangeAlt, FaPhone, FaSlidersH, FaUserClock} from "react-icons/fa";
-
+import {TextField} from '@mui/material'
 import {driver} from 'driver.js';
 import 'driver.js/dist/driver.css';
 import {useCursor} from "@/context/cursor-context";
@@ -87,7 +86,7 @@ type TourItem = {
     field?: string;             // DataGrid column field for auto-scroll (optional)
 };
 
-export default function Table() {
+export default function Table({modals, hideCustomTooltip}: { modals?: React.ReactNode, hideCustomTooltip?: boolean }) {
     const {setCursor} = useCursor()
     const {RangePicker} = DatePicker
     const apiRef = useGridApiRef();
@@ -292,7 +291,6 @@ export default function Table() {
     // Simple query helper
     const q = (sel: string) => document.querySelector(sel) as HTMLElement | null;
 
-
     // Smoothly bring a column’s header filter into view
     const scrollColumnIntoView = (field: string) => {
         requestAnimationFrame(() => {
@@ -318,21 +316,6 @@ export default function Table() {
             idEl?.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
         });
     };
-
-    // Search filter
-    const SearchFormFilter = ({id}: { id: string }) => {
-        return (
-            <div className={'w-full flex items-center gap-1'}>
-                <input
-                    className={'border border-black rounded-[2px] p-1.5 w-full'}
-                    placeholder={''}
-                />
-                <IconButton className={'bg-gray-200! rounded-[2px]! p-1.5!'} id={`${id}-btn`}>
-                    <MdSearch size={20}/>
-                </IconButton>
-            </div>
-        )
-    }
 
     const handleEditClick = (id: GridRowId) => () => {
         setRowModesModel({...rowModesModel, [id]: {mode: GridRowModes.Edit}});
@@ -434,7 +417,14 @@ export default function Table() {
             field: 'phone', headerName: 'მობილური', width: 104,
             renderHeader: renderTableHeader,
             editable: true,
-            renderHeaderFilter: () => withTourId('tour-filter-phone', <SearchFormFilter/>)
+            renderHeaderFilter: () => withTourId('tour-filter-phone',
+                <Box sx={{display: 'flex', alignItems: 'flex-center'}}>
+                    <TextField size={'small'}/>
+                    <IconButton className={'bg-gray-200! rounded-[2px]! p-1.5!'}>
+                        <MdSearch size={18}/>
+                    </IconButton>
+                </Box>
+            )
         },
         {
             field: 'status', headerName: 'სტატუსი', width: 64,
@@ -727,15 +717,22 @@ export default function Table() {
                     </Tooltip>
                 </Toolbar>
 
-                <div className="bg-gray-100 border-b border-gray-200 py-4 px-4 title_font flex justify-end items-center gap-2">
-                    <MoveModal/>
-                    <SearchModal/>
-                    <AnalyzesModal/>
-                    <ReplaceModal/>
-                    <MyLiddyModal/>
-                    <RequestLiddyModal/>
-                    <SplitModal/>
-                </div>
+                {!hideCustomTooltip && <div
+                    className="bg-gray-100 border-b border-gray-200 py-4 px-4 title_font flex justify-end items-center gap-2">
+                    {modals ?
+                        modals
+                        :
+                        <>
+                            <MoveModal/>
+                            <SearchModal/>
+                            <AnalyzesModal/>
+                            <ReplaceModal/>
+                            <MyLiddyModal/>
+                            <RequestLiddyModal/>
+                            <SplitModal/>
+                        </>
+                    }
+                </div>}
             </div>
         );
     }

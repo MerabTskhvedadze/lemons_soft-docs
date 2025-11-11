@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
 import {Modal} from '../modal'
 import {Button} from '@/components/ui/button'
-import {MdDashboard} from "react-icons/md";
 
-export const MoveModal = () => {
+export const FbStatisticModal = () => {
     const [modal, setModal] = useState<boolean>(false)
 
     const closeModal = () => setModal(false)
@@ -13,10 +12,10 @@ export const MoveModal = () => {
         <Button
             onClick={openModal}
             size={'xs'}
-            className=" bg-blue-500/90 hover:bg-blue-700" id="tour-cta-move"
+            id="tour-cta-filters"
+            className={'bg-blue-700 hover:bg-blue-800'}
         >
-            <MdDashboard/>
-            გადატანა
+            📊 FB სტატისტიკა
         </Button>
 
         <Modal open={modal} onCloseAction={closeModal}>

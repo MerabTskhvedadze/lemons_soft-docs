@@ -14,7 +14,7 @@ export const sidebarInitial: MenuSection[] = [
             { id: "duplicates", label: "დუბლირებული", href: "/leads/duplicates" },
             { id: "not-in-meetings", label: "შეხვედრებში არ არის", href: "/leads/not-in-meetings" },
             { id: "do-not-contact", label: "აღარ დაუკავშირდეთ", href: "/leads/do-not-contact" },
-            { id: "quadrant", label: "კვადრატული", href: "/leads/quadrant" },
+            { id: "square", label: "კვადრატული", href: "/leads/square" },
             { id: "promotions", label: "აქციები", href: "/leads/promotions" },
             { id: "categories", label: "ლიდის კატეგორია", href: "/leads/categories" },
             { id: "history", label: "ისტორია", href: "/leads/history" },

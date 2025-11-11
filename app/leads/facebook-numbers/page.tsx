@@ -5,9 +5,10 @@ import {ScrollTrailText} from "@/animations/ScrollTrailText";
 import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
 
+import {FbStatisticModal} from '@/components/modals'
 import Table from '@/components/number-base/Table'
 
-export default function NumberBase() {
+export default function FacebookNumbers() {
 
     return (
         <>
@@ -32,7 +33,7 @@ export default function NumberBase() {
             <Separator className="my-5 bg-transparent"/>
 
             <div className="bg-gray-100 p-2 rounded flex flex-col gap-4 title_font">
-                <Table/>
+                <Table modals={<FbStatisticModal/>}/>
             </div>
 
         </>
