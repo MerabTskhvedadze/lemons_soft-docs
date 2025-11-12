@@ -1,3 +1,4 @@
+'use client'
 import React, {useState} from "react";
 import {FaUserClock} from "react-icons/fa";
 import {Button} from "@/components/ui/button";

@@ -6,7 +6,7 @@ export const sidebarInitial: MenuSection[] = [
     { id: "menu", label: "მენიუ", icon: "bars", link: "/menu" },
 
     {
-        id: "leads", label: "ლიდები", icon: "addressBook", link: "/",
+        id: "leads", label: "ლიდები", icon: "addressBook", link: "#",
         items: [
             { id: "phone-database", label: "ნომრების ბაზა", href: "/leads/number-base" },
             { id: "facebook-numbers", label: "FACEBOOK ნომრები", href: "/leads/facebook-numbers" },
@@ -24,7 +24,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "commercials", label: "კომერციულები", icon: "shoppingBag", link: "/",
+        id: "commercials", label: "კომერციულები", icon: "shoppingBag", link: "#",
         items: [
             { id: "my-tasks", label: "ჩემი დავალებები", href: "/commercials/my-tasks" },
             { id: "all", label: "ყველა კომერციული", href: "/commercials/all" },
@@ -32,7 +32,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "meetings", label: "შეხვედრები", icon: "handshake", link: "/",
+        id: "meetings", label: "შეხვედრები", icon: "handshake", link: "#",
         items: [
             { id: "my-tasks-m", label: "ჩემი დავალებები", href: "/meetings/my-tasks" },
             { id: "all-m", label: "ყველა შეხვედრა", href: "/meetings/all" },
@@ -40,7 +40,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "residents", label: "მობინადრეები", icon: "users", link: "/",
+        id: "residents", label: "მობინადრეები", icon: "users", link: "#",
         items: [
             { id: "my-sales", label: "ჩემი გაყიდვები", href: "/residents/my-sales" },
             { id: "residents", label: "მობინადრეები", href: "/residents" },
@@ -50,11 +50,11 @@ export const sidebarInitial: MenuSection[] = [
         ],
     },
 
-    { id: "waitlist", label: "მომლოდინეები", icon: "phone", link: "/",
+    { id: "waitlist", label: "მომლოდინეები", icon: "phone", link: "#",
         items: [{ id: "leads-w", label: "მომლოდინე ლიდები", href: "/waitlist/leads" }] },
 
     {
-        id: "sms", label: "SMS", icon: "mobile", link: "/",
+        id: "sms", label: "SMS", icon: "mobile", link: "#",
         items: [
             { id: "send-by-projects", label: "პროექრებში გაგზავნა", href: "/sms/send-by-projects" },
             { id: "templates", label: "შაბლონები", href: "/sms/templates" },
@@ -63,7 +63,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "messages", label: "შეტყობინებები", icon: "comments", link: "/",
+        id: "messages", label: "შეტყობინებები", icon: "comments", link: "#",
         items: [
             { id: "messenger", label: "Messenger", href: "/messages/messenger" },
             { id: "compose", label: "შეტყობინების გაგზავნა", href: "/messages/compose" },
@@ -71,7 +71,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "salaries-sales", label: "SALE ხელფასები", icon: "bookmark", link: "/",
+        id: "salaries-sales", label: "SALE ხელფასები", icon: "bookmark", link: "#",
         items: [
             { id: "stats", label: "სტატისტიკა", href: "/salaries/sales/stats" },
             { id: "plan", label: "ხელფასის დაგეგმვა", href: "/salaries/sales/plan" },
@@ -83,7 +83,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "salaries-call", label: "CALL ხელფასები", icon: "creditCard", link: "/",
+        id: "salaries-call", label: "CALL ხელფასები", icon: "creditCard", link: "#",
         items: [
             { id: "call-plan", label: "დაგეგმვა", href: "/salaries/call/plan" },
             { id: "call-approve", label: "დასადასტურებელი", href: "/salaries/call/to-approve" },
@@ -94,7 +94,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "management", label: "მენეჯმენტი", icon: "hourglass", link: "/",
+        id: "management", label: "მენეჯმენტი", icon: "hourglass", link: "#",
         items: [
             { id: "schedule", label: "გრაფიკი", href: "/management/schedule" },
             { id: "vacation", label: "შვებულება", href: "/management/vacation" },
@@ -106,7 +106,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "stats", label: "სტატისტიკა", icon: "map", link: "/",
+        id: "stats", label: "სტატისტიკა", icon: "map", link: "#",
         items: [
             { id: "incoming-numbers", label: "შემოსული ნომრები", href: "/stats/incoming-numbers" },
             { id: "outgoing-numbers", label: "გაცემული ნომრები", href: "/stats/outgoing-numbers" },
@@ -115,7 +115,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "team", label: "გუნდი", icon: "university", link: "/",
+        id: "team", label: "გუნდი", icon: "university", link: "#",
         items: [
             { id: "employees", label: "თანამშრომლები", href: "/team/employees" },
             { id: "realtors", label: "რეალტორი", href: "/team/realtors" },
@@ -124,7 +124,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "construction", label: "სამშენებლო", icon: "building", link: "/",
+        id: "construction", label: "სამშენებლო", icon: "building", link: "#",
         items: [
             { id: "c-incoming", label: "შემოსული ნომრები", href: "/construction/incoming-numbers" },
             { id: "c-outgoing", label: "გაცემული ნომრები", href: "/construction/outgoing-numbers" },
@@ -133,7 +133,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "pages", label: "გვერდები", icon: "file", link: "/",
+        id: "pages", label: "გვერდები", icon: "file", link: "#",
         items: [
             { id: "p-incoming", label: "შემოსული ნომრები", href: "/pages/incoming-numbers" },
             { id: "p-outgoing", label: "გაცემული ნომრები", href: "/pages/outgoing-numbers" },
@@ -142,7 +142,7 @@ export const sidebarInitial: MenuSection[] = [
     },
 
     {
-        id: "access-logs", label: "Access Logs", icon: "archive", link: "/",
+        id: "access-logs", label: "Access Logs", icon: "archive", link: "#",
         items: [{ id: "fields", label: "Fields Logs", href: "/access-logs/fields" }],
     },
 

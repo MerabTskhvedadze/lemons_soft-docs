@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import {Geist, Geist_Mono} from "next/font/google";
 
@@ -7,14 +9,14 @@ import Header from "@/components/header";
 import {AppSidebar} from "@/components/app-aside";
 import {SidebarProvider} from "@/components/ui/sidebar";
 import {ScrollProgressBar} from "@/animations/ScrollProgressBar";
-import {Metadata} from "next";
 
 import StyledComponentsRegistry from '@/lib/registry'
 
 import "driver.js/dist/driver.css";
 import {CursorProvider} from "@/context/cursor-context";
 import {SidebarMenuProvider} from '@/context/SidebarMenuContext'
-import MuiXLicense from "@/components/MuiXLicense";
+
+import { LicenseInfo } from '@mui/x-license';
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -26,10 +28,7 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-    title: "LemonsCRM Documentation",
-    description: "lemons crm documentation",
-};
+LicenseInfo.setLicenseKey(process.env.NEXT_PUBLIC_MUI_LICENSE!);
 
 export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
@@ -58,7 +57,6 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
                         </CursorProvider>
                     </SidebarMenuProvider>
                 </StyledComponentsRegistry>
-                <MuiXLicense/>
             </body>
         </html>
     );

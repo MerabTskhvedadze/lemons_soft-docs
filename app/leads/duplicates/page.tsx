@@ -180,12 +180,17 @@ export default function Duplicates() {
                 <div className={'flex items-center gap-3'}>
                     <ScrollTrailText className={'title_font text-lg'}>🔹 გვერდის დანიშნულება</ScrollTrailText>
                     <Button
-                        className="title_font bg-blue-700 text-sm"
-                        size={'sm'}
+                        className="title_font bg-blue-700 text-xs hover:bg-blue-800"
+                        size={'xs'}
                     >
                         გაეცანი გვერდს
                     </Button>
                 </div>
+
+                <ScrollTrailText className="pl-5">
+                    გვერდზე წარმოდგენილია დუბლირებული ნომრები, რომლებიც შეგვიძლია გავაერთიანოთ,
+                    <span className={'block italic text-[10.5px] mt-1'}>*სანახავად მოკიდეთ მაუსი ცხრილში არსებულ ნომერს და ცადეთ გაერთიანება*</span>
+                </ScrollTrailText>
             </header>
 
             <Separator className={'py-3 bg-transparent'}/>
