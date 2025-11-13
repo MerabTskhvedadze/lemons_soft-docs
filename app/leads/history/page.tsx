@@ -18,7 +18,17 @@ import {
 import {AdapterDayjs} from '@mui/x-date-pickers-pro/AdapterDayjs';
 import {DateRangePicker} from '@mui/x-date-pickers-pro/DateRangePicker';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-dayjs.extend(customParseFormat);
+
+import {
+    MdInfoOutline,
+    MdHistory,
+    MdFilterList,
+    MdPerson,
+    MdEvent,
+    MdNumbers,
+    MdRule,
+    MdSearch
+} from 'react-icons/md';
 
 import {
     Box,
@@ -30,10 +40,13 @@ import {
     TableHead,
     TableRow,
     Chip,
-    Stack
+    Stack,
+    Typography, Divider, List, ListItem, ListItemIcon, ListItemText,
 } from "@mui/material";
 import dayjs, {Dayjs} from "dayjs";
 import {DateRange} from "@mui/lab";
+
+dayjs.extend(customParseFormat);
 
 // ---------- Mock history data ----------
 type HistoryRow = {
@@ -103,6 +116,69 @@ const HISTORY: HistoryRow[] = [
     },
 ];
 
+function HistoryLogsDoc() {
+    return (
+        <Box sx={{pl: 2.5}}>
+            <Typography className={'title_font'}>
+                სვეტები
+            </Typography>
+            <List dense>
+                <Row icon={<MdNumbers/>} title="ნომერი">
+                    რომელ ნომერზე/ლიდზე მოხდა ქმედება.
+                </Row>
+                <Row icon={<MdHistory/>} title="მოქმედება">
+                    რომელი მოქმედება მოხდა კონკრეტულ ნომერზე <br/>
+                    <Chip size="small" label="შექნმა"/> / <Chip size="small" label="განახლება"/> /{' '}
+                    <Chip size="small" label="წაშლა"/> / <Chip size="small" label="გადატანა"/> და სხვა შენს სისტემაში
+                    განსაზღვრული აქტივობები.
+                </Row>
+                <Row icon={<MdRule/>} title="სტატუსი">
+                    მოქმედების შემსრულებელი პირის სტატუსი(პოზიცია).
+                </Row>
+                <Row icon={<MdPerson/>} title="თანამშრომელი">
+                    შემსრულებელი პირი ვინც განახორციელა ქმედება (წაშლა, განახლება ან სხვა...).
+                </Row>
+                <Row icon={<MdEvent/>} title="თარიღი">
+                    ქმედების დრო/თარიღი.
+                </Row>
+                <Row icon={<MdInfoOutline/>} title="აღწერა">
+                    განახლების აღწერა, მაგალითად: „განახლდა სტატუსი“, „დაემატა კომენტარი“ და ა.შ.
+                </Row>
+            </List>
+
+            <Divider sx={{my: 1.5}}/>
+
+            <Typography className={'title_font'}>
+                ფილტრები (ზედა პანელი)
+            </Typography>
+            <List dense>
+                <Row icon={<MdFilterList/>} title="მოქმედება / სტატუსი / თანამშრომელი">
+                    აირჩიე ჩამოსაშლელებიდან კონკრეტული მნიშვნელობა ან დატოვე <b>ყველა</b>.
+                </Row>
+                <Row icon={<MdSearch/>} title="ნომრით ძებნა">
+                    ლიდის ნომრით ძებნა.
+                </Row>
+                <Row icon={<MdEvent/>} title="თარიღის დიაპაზონი">
+                    მონიშნე <b>დან - მდე</b> ინტერვალი, და გამოჩნდება მხოლოდ ამ შუალედში შესრულებული ქმედებები.
+                </Row>
+            </List>
+        </Box>
+    );
+}
+
+/* helpers */
+function Row({icon, title, children}: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
+    return (
+        <ListItem>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText
+                primary={title}
+                secondary={<Typography variant="body2" color="text.secondary">{children}</Typography>}
+            />
+        </ListItem>
+    );
+}
+
 // ---------- Page ----------
 export default function History() {
     // filters
@@ -161,17 +237,19 @@ export default function History() {
             <header className=" flex flex-col gap-3">
                 <div className={'flex items-center gap-3'}>
                     <ScrollTrailText className={'title_font text-lg'}>🔹 გვერდის დანიშნულება</ScrollTrailText>
-                    <Button className="title_font bg-blue-700 text-sm" size={'sm'}>
-                        გაეცანი გვერდს
-                    </Button>
                 </div>
 
                 <ScrollTrailText className="pl-5">
-                    ნომრების ბაზაზე წარმოდგენილია ნომრების ცხრილი
+                    ისტორიის ლოგები - ვინ რა ქმედება შეასრულა, როდის და **რომელ ნომერზე**.
+                    <br/>
+                    აქ ჩანს ჩანაწერები, როგორიცაა: „ლიდი შეიქმნა“, „განახლდა“, „წაიშალა“, „გადანაწილდა/გადატანილია პროექტში“ და სხვა...
                 </ScrollTrailText>
             </header>
 
-            <Separator className="my-5 bg-transparent"/>
+
+            <Separator className="my-4 bg-transparent" />
+            <HistoryLogsDoc />
+            <Separator className="my-4 bg-transparent" />
 
             <div className={'bg-gray-50 rounded overflow-hidden'}>
                 <div className={'bg-gray-200 p-4 flex items-center justify-between'}>

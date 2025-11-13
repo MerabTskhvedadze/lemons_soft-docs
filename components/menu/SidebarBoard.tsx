@@ -11,13 +11,13 @@ import {MdEdit, MdDelete} from "react-icons/md";
 import {IconKey} from "@/types/menu";
 
 /** Adjust these if you already have exported types in your context */
-type SidebarItem = {
+export type SidebarItem = {
     id: string;
     label: string;
     href: string;
 };
 
-type SidebarSection = {
+export type SidebarSection = {
     id: string;
     label: string;
     icon: string;   // whatever key type iconFromKey expects

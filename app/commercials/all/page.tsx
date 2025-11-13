@@ -2,6 +2,7 @@ import {ScrollTrailText} from "@/animations/ScrollTrailText";
 import React from "react";
 import FbTable, {TourItem} from "@/components/tables/FbTable";
 import {Separator} from "@/components/ui/separator";
+import TableDocs from "@/components/tables/table-docs";
 
 export default function All(){
     const TOUR_ITEMS: TourItem[] = [
@@ -142,19 +143,13 @@ export default function All(){
             {/* overview */}
             <header className=" flex flex-col gap-3">
                 <div className={'flex items-center gap-3'}>
-                    <ScrollTrailText className={'title_font text-lg'}>🔹 გვერდის დანიშნულება</ScrollTrailText>
+                    <ScrollTrailText className={'title_font text-lg'}>🔹 ყველა კომერციული</ScrollTrailText>
                 </div>
 
-                <ScrollTrailText className="pl-5">
-                    დეშბორდის გვერდი წარმოადგენს სისტემის მთავარ მონიტორინგის პანელს, სადაც მომხმარებელი
-                    ხედავს დღის სტატისტიკას, ზარების რაოდენობას, შეხვედრებს, ქოლცენტრის და გაყიდვების აქტივობას,
-                    ასევე
-                    პირად და გუნდურ შედეგებს. გვერდი განკუთვნილია ოპერატორებისთვის, მენეჯერებისთვის და
-                    ადმინისტრატორებისთვის - სამუშაო
-                    პროცესის ყოველდღიური კონტროლისთვის.
-                </ScrollTrailText>
             </header>
 
+            <Separator className="my-5 bg-transparent"/>
+            <TableDocs/>
             <Separator className="my-5 bg-transparent"/>
 
             <FbTable touritems={TOUR_ITEMS}/>

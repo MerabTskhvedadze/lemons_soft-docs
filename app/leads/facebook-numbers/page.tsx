@@ -5,25 +5,7 @@ import {Separator} from "@/components/ui/separator";
 import {FbStatisticModal} from "@/components/modals";
 import FbTable, {TourItem} from "@/components/tables/FbTable";
 
-import {Box, List, ListItem, ListItemIcon, ListItemText, Chip} from '@mui/material';
-import {
-    MdFilterList,
-    MdOutlineSaveAlt,
-    MdViewColumn,
-    MdRefresh,
-    MdCached,
-    MdAddCircleOutline,
-    MdSearch, MdEdit, MdSave, MdCancel, MdPhoneIphone
-} from 'react-icons/md';
-
-/* ---------- Helpers ---------- */
-function InlineIcon({children}: { children: React.ReactNode }) {
-    return (
-        <Box component="span" sx={{display: 'inline-flex', verticalAlign: 'middle', mx: 0.5}}>
-            {children}
-        </Box>
-    );
-}
+import TableDocs from "@/components/tables/table-docs";
 
 export default function FacebookNumbers() {
     const TOUR_ITEMS: TourItem[] = [
@@ -167,114 +149,19 @@ export default function FacebookNumbers() {
             {/* overview */}
             <header className=" flex flex-col gap-3">
                 <div className={'flex items-center gap-3'}>
-                    <ScrollTrailText className={'title_font text-lg'}>🔹 გვერდის დანიშნულება</ScrollTrailText>
+                    <ScrollTrailText className={'title_font text-lg'}>🔹 FACEBOOK ნომრები</ScrollTrailText>
                 </div>
 
                 <ScrollTrailText className="pl-5">
-                    ეს გვერდი აერთიანებს **სოციალური მედიის** ლიდებს/ნომრებს — Facebook, Instagram, TikTok და სხვა
-                    არხებიდან.<br/>
-                    გამოიყენეთ ქვემოთ ჩამოთვლილი ნაბიჯები სწრაფი ფილტრისათვის, რედაქტირებისა და ექსპორტისთვის.
+                    Facebook ნომრები არის ნომრების ბაზა(ცხრილი) რომლშიც მთავარი ბაზიდან ნაწილდება ისეთი ნომრები რომლმებიც
+                    შემოსულია სოციალური მედიის - <b>Facebook, Instagram, TikTok</b> და სხვა
+                    არხებიდან.
                 </ScrollTrailText>
             </header>
 
             <Separator className="my-5 bg-transparent"/>
 
-            <section>
-                <ScrollTrailText className="pl-5 title_font">
-                    ძირითადი მოქმედებები
-                </ScrollTrailText>
-                <List>
-                    <ListItem>
-                        <ListItemIcon><MdFilterList size={18}/></ListItemIcon>
-                        <ListItemText
-                            primary="ფილტრაცია სვეტიდან"
-                            secondary={
-                                <>
-                                    თარიღზე გამოიყენეთ დიაპაზონი - "დაწყება" / "დასრულება".
-                                    ტექსტურ ველებში შეიყვანეთ საძიებო სიტყვა. ჩამოსაშლელებში აირჩიეთ „ყველა“ ან
-                                    კონკრეტული მნიშვნელობა.
-                                </>
-                            }
-                        />
-                    </ListItem>
-
-                    <ListItem>
-                        <ListItemIcon><MdEdit size={18}/></ListItemIcon>
-                        <ListItemText
-                            primary="რედაქტირება"
-                            secondary={
-                                <>
-                                    მარჯვენა სვეტიდან გახსენით ✏️ ცვლილებების შესანახად დააჭირეთ{' '}
-                                    <InlineIcon><MdSave/></InlineIcon> „შენახვა“, უკან დასაბრუნებლად -{' '}
-                                    <InlineIcon><MdCancel/></InlineIcon> „გაუქმება“.
-                                </>
-                            }
-                        />
-                    </ListItem>
-
-                    <ListItem>
-                        <ListItemIcon><MdAddCircleOutline size={18}/></ListItemIcon>
-                        <ListItemText
-                            primary="ახალი რიგი"
-                            secondary="ზედა პანელზე დამატების ღილაკი ქმნის ცარიელ სტრიქონს ცხრილში"
-                        />
-                    </ListItem>
-
-                    <ListItem>
-                        <ListItemIcon><MdViewColumn size={18}/></ListItemIcon>
-                        <ListItemText
-                            primary="სვეტების მართვა"
-                            secondary="ღილაკიდან დამალეთ/გამოაჩინეთ სასურველი სვეტები ცხრილში."
-                        />
-                    </ListItem>
-
-                    <ListItem>
-                        <ListItemIcon><MdOutlineSaveAlt size={18}/></ListItemIcon>
-                        <ListItemText
-                            primary="ექსპორტი"
-                            secondary="აკეთებს ექსპოერტს ექსელ ფაილში მიმდინარე ცხრილის მიხედვით"
-                        />
-                    </ListItem>
-
-                    <ListItem>
-                        <ListItemIcon><MdRefresh size={18}/></ListItemIcon>
-                        <ListItemText
-                            primary="ცხრილის განახლება"
-                            secondary="ხელახლა ტვირთავს მონაცემებს ცხრილში"
-                        />
-                    </ListItem>
-
-                    <ListItem>
-                        <ListItemIcon><MdCached size={18}/></ListItemIcon>
-                        <ListItemText
-                            primary="განახლება"
-                            secondary="სრული განახლება (შლის ბრაუზერის ქეშს)"
-                        />
-                    </ListItem>
-                </List>
-            </section>
-
-            <section>
-                <ScrollTrailText className="pl-5 title_font">
-                    კარგი პრაქტიკები
-                </ScrollTrailText>
-                <List>
-                    <ListItem>
-                        <ListItemIcon><MdPhoneIphone size={18}/></ListItemIcon>
-                        <ListItemText
-                            primary="ნომრის ფორმატი"
-                            secondary="ტელეფონი შეიყვანეთ ფორმატით: +995..."
-                        />
-                    </ListItem>
-                    <ListItem>
-                        <ListItemIcon><MdSearch size={18}/></ListItemIcon>
-                        <ListItemText
-                            primary="დუბლიკატების თავიდან აცილება"
-                            secondary="ახალი რიგის ჩამატებამდე მოძებნეთ ნომერი „მობილურის“ ფილტრით."
-                        />
-                    </ListItem>
-                </List>
-            </section>
+            <TableDocs/>
 
             <Separator className="my-5 bg-transparent"/>
 

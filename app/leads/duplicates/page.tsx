@@ -28,6 +28,7 @@ import {
 import {ScrollTrailText} from "@/animations/ScrollTrailText";
 import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
+import DuplicatesDoc from "@/components/duplicates/duplicates-doc";
 
 // ---- Types ----
 export type Row = {
@@ -43,7 +44,6 @@ const INITIAL: Row[] = [
     {id: "a1", numbers: 598123456, name: "Alice", email: "alice@ex.com", comment: "alpha"},
     {id: "b1", numbers: 977654321, name: "Bob", email: "bob@ex.com", comment: "bravo"},
     {id: "a2", numbers: 598123456, name: "A. Lice", email: "a.lice@ex.com", comment: "dup"},
-    {id: "c1", numbers: 599456789, name: "Carol", email: "carol@ex.com"},
     {id: "b2", numbers: 977654321, name: "Bobby", comment: "dup-2"},
 ];
 
@@ -178,22 +178,22 @@ export default function Duplicates() {
         <>
             <header className=" flex flex-col gap-3">
                 <div className={'flex items-center gap-3'}>
-                    <ScrollTrailText className={'title_font text-lg'}>🔹 გვერდის დანიშნულება</ScrollTrailText>
-                    <Button
-                        className="title_font bg-blue-700 text-xs hover:bg-blue-800"
-                        size={'xs'}
-                    >
-                        გაეცანი გვერდს
-                    </Button>
+                    <ScrollTrailText className={'title_font text-lg'}>🔹 დუბლირებული ნომრები</ScrollTrailText>
                 </div>
 
                 <ScrollTrailText className="pl-5">
-                    გვერდზე წარმოდგენილია დუბლირებული ნომრები, რომლებიც შეგვიძლია გავაერთიანოთ,
+                    დუბლირებული ნომრების ცხრილში წარმოდგენილია ნომრები, რომლებიც რამდენჯერმე ფიქსირდება ნომრების ბაზაში
+                    ჩანაწერების გასაერთიანებლად გამოიყენეთ **Drag & Drop** -
+                    გადაიტანეთ ერთი სტრიქონი მეორეზე გასაერთიანებლად.
                     <span className={'block italic text-[10.5px] mt-1'}>*სანახავად მოკიდეთ მაუსი ცხრილში არსებულ ნომერს და ცადეთ გაერთიანება*</span>
                 </ScrollTrailText>
             </header>
 
-            <Separator className={'py-3 bg-transparent'}/>
+            <Separator className="py-2 bg-transparent" />
+
+            <DuplicatesDoc />
+
+            <Separator className="py-3 bg-transparent" />
 
             <TableContainer component={Paper} variant="outlined">
                 <DndContext

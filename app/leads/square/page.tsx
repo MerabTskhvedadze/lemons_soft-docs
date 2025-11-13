@@ -1,7 +1,29 @@
 "use client";
 
+import {
+    Box,
+    Typography,
+    IconButton,
+    TextField,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Chip,
+    Divider
+} from '@mui/material';
+
+import {
+    MdInfoOutline,
+    MdFilterList,
+    MdSearch,
+    MdDateRange,
+    MdEdit,
+    MdDeleteForever,
+    MdGridOn
+} from 'react-icons/md';
+
 import * as React from "react";
-import {Box, IconButton, TextField} from "@mui/material";
 import {DataGridPremium, GridColDef, GridRenderCellParams} from "@mui/x-data-grid-premium";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -32,9 +54,7 @@ const columns: GridColDef[] = [
         headerName: "ID",
         width: 110,
         sortable: true,
-        renderHeaderFilter: () => {
-            return <FilterInput onChange={(e) => console.log(e)}/>
-        }
+        renderHeaderFilter: () => null
     },
     {
         field: "name",
@@ -79,6 +99,67 @@ const columns: GridColDef[] = [
     },
 ];
 
+function ProjectsAreasDoc() {
+    return (
+        <Box sx={{pl: 2.5,}}>
+            <Divider sx={{my: 1.75}}/>
+
+            <Typography className={'title_font'}>
+                ცხრილის სტრუქტურა
+            </Typography>
+            <List dense>
+                <Tip
+                    icon={<MdGridOn/>}
+                    title="სვეტები"
+                    desc={
+                        <>
+                            <Chip size="small" label="სახელი"/> და <Chip size="small" label="თარიღი"/>.
+                            „სახელი“ სახელის სვეტში მოცემულია პროექტის ფართობები
+                        </>
+                    }
+                />
+                <Tip
+                    icon={<MdFilterList/>}
+                    title="ფილტრაცია სვეტებიდან"
+                    desc={
+                        <>
+                            <b>სახელზე</b> - ტექსტური ძებნა<InlineIcon><MdSearch/></InlineIcon>,{' '}
+                            <b>თარიღი</b> - აირჩიეთ დიაპაზონი კალენდარით <InlineIcon><MdDateRange/></InlineIcon>.
+                        </>
+                    }
+                />
+                <Tip
+                    icon={<MdEdit/>}
+                    title="რედაქტირება"
+                    desc="ფანქრის ღილაკით შეგიძლიათ პროექტის რედაქტირება."
+                />
+                <Tip
+                    icon={<MdDeleteForever/>}
+                    title="წაშლა"
+                    desc="ნაგვის ყუთის ღილაკი შლის ჩანაწერს."
+                />
+            </List>
+        </Box>
+    );
+}
+
+/* helpers */
+function Tip({icon, title, desc}: { icon: React.ReactNode; title: string; desc: React.ReactNode }) {
+    return (
+        <ListItem>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText
+                primary={title}
+                secondary={<Typography variant="body2" color="text.secondary">{desc}</Typography>}
+            />
+        </ListItem>
+    );
+}
+
+function InlineIcon({children}: { children: React.ReactNode }) {
+    return <Box component="span" sx={{display: 'inline-flex', verticalAlign: 'middle', mx: 0.25}}>{children}</Box>;
+}
+
 export default function Square() {
     return (
         <>
@@ -86,21 +167,18 @@ export default function Square() {
             <header className=" flex flex-col gap-3">
                 <div className={'flex items-center gap-3'}>
                     <ScrollTrailText className={'title_font text-lg'}>🔹 გვერდის დანიშნულება</ScrollTrailText>
-                    <Button
-                        // onClick={startTour}
-                        className="title_font bg-blue-700 text-sm"
-                        size={'sm'}
-                    >
-                        გაეცანი გვერდს
-                    </Button>
                 </div>
 
                 <ScrollTrailText className="pl-5">
-                    ნომრების ბაზაზე წარმოდგენილია ნომრების ცხრილი
+                    გვერდი წარმოადგენს <b>პროექტების სიას</b> და მათ შესაბამის <b>ფართობებს (m²)</b>.
+                    ჩანაწერები მოდის ცენტრალური მონაცემთა წყაროდან.
                 </ScrollTrailText>
             </header>
 
-            <Separator className="my-5 bg-transparent"/>
+
+            <Separator className="my-4 bg-transparent" />
+            <ProjectsAreasDoc />
+            <Separator className="my-4 bg-transparent" />
 
             <DataGridPremium
                 headerFilters

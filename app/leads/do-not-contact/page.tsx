@@ -5,6 +5,7 @@ import {ScrollTrailText} from "@/animations/ScrollTrailText";
 import {Separator} from "@/components/ui/separator";
 
 import SecondaryTable from "@/components/tables/SecondaryTable";
+import TableDocs from "@/components/tables/table-docs";
 
 export default function NotInMeetings() {
 
@@ -17,10 +18,14 @@ export default function NotInMeetings() {
                 </div>
 
                 <ScrollTrailText className="pl-5">
-                    "აღარ დაუკავშირდეთ" - გვერდის ცხრილშ ვარდება ნომრები რომლებიც არ პასუხობენ ზარებს ან გზავნიან NO SMS
+                    "აღარ დაუკავშირდეთ" - გვერდის ცხრილში ვარდება ნომრები რომლებიც არ პასუხობენ ზარებს ან გზავნიან NO SMS
                     - ს, ასეთ ნომრებს აღარ ვუკავშირდებით
                 </ScrollTrailText>
             </header>
+
+            <Separator className="my-5 bg-transparent"/>
+
+            <TableDocs/>
 
             <Separator className="my-5 bg-transparent"/>
 
