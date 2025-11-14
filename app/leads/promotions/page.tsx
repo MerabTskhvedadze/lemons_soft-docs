@@ -115,8 +115,6 @@ const columns: GridColDef[] = [
 function PromotionsDoc() {
     return (
         <Box sx={{pl: 2.5}}>
-            <Divider sx={{my: 1.75}}/>
-
             <Typography className={'title_font'}>
                 სვეტები
             </Typography>
@@ -214,11 +212,6 @@ export default function Promotions() {
             </header>
 
             <Separator className="my-4 bg-transparent"/>
-
-            <PromotionsDoc/>
-
-            <Separator className="my-4 bg-transparent"/>
-
             <DataGridPremium
                 headerFilters
                 rows={rows}
@@ -235,6 +228,9 @@ export default function Promotions() {
                 pageSizeOptions={[25, 50, 100]}
                 slotProps={{toolbar: {showQuickFilter: true, quickFilterProps: {debounceMs: 300}}}}
             />
+            <Separator className="my-4 bg-transparent"/>
+
+            <PromotionsDoc/>
         </>
     );
 }

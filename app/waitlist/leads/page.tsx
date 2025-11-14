@@ -2,6 +2,7 @@ import {ScrollTrailText} from "@/animations/ScrollTrailText";
 import {Separator} from "@/components/ui/separator";
 import FbTable, {TourItem} from "@/components/tables/FbTable";
 import React from "react";
+import TableDocs from "@/components/tables/table-docs";
 
 export default function WaitingLeads() {
     const TOUR_ITEMS: TourItem[] = [
@@ -156,6 +157,9 @@ export default function WaitingLeads() {
             </header>
 
             <Separator className="my-5 bg-transparent"/>
+            <TableDocs/>
+            <Separator className="my-5 bg-transparent"/>
+
 
             <FbTable touritems={TOUR_ITEMS}/>
         </>

@@ -189,12 +189,7 @@ export default function Duplicates() {
                 </ScrollTrailText>
             </header>
 
-            <Separator className="py-2 bg-transparent" />
-
-            <DuplicatesDoc />
-
-            <Separator className="py-3 bg-transparent" />
-
+            <Separator className="py-2 bg-transparent"/>
             <TableContainer component={Paper} variant="outlined">
                 <DndContext
                     sensors={sensors}
@@ -239,6 +234,9 @@ export default function Duplicates() {
                     </DragOverlay>
                 </DndContext>
             </TableContainer>
+            <Separator className="py-3 bg-transparent"/>
+
+            <DuplicatesDoc/>
         </>
     );
 }

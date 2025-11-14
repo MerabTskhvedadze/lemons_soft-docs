@@ -185,11 +185,6 @@ export default function NumberBase() {
             </header>
 
             <Separator className="my-5 bg-transparent"/>
-
-            <TableDocs/>
-
-            <Separator className="my-5 bg-transparent"/>
-
             <FbTable
                 toolbarBtns={
                     <>
@@ -204,6 +199,9 @@ export default function NumberBase() {
                 }
                 touritems={TOUR_ITEMS}
             />
+            <Separator className="my-5 bg-transparent"/>
+
+            <TableDocs/>
         </>
     )
 }

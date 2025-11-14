@@ -160,12 +160,10 @@ export default function FacebookNumbers() {
             </header>
 
             <Separator className="my-5 bg-transparent"/>
-
-            <TableDocs/>
-
+            <FbTable toolbarBtns={<FbStatisticModal/>} touritems={TOUR_ITEMS}/>
             <Separator className="my-5 bg-transparent"/>
 
-            <FbTable toolbarBtns={<FbStatisticModal/>} touritems={TOUR_ITEMS}/>
+            <TableDocs/>
         </>
     )
 }

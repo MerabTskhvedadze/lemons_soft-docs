@@ -2,6 +2,7 @@ import {ScrollTrailText} from "@/animations/ScrollTrailText";
 import {Separator} from "@/components/ui/separator";
 import FbTable, {TourItem} from "@/components/tables/FbTable";
 import React from "react";
+import TableDocs from "@/components/tables/table-docs";
 
 export default function MyTasks() {
     const TOUR_ITEMS: TourItem[] = [
@@ -142,7 +143,7 @@ export default function MyTasks() {
             {/* overview */}
             <header className=" flex flex-col gap-3">
                 <div className={'flex items-center gap-3'}>
-                    <ScrollTrailText className={'title_font text-lg'}>🔹 გვერდის დანიშნულება</ScrollTrailText>
+                    <ScrollTrailText className={'title_font text-lg'}>🔹 ჩემი შეხვედრები</ScrollTrailText>
                 </div>
 
                 <ScrollTrailText className="pl-5">
@@ -156,8 +157,10 @@ export default function MyTasks() {
             </header>
 
             <Separator className="my-5 bg-transparent"/>
-
             <FbTable touritems={TOUR_ITEMS}/>
+            <Separator className="my-5 bg-transparent"/>
+
+            <TableDocs/>
         </>
     )
 }

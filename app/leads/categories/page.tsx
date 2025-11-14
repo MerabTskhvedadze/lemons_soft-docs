@@ -237,6 +237,63 @@ export default function Categories() {
 
             <Separator className="my-5 bg-transparent"/>
 
+            <section className={'flex justify-between items-start gap-3'}>
+                {/* categories list + drag & drop */}
+                <section>
+                    <Reorder.Group
+                        onReorder={setSections}
+                        values={sections}
+                        className={'shadow max-w-[364px] min-w-[344px] bg-gray-50 px-2 rounded-sm'}
+                    >
+                        {sections.map((section) => (
+                            <Reorder.Item
+                                value={section}
+                                key={section.id}
+                                className={'group p-2 border rounded-md my-2 cursor-grab active:cursor-grabbing bg-white hover:border-yellow-900'}
+                            >
+                                <div className={'flex items-center gap-2 group-hover:text-yellow-900'}>
+                                    {section.label}
+                                    <CustomButton size={'icon-sm'} variant={'ghost'} className={'ml-auto'}>
+                                        <MdEdit color={'#737373'}/>
+                                    </CustomButton>
+                                </div>
+
+                                {/* section subitems */}
+                                {section.items &&
+                                    <Reorder.Group
+                                        values={section.items}
+                                        onReorder={handleSubReorder(section.id)}
+                                        className={'mt-2 flex flex-col gap-2 pl-3'}
+                                    >
+                                        {section.items.map((item: any) => (
+                                            <Reorder.Item
+                                                key={item.id}
+                                                value={item}
+                                                className={'group/inner flex items-center border p-2 rounded-md bg-white hover:border-yellow-700'}
+                                            >
+                                                <span className={'text-sm'}>{item.label}</span>
+                                                <div className={'ml-auto inline-flex items-center'}>
+                                                    <CustomButton size={'icon-sm'} variant={'ghost'}>
+                                                        <MdEdit color={'#737373'}/>
+                                                    </CustomButton>
+                                                    <CustomButton size={'icon-sm'} variant={'ghost'}>
+                                                        <MdDelete color={'#737373'}/>
+                                                    </CustomButton>
+                                                </div>
+                                            </Reorder.Item>
+                                        ))}
+                                    </Reorder.Group>
+                                }
+                            </Reorder.Item>
+                        ))}
+                    </Reorder.Group>
+                </section>
+
+                <Form/>
+            </section>
+
+            <Separator className="my-5 bg-transparent"/>
+
             <section className={'pl-5'}>
                 {/* გამოყენების ინსტრუქცია */}
                 <Section title="გამოყენების ინსტრუქცია">
@@ -380,61 +437,6 @@ export default function Categories() {
             </section>
 
             <Separator className="my-5 bg-transparent"/>
-
-            <section className={'flex justify-between items-start gap-3'}>
-                {/* categories list + drag & drop */}
-                <section>
-                    <Reorder.Group
-                        onReorder={setSections}
-                        values={sections}
-                        className={'shadow max-w-[364px] min-w-[344px] bg-gray-50 px-2 rounded-sm'}
-                    >
-                        {sections.map((section) => (
-                            <Reorder.Item
-                                value={section}
-                                key={section.id}
-                                className={'group p-2 border rounded-md my-2 cursor-grab active:cursor-grabbing bg-white hover:border-yellow-900'}
-                            >
-                                <div className={'flex items-center gap-2 group-hover:text-yellow-900'}>
-                                    {section.label}
-                                    <CustomButton size={'icon-sm'} variant={'ghost'} className={'ml-auto'}>
-                                        <MdEdit color={'#737373'}/>
-                                    </CustomButton>
-                                </div>
-
-                                {/* section subitems */}
-                                {section.items &&
-                                    <Reorder.Group
-                                        values={section.items}
-                                        onReorder={handleSubReorder(section.id)}
-                                        className={'mt-2 flex flex-col gap-2 pl-3'}
-                                    >
-                                        {section.items.map((item: any) => (
-                                            <Reorder.Item
-                                                key={item.id}
-                                                value={item}
-                                                className={'group/inner flex items-center border p-2 rounded-md bg-white hover:border-yellow-700'}
-                                            >
-                                                <span className={'text-sm'}>{item.label}</span>
-                                                <div className={'ml-auto inline-flex items-center'}>
-                                                    <CustomButton size={'icon-sm'} variant={'ghost'}>
-                                                        <MdEdit color={'#737373'}/>
-                                                    </CustomButton>
-                                                    <CustomButton size={'icon-sm'} variant={'ghost'}>
-                                                        <MdDelete color={'#737373'}/>
-                                                    </CustomButton>
-                                                </div>
-                                            </Reorder.Item>
-                                        ))}
-                                    </Reorder.Group>
-                                }
-                            </Reorder.Item>
-                        ))}
-                    </Reorder.Group>
-                </section>
-
-                <Form/>
-            </section>
 
         </>
     )

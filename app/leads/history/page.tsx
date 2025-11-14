@@ -248,9 +248,6 @@ export default function History() {
 
 
             <Separator className="my-4 bg-transparent" />
-            <HistoryLogsDoc />
-            <Separator className="my-4 bg-transparent" />
-
             <div className={'bg-gray-50 rounded overflow-hidden'}>
                 <div className={'bg-gray-200 p-4 flex items-center justify-between'}>
                     <h1 className={'title_font text-sm'}>
@@ -386,6 +383,9 @@ export default function History() {
                     </TableContainer>
                 </Box>
             </div>
+            <Separator className="my-4 bg-transparent" />
+
+            <HistoryLogsDoc />
         </>
     )
 }

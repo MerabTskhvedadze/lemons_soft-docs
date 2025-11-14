@@ -26,12 +26,10 @@ export default function NotInMeetings() {
             </header>
 
             <Separator className="my-5 bg-transparent"/>
-
-            <TableDocs/>
-
+            <SecondaryTable/>
             <Separator className="my-3 bg-transparent"/>
 
-            <SecondaryTable/>
+            <TableDocs/>
         </>
     )
 }
